@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/tools/logs/main",
+    "pages/tools/counter/main",
+    "pages/tools/remainder/main",
+    "pages/tools/realView/main",
+    "pages/tools/w_overTimePay/main",
+    "pages/tools/lab/main",
+    "pages/store/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "BROWNIU",
+    "navigationBarTextStyle": "black"
+  }
+}
