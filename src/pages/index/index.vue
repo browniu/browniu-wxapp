@@ -26,12 +26,18 @@ export default {
         { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '旺旺加班费', label: false, access: false },
         { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true },
-        { href: '../store/main', name: '🚧 施工中', label: false, access: true }
+        { href: '../store/index/main', name: '🚧 施工中', label: false, access: true }
       ]
     }
   },
   methods: {
     verify (index) {
+      if (index === 4) {
+        wx.switchTab({
+          url: '../store/index/main'
+        })
+        return
+      }
       wx.vibrateShort()
       if (this.tools[index].access) {
         if (this.access) {

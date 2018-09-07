@@ -1,10 +1,13 @@
 <template>
-  <div>Hello Vue!</div>
+  <div>
+    store index
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 <style lang='stylus' scoped>
-@import '../../assets/styles/index.styl';
+@import '../../../assets/styles/index.styl'
+
 </style>

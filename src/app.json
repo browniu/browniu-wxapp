@@ -7,7 +7,11 @@
     "pages/tools/realView/main",
     "pages/tools/w_overTimePay/main",
     "pages/tools/lab/main",
-    "pages/store/main"
+    "pages/store/index/main",
+    "pages/store/news/main",
+    "pages/store/class/main",
+    "pages/store/shopping/main",
+    "pages/store/mine/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,22 +20,33 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "backgroundColor": "#fafafa",
-    "borderStyle": "white",
-    "selectedColor": "#b4282d",
-    "color": "#666",
+    "color": "#8f8e94",
+    "selectedColor": "#42b983",
     "list": [{
-        "pagePath": "pages/store/main",
-        "iconPath": "static/images/ic_menu_choice_nor.png",
-        "selectedIconPath": "static/images/ic_menu_choice_pressed.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/store/main",
-        "iconPath": "static/images/ic_menu_topic_nor.png",
-        "selectedIconPath": "static/images/ic_menu_topic_pressed.png",
-        "text": "专题"
-      }
-    ]
+      "pagePath": "pages/store/index/main",
+      "iconPath": "static/images/index.png",
+      "selectedIconPath": "static/images/index_s.png",
+      "text": "首页"
+    }, {
+      "pagePath": "pages/store/news/main",
+      "iconPath": "static/images/news.png",
+      "selectedIconPath": "static/images/news_s.png",
+      "text": "资讯"
+    }, {
+      "pagePath": "pages/store/class/main",
+      "iconPath": "static/images/class.png",
+      "selectedIconPath": "static/images/class_s.png",
+      "text": "分类"
+    }, {
+      "pagePath": "pages/store/shopping/main",
+      "iconPath": "static/images/shopping.png",
+      "selectedIconPath": "static/images/shopping_s.png",
+      "text": "购物车"
+    }, {
+      "pagePath": "pages/store/mine/main",
+      "iconPath": "static/images/mine.png",
+      "selectedIconPath": "static/images/mine_s.png",
+      "text": "个人"
+    }]
   }
 }

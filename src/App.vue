@@ -35,4 +35,15 @@ html, body {
   -webkit-transition width 2s
   -o-transition width 2s
 }
+@font-face {
+  font-family 'iconfont' /* project id 796664 */
+  src url('//at.alicdn.com/t/font_796664_xlzbb444c9.eot')
+  src url('//at.alicdn.com/t/font_796664_xlzbb444c9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.woff') format('woff'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.ttf') format('truetype'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.svg#iconfont') format('svg')
+}
+.iconfont {
+  font-family: "iconfont";
+  font-size: 16px
+  font-style: normal;
+  color: #9e9595;
+}
 </style>
