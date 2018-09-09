@@ -17,6 +17,11 @@ export default {
       killNumber: 0,
       killer: 3
     }
+  },
+  mounted () {
+    wx.setNavigationBarTitle({
+      title: 'Killer 3'
+    })
   }
 }
 </script>

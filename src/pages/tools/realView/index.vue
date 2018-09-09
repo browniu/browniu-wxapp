@@ -3,7 +3,8 @@
     <main>
       <div class="container">
         <h1>
-          [<span>{{height}}</span>,
+          [
+          <span>{{height}}</span>,
           <span>{{width}}</span>]</h1>
         <p>{{deviceInfo}}</p>
       </div>
@@ -78,6 +79,9 @@ export default {
   },
   mounted () {
     console.log(wx.getSystemInfoSync())
+    wx.setNavigationBarTitle({
+      title: '真实视窗'
+    })
   }
 }
 </script>

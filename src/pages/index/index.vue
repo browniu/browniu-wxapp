@@ -19,20 +19,21 @@
 export default {
   data () {
     return {
+      develop: false,
       access: false,
       login: false,
       tools: [
         { href: '../tools/remainder/main', name: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '旺旺加班费', label: false, access: false },
-        { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true },
-        { href: '../store/index/main', name: '🚧 施工中', label: false, access: true }
+        { href: '../store/index/main', name: '小卖部', label: false, access: false },
+        { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true }
       ]
     }
   },
   methods: {
     verify (index) {
-      if (index === 4) {
+      if (index === 3 && !this.tools[3].access) {
         wx.switchTab({
           url: '../store/index/main'
         })
@@ -47,7 +48,7 @@ export default {
         } else {
           wx.vibrateLong()
           wx.showToast({
-            title: '立入禁止',
+            title: '立ち入り禁止',
             icon: 'none',
             duration: 2000
           })
@@ -76,6 +77,11 @@ export default {
   },
   mounted () {
     this.identity()
+    if (this.develop) {
+      wx.switchTab({
+        url: '../store/index/main'
+      })
+    }
   }
 }
 </script>

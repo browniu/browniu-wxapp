@@ -18,7 +18,11 @@ export default {
         duration: 2000
       })
     }
-
+  },
+  mounted () {
+    wx.setNavigationBarTitle({
+      title: '实验室'
+    })
   }
 }
 </script>

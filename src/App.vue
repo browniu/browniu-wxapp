@@ -19,15 +19,6 @@ html, body {
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
 }
-// .container {
-//   height 100%
-//   display flex
-//   flex-direction column
-//   align-items center
-//   justify-content space-between
-//   padding 200rpx 0
-//   box-sizing border-box
-// }
 // /* this rule will be remove */
 * {
   transition width 2s
@@ -36,9 +27,12 @@ html, body {
   -o-transition width 2s
 }
 @font-face {
-  font-family 'iconfont' /* project id 796664 */
-  src url('//at.alicdn.com/t/font_796664_xlzbb444c9.eot')
-  src url('//at.alicdn.com/t/font_796664_xlzbb444c9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.woff') format('woff'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.ttf') format('truetype'), url('//at.alicdn.com/t/font_796664_xlzbb444c9.svg#iconfont') format('svg')
+  font-family: 'iconfont';  /* project id 796664 */
+  src: url('//at.alicdn.com/t/font_796664_ekixfyr2isj.eot');
+  src: url('//at.alicdn.com/t/font_796664_ekixfyr2isj.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.woff') format('woff'),
+  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont";

@@ -82,6 +82,11 @@ export default {
         this.label3State = false
       }
     }
+  },
+  mounted () {
+    wx.setNavigationBarTitle({
+      title: '旺旺加班费'
+    })
   }
 }
 </script>
@@ -94,7 +99,7 @@ export default {
   position relative
   background-color #fff
   // background-image url('https://cdn.dribbble.com/users/1756402/screenshots/4748068/vacation.gif')
-  background-position bottom center 
+  background-position bottom center
   background-size 60%
   background-repeat no-repeat
   overflow hidden
