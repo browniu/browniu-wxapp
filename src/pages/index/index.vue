@@ -26,14 +26,15 @@ export default {
         { href: '../tools/remainder/main', name: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '旺旺加班费', label: false, access: false },
-        { href: '../store/index/main', name: '小卖部', label: false, access: false },
+        { href: '../tools/dice/main', name: '摇骰子', label: false, access: false },
+        { href: '../store/index/main', name: '🚧 施工中', label: false, access: false },
         { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true }
       ]
     }
   },
   methods: {
     verify (index) {
-      if (index === 3 && !this.tools[3].access) {
+      if (index === 4 && !this.tools[3].access) {
         wx.switchTab({
           url: '../store/index/main'
         })
@@ -95,6 +96,10 @@ export default {
   background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
   background-position bottom right
   background-size 150%
+  background-image url('https://cdn.dribbble.com/users/256781/screenshots/2876842/flowers_dribbble-2.gif')
+  background-position bottom center
+  background-position-y 403px
+  background-size 80%
   background-repeat no-repeat
   overflow hidden
   & main {

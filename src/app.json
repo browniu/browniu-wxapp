@@ -6,6 +6,7 @@
     "pages/tools/remainder/main",
     "pages/tools/realView/main",
     "pages/tools/w_overTimePay/main",
+    "pages/tools/dice/main",
     "pages/tools/lab/main",
     "pages/store/index/main",
     "pages/store/news/main",
