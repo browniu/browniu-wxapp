@@ -19,7 +19,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       tools: [
@@ -79,7 +79,7 @@ export default {
     this.identity()
     if (this.develop) {
       wx.switchTab({
-        url: '../store/index/main'
+        url: '../store/class/main'
       })
     }
   }
