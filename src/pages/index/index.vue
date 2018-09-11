@@ -78,13 +78,16 @@ export default {
     }
   },
   mounted () {
+    wx.cloud.init({
+      traceUser: true
+    })
     this.identity()
     if (this.develop) {
       // wx.switchTab({
       //   url: '../store/class/main'
       // })
       wx.navigateTo({
-        url: '../tools/realView/main'
+        url: '../tools/lab/main'
       })
     }
   },
