@@ -1,5 +1,5 @@
 <template>
-  <div class="tools">
+  <div :class="['tools',theme===1?'theme1':'',theme===2?'theme2':'']">
     <main>
       <ol>
         <li v-for="(item, index) in tools" :key="index">
@@ -19,9 +19,10 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
+      theme: 0,
       tools: [
         { href: '../tools/remainder/main', name: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
@@ -79,10 +80,16 @@ export default {
   mounted () {
     this.identity()
     if (this.develop) {
-      wx.switchTab({
-        url: '../store/class/main'
+      // wx.switchTab({
+      //   url: '../store/class/main'
+      // })
+      wx.navigateTo({
+        url: '../tools/realView/main'
       })
     }
+  },
+  created () {
+    this.theme = Math.floor(Math.random() * 2 + 1)
   }
 }
 </script>
@@ -93,24 +100,29 @@ export default {
   height 100vh
   position relative
   background-color #fff
-  background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
-  background-position bottom right
-  background-size 150%
-  background-image url('https://cdn.dribbble.com/users/256781/screenshots/2876842/flowers_dribbble-2.gif')
-  background-position bottom center
-  background-position-y 403px
-  background-size 80%
   background-repeat no-repeat
   overflow hidden
+  &.theme1 {
+    background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
+    background-position bottom right
+    background-size 150%
+  }
+  &.theme2 {
+    background-image url('https://cdn.dribbble.com/users/256781/screenshots/2876842/flowers_dribbble-2.gif')
+    background-position bottom center
+    background-position-y 403px
+    background-size 80%
+  }
   & main {
     padding 15px
     ol {
-      display grid
-      grid-template-columns 33.33% 33.33% auto
-      grid-column-gap 3px
-      grid-row-gap 3px
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      justify-content center
       width 100%
       & li {
+        width calc(((100% - 4px) / 3))
         font-size 14px
         color co_7
         margin 0
@@ -120,6 +132,11 @@ export default {
         height 120px
         background co_10
         position relative
+        margin-right 2px
+        margin-bottom 2px
+        &:nth-of-type(3n) {
+          margin-right 0
+        }
         & i {
           position absolute
           top -40%

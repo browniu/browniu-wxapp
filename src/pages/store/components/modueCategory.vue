@@ -69,15 +69,19 @@ export default {
   }
   .main {
     & .items {
-      display grid
-      grid-template-columns 31% 31% auto
-      grid-column-gap 10px
-      grid-row-gap 18px
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      justify-content left
       & li {
+        width calc(((100% - 20px) / 3))
+        margin-right 10px
+        &:nth-of-type(3n) {
+          margin-right 0
+        }
         & .item-post {
           border-radius 3px
           height 70px
-          // background-color co_10
           background-size auto 100%
           background-position center center
           background-repeat no-repeat

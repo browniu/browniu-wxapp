@@ -1,8 +1,7 @@
 <template>
   <div class="dice">
-    <!-- <button @click="shakeDice">摇一摇</button> -->
     <div class="main">
-      <div :class="['inner',shake?'rot':'']" @click="shakeDice">
+      <div :class="['inner',shake?'rotate':'',dice===1?'dice1':'',dice===2?'dice2':'',dice===3?'dice3':'',dice===4?'dice4':'',dice===5?'dice5':'',dice===6?'dice6':'']" @click="shakeDice">
         <li v-for="(item, index) in 6" :key="index"></li>
       </div>
     </div>
@@ -19,10 +18,10 @@ export default {
   },
   methods: {
     shakeDice () {
-      this.shake = true
+      this.shake = false
       setTimeout(() => {
-        this.shake = false
-      }, 1000)
+        this.shake = true
+      }, 0)
       console.log('shake')
       this.dice = Math.floor(Math.random() * 6 + 1)
     }
@@ -31,6 +30,7 @@ export default {
 </script>
 <style lang='stylus' scoped>
 // @import '../../../assets/styles/index.styl'
+@import '../dice/keyframe.css'
 co_1 = #e639a3
 co_2 = #663c6d
 .dice {
@@ -48,9 +48,6 @@ co_2 = #663c6d
       height 200px
       width 200px
       border 2px solid co_1
-      &.rot {
-        transform rotate(720deg)
-      }
       & li {
         height 15px
         width 15px
@@ -61,6 +58,118 @@ co_2 = #663c6d
         top 50%
         left 50%
         transform translate(-50%, -50%)
+        transition .5s ease 1s
+      }
+      &.rotate {
+        animation shake 1.5s cubic-bezier(0.97, 0.01, 0.27, 1.01)
+      }
+      &.dice1 {
+        & li {
+          top 50%
+          left 50%
+        }
+      }
+      &.dice2 {
+        & li:nth-child(odd) {
+          top 25%
+          left 75%
+        }
+        & li:nth-child(even) {
+          top 75%
+          left 25%
+        }
+      }
+      &.dice3 {
+        & li:nth-child(odd) {
+          top 25%
+          left 75%
+        }
+        & li:nth-child(even) {
+          top 75%
+          left 25%
+        }
+        & li:last-child {
+          top 50%
+          left 50%
+        }
+      }
+      &.dice4 {
+        & li:nth-child(1) {
+          top 25%
+          left 25%
+        }
+        & li:nth-child(2) {
+          top 25%
+          left 75%
+        }
+        & li:nth-child(3) {
+          top 75%
+          left 25%
+        }
+        & li:nth-child(4) {
+          top 75%
+          left 75%
+        }
+        & li:nth-child(5) {
+          top 50%
+          left 50%
+        }
+        & li:nth-child(6) {
+          top 50%
+          left 50%
+        }
+      }
+      &.dice5 {
+        & li:nth-child(1) {
+          top 25%
+          left 25%
+        }
+        & li:nth-child(2) {
+          top 25%
+          left 75%
+        }
+        & li:nth-child(3) {
+          top 75%
+          left 25%
+        }
+        & li:nth-child(4) {
+          top 75%
+          left 75%
+        }
+        & li:nth-child(5) {
+          top 50%
+          left 50%
+        }
+        & li:nth-child(6) {
+          top 50%
+          left 50%
+        }
+      }
+      &.dice6 {
+        & li:nth-child(1) {
+          top 25%
+          left 37.5%
+        }
+        & li:nth-child(2) {
+          top 50%
+          left 37.5%
+        }
+        & li:nth-child(3) {
+          top 75%
+          left 37.5%
+        }
+        & li:nth-child(4) {
+          top 25%
+          left 62.5%
+        }
+        & li:nth-child(5) {
+          top 50%
+          left 62.5%
+        }
+        & li:nth-child(6) {
+          top 75%
+          left 62.5%
+        }
       }
     }
   }
