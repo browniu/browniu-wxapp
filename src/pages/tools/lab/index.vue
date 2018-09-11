@@ -3,7 +3,7 @@
     <div class="click" @click="apitest">
       vibrateLong
     </div>
-
+    <p>{{json}}</p>
   </div>
 </template>
 
@@ -11,22 +11,18 @@
 export default {
   data () {
     return {
-      openID: null
+      openID: null,
+      json: {}
     }
   },
   methods: {
     apitest () {
       wx.vibrateLong()
-
       const db = wx.cloud.database()
-      // 查询当前用户所有的 counters
       db.collection('realView').get({
         success: res => {
-          console.log(res.data)
-          this.setData({
-            queryResult: JSON.stringify(res.data, null, 2)
-          })
           console.log('[数据库] [查询记录] 成功: ', res)
+          this.json = res.data[0].viewInfo
         },
         fail: err => {
           wx.showToast({
