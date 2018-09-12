@@ -2,9 +2,7 @@
   <div class="deviceView">
     <main>
       <div class="container">
-        <h1>[
-          <span>{{viewHeight}}</span>,
-          <span>{{viewWidth}}</span>]</h1>
+        <h1>[<span>{{viewHeight}}</span>,<span>{{viewWidth}}</span>]</h1>
         <p>{{showInfo}}</p>
       </div>
       <div class="sub">
@@ -13,9 +11,26 @@
       </div>
       <div class="list">
         <ul class="list-inner">
-          <li v-for="(item, index) in dataList" :key="index">
-            {{item.view1Device}}
-          </li>
+          <table>
+            <thead>
+              <span>机型</span>
+              <span>视窗</span>
+              <span>系统</span>
+              <span>顶栏</span>
+              <span>比率</span>
+              <span>性能</span>
+            </thead>
+            <scroll-view scroll-y class="tbody">
+              <li v-for="(item, index) in dataList" :key="index">
+                <span>{{item.view1Device}}</span>
+                <span>{{item.view2Height}},{{item.view3Width}}</span>
+                <span>{{item.view4Info.system}}</span>
+                <span>{{item.view4Info.statusBarHeight}}</span>
+                <span>{{item.view4Info.pixelRatio}}</span>
+                <span>{{item.view4Info.benchmarkLevel}}</span>
+              </li>
+            </scroll-view>
+          </table>
         </ul>
       </div>
     </main>
@@ -44,7 +59,8 @@ export default {
         'screenWidth': wx.getSystemInfoSync().screenWidth
       },
       // download data
-      dataList: [1, 2, 3],
+      dataList: [],
+      dataListDetail: {},
       buttonInfo: '提交设备信息',
       buttonState: false,
       subCount: 0
@@ -127,12 +143,12 @@ export default {
     const db = wx.cloud.database()
     db.collection('realView').get().then(res => {
       this.dataList = res.data
-      console.log(res.data)
     })
   }
 }
 </script>
 <style lang='stylus' scoped>
+@import '../../../assets/styles/index.styl'
 co_g_1 = #9dd6c5
 co_g_2 = #e38785
 co_g_3 = #34495e
@@ -141,16 +157,16 @@ co_g_5 = #a3a9ad
 .deviceView {
   height 100vh
   width 100vw
+  overflow hidden
   background #fff
   text-align center
   position relative
   & main {
-    max-width 400px
     position absolute
-    top 30%
+    top 50%
     left 50%
     transform translate(-50%, -50%)
-    width 70%
+    width 100%
     & .container {
       & h1 {
         margin 0
@@ -185,7 +201,7 @@ co_g_5 = #a3a9ad
         color #fff
         height 50px
         line-height 50px
-        width 100%
+        width 70%
         display inline-block
         background co_g_1
         border-radius 50px
@@ -206,18 +222,85 @@ co_g_5 = #a3a9ad
         transform translateX(-50%) scale(0.7)
       }
     }
-    & form {
-      position absolute
-      z-index -9999
-      visibility hidden
+    & .list {
+      margin-top 30px
+      & .list-inner {
+        & table {
+          padding 10px
+          box-sizing border-box
+          text-align left
+          // transform scale(0.8)
+          // width 100%
+          & thead {
+            padding 8px 10px 
+            font-size 12px
+            background co_10
+            color co_2
+            white-space nowrap
+            span {
+              display inline-block
+              overflow hidden
+              &:nth-child(1) {
+                width 25%
+              }
+              &:nth-child(2) {
+                width 20%
+              }
+              &:nth-child(3) {
+                width 26%
+              }
+              &:nth-child(4) {
+                width 10%
+              }
+              &:nth-child(5) {
+                width 10%
+              }
+              &:nth-child(6) {
+                width 10%
+              }
+            }
+          }
+          & .tbody {
+            height 200px
+            overflow hidden
+            & li {
+              font-size 12px
+              white-space nowrap
+              border-bottom 1px solid co_10
+              padding-bottom 10px
+              span {
+                display inline-block
+                margin-top 10px
+                overflow hidden
+                box-sizing border-box
+                &:nth-child(1) {
+                  position relative 
+                  left 10px
+                  width 25%
+                }
+                &:nth-child(2) {
+                  position relative 
+                  left 10px
+                  width 20%
+                }
+                &:nth-child(3) {
+                  width 26%
+                }
+                &:nth-child(4) {
+                  width 10%
+                }
+                &:nth-child(5) {
+                  width 10%
+                }
+                &:nth-child(6) {
+                  width 10%
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  }
-  & .data {
-    height 10px
-    width 10px
-    position absolute
-    bottom 0
-    left 0
   }
 }
 </style>
