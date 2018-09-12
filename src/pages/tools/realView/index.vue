@@ -2,24 +2,23 @@
   <div class="deviceView">
     <main>
       <div class="container">
-        <h1>
-          [
-          <span>{{height}}</span>,
-          <span>{{width}}</span>]</h1>
-        <p>{{deviceInfo}}</p>
+        <h1>[
+          <span>{{viewHeight}}</span>,
+          <span>{{viewWidth}}</span>]</h1>
+        <p>{{showInfo}}</p>
       </div>
       <div class="sub">
         <div @click="subInfo" :class="['button',buttonState?'act':'']">{{buttonInfo}}</div>
-        <i>包含当前设备系统及视窗尺寸信息将被记录，此类数据可作为应用适配优化方案的重要依据。</i>
+        <i>包含当前系统及视窗信息将被记录，此类数据可作为优化适配方案的重要参考。</i>
       </div>
-      <form id="form" action="http://browniu.gz01.bdysite.com/subData.php" method="post" target="subIframe">
-        <input name="height" type="text" v-model="height">
-        <input name="width" type="text" v-model="width">
-        <input name="info" type="text" v-model="deviceInfo">
-      </form>
-      <iframe name="subIframe" style="display:none;"></iframe>
+      <div class="list">
+        <ul class="list-inner">
+          <li v-for="(item, index) in dataList" :key="index">
+            {{item.view1Device}}
+          </li>
+        </ul>
+      </div>
     </main>
-    <a href="http://browniu.gz01.bdysite.com/dataList.php" class="data"></a>
   </div>
 </template>
 
@@ -27,9 +26,25 @@
 export default {
   data () {
     return {
-      height: wx.getSystemInfoSync().windowHeight,
-      width: wx.getSystemInfoSync().windowWidth,
-      deviceInfo: wx.getSystemInfoSync().model + ' | ' + wx.getSystemInfoSync().brand + ' | ' + wx.getSystemInfoSync().system + ' | ' + wx.getSystemInfoSync().statusBarHeight,
+      // upload data
+      showInfo: wx.getSystemInfoSync().model + ' | ' + wx.getSystemInfoSync().brand + ' | ' + wx.getSystemInfoSync().system + ' | ' + wx.getSystemInfoSync().statusBarHeight + ' | ' + wx.getSystemInfoSync().benchmarkLevel,
+      viewDevice: wx.getSystemInfoSync().model,
+      viewHeight: wx.getSystemInfoSync().windowHeight,
+      viewWidth: wx.getSystemInfoSync().windowWidth,
+      viewInfo: {
+        'brand': wx.getSystemInfoSync().brand,
+        'system': wx.getSystemInfoSync().system,
+        'statusBarHeight': wx.getSystemInfoSync().statusBarHeight,
+        'benchmarkLevel': wx.getSystemInfoSync().benchmarkLevel,
+        'language': wx.getSystemInfoSync().language,
+        'pixelRatio': wx.getSystemInfoSync().pixelRatio,
+        'platform': wx.getSystemInfoSync().platform,
+        'version': wx.getSystemInfoSync().version,
+        'screenHeight': wx.getSystemInfoSync().screenHeight,
+        'screenWidth': wx.getSystemInfoSync().screenWidth
+      },
+      // download data
+      dataList: [1, 2, 3],
       buttonInfo: '提交设备信息',
       buttonState: false,
       subCount: 0
@@ -40,20 +55,48 @@ export default {
       if (!this.buttonState) {
         this.buttonInfo = '提交成功，多谢支持'
         this.buttonState = true
-
-        wx.request({
-          url: 'http://browniu.gz01.bdysite.com/subData.php',
-          data: {
-            width: this.width,
-            height: this.height,
-            info: this.deviceInfo
+        const db = wx.cloud.database()
+        const _ = db.command
+        db.collection('realView').where(_.and([
+          {
+            view1Device: _.eq(this.viewDevice)
           },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
+          {
+            view2Height: _.eq(this.viewHeight)
           },
-          success: function (res) {
-            console.log(res.data)
+          {
+            view3Width: _.eq(this.viewWidth)
+          }
+        ])).get({
+          success: res => {
+            console.log('[数据库] [查询记录] 成功: ', res)
+            if (res.data.length === 0) {
+              console.log('is new')
+              db.collection('realView').add({
+                data: {
+                  view1Device: this.viewDevice,
+                  view2Height: this.viewHeight,
+                  view3Width: this.viewWidth,
+                  view4Info: this.viewInfo,
+                  due: new Date('2018-09-01')
+                },
+                success: function (res) {
+                  console.log(res)
+                }
+              })
+            } else {
+              wx.showToast({
+                icon: 'succeed',
+                title: '数据已收录'
+              })
+            }
+          },
+          fail: err => {
+            wx.showToast({
+              icon: 'none',
+              title: '查询记录失败'
+            })
+            console.error('[数据库] [查询记录] 失败：', err)
           }
         })
       }
@@ -78,9 +121,13 @@ export default {
     }
   },
   mounted () {
-    console.log(wx.getSystemInfoSync())
     wx.setNavigationBarTitle({
       title: '真实视窗'
+    })
+    const db = wx.cloud.database()
+    db.collection('realView').get().then(res => {
+      this.dataList = res.data
+      console.log(res.data)
     })
   }
 }
@@ -100,7 +147,7 @@ co_g_5 = #a3a9ad
   & main {
     max-width 400px
     position absolute
-    top 40%
+    top 30%
     left 50%
     transform translate(-50%, -50%)
     width 70%
@@ -134,7 +181,7 @@ co_g_5 = #a3a9ad
       & .button {
         user-select none
         text-align center
-        margin 50px 0 10px
+        margin 30px 0 10px
         color #fff
         height 50px
         line-height 50px
@@ -150,6 +197,7 @@ co_g_5 = #a3a9ad
         width 120%
         display block
         font-size 12px
+        line-height 16px
         color co_g_5
         font-style normal
         transform scale(0.6)

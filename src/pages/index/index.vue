@@ -87,7 +87,7 @@ export default {
       //   url: '../store/class/main'
       // })
       wx.navigateTo({
-        url: '../tools/lab/main'
+        url: '../tools/realView/main'
       })
     }
   },
