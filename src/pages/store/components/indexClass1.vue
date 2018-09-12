@@ -54,9 +54,9 @@ export default {
         'button': '去看看',
         'color': '#fff',
         'position': 'center',
-        'img': 'https://lfstore.line-scdn.net/pc/static/img/sp_logo_login.png',
+        'img': 'http://pb85uax7t.bkt.clouddn.com/sp_logo_login.png',
         'bgcolor': '#01d664',
-        'bgimg': 'https://www.transparenttextures.com/patterns/vichy.png'
+        'bgimg': 'http://pb85uax7t.bkt.clouddn.com/vichy.png'
       }
     }
   }

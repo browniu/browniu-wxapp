@@ -1,6 +1,6 @@
 <template>
-  <div class="module-cross">
-    <div class="main" :style="{backgroundImage:'url('+data.bgimg+')',color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}">
+  <div class="module-cross" :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}">
+    <div class="main" :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}">
       <div class="inner">
         <h1>{{data.title}}</h1>
         <p>{{data.sub}}</p>
@@ -9,7 +9,7 @@
           <span></span>
         </div>
       </div>
-      <div class="texture" :style="{backgroundImage:'url('+data.img+')'}"></div>
+      <div class="texture"></div>
     </div>
   </div>
 </template>
@@ -30,11 +30,8 @@ export default {
   .main {
     border-bottom 6px solid #fff
     position relative
-    // background-image url('https://www.transparenttextures.com/patterns/dark-stripes-light.png')
-    // background-image url('https://www.transparenttextures.com/patterns/graphy.png')
-    // background-image url('https://www.transparenttextures.com/patterns/vichy.png')
-    // background-image: url("https://www.transparenttextures.com/patterns/light-wool.png");
     height 135px
+    background-image url('http://pb85uax7t.bkt.clouddn.com/vichy.png')
     & .texture {
       height 50px
       width 97px
@@ -45,6 +42,7 @@ export default {
       background-position left top
       background-size auto 60px
       background-repeat no-repeat
+      background-image url('http://pb85uax7t.bkt.clouddn.com/sp_logo_login.png')
     }
     & .inner {
       text-align center

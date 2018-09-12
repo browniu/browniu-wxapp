@@ -19,7 +19,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 0,
@@ -83,12 +83,12 @@ export default {
     })
     this.identity()
     if (this.develop) {
-      // wx.switchTab({
-      //   url: '../store/class/main'
-      // })
-      wx.navigateTo({
-        url: '../tools/realView/main'
+      wx.switchTab({
+        url: '../store/index/main'
       })
+      // wx.navigateTo({
+      //   url: '../tools/realView/main'
+      // })
     }
   },
   created () {

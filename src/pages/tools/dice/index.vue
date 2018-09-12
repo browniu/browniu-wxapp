@@ -22,14 +22,12 @@ export default {
       setTimeout(() => {
         this.shake = true
       }, 0)
-      console.log('shake')
       this.dice = Math.floor(Math.random() * 6 + 1)
     }
   }
 }
 </script>
 <style lang='stylus' scoped>
-// @import '../../../assets/styles/index.styl'
 @import '../dice/keyframe.css'
 co_1 = #e639a3
 co_2 = #663c6d
