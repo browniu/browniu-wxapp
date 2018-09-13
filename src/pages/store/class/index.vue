@@ -96,7 +96,7 @@ export default {
         },
         {
           'index': '5',
-          'title': '芮可',
+          'title': '秋可',
           'icon': 'https://lfstore-phinf.pstatic.net/MjAxODA3MThfMjg4/MDAxNTMxODg3MjAyMzY5.DiUps950Ginf1rNXNLlIDFV_LtMNARUKIqvqlVdOnJsg.Ohsy2_AaXzFjmjGqnUInhaZvw7MF6xW641Szl1IN3acg.PNG/image.png',
           'list': [
             { 'title': '袜子', 'img': '' },

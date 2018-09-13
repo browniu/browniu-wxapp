@@ -12,7 +12,8 @@
     "pages/store/news/main",
     "pages/store/class/main",
     "pages/store/shopping/main",
-    "pages/store/mine/main"
+    "pages/store/mine/main",
+    "pages/store/detail/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

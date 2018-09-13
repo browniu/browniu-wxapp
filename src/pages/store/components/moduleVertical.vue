@@ -6,7 +6,7 @@
     </div>
     <div class="main">
       <ul class="items">
-        <li v-for="(item, index) in data.list" :key="index" :style="{backgroundImage:'url('+item.img+')'}">
+        <li @click="goDetail(item.id)" v-for="(item, index) in data.list" :key="index" :style="{backgroundImage:'url('+item.img+')'}">
           <div class="item-title">
             <h1>{{item.title}}</h1>
             <p>{{item.sub}}</p>
@@ -25,6 +25,14 @@ export default {
       type: Object,
       require: true
     }
+  },
+  methods: {
+    goDetail (e) {
+      console.log(e)
+      wx.navigateTo({
+        url: '../detail/main?id=' + e
+      })
+    }
   }
 }
 </script>
@@ -32,7 +40,7 @@ export default {
 @import '../../../assets/styles/index.styl'
 .module-vertical {
   padding 15px 10px
-  //border-bottom 8px solid co_10
+  // border-bottom 8px solid co_10
   .title {
     text-align center
     font-size 16px
@@ -54,14 +62,14 @@ export default {
       grid-column-gap 10px
       grid-row-gap 10px
       & li {
-          border-radius 2px
-          height 120px
-          background-color co_10
-          background-size auto 120%
-          background-position left top
-          background-repeat no-repeat
+        border-radius 2px
+        height 120px
+        background-color co_10
+        background-size auto 120%
+        background-position left top
+        background-repeat no-repeat
         & .item-title {
-          transform scale(.8)
+          transform scale(0.8)
           position relative
           left -5px
           top 8px

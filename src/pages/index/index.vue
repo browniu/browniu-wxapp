@@ -83,12 +83,12 @@ export default {
     })
     this.identity()
     if (this.develop) {
-      wx.switchTab({
-        url: '../store/index/main'
-      })
-      // wx.navigateTo({
-      //   url: '../tools/realView/main'
+      // wx.switchTab({
+      //   url: '../store/index/main'
       // })
+      wx.navigateTo({
+        url: '../store/detail/main?id=g0001'
+      })
     }
   },
   created () {

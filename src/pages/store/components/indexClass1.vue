@@ -24,10 +24,10 @@ export default {
       mvData: {
         'title': '人气推荐',
         'list': [
-          { 'title': '人很漂亮 包也很可爱', 'sub': '化妆品收纳袋', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA5MDdfMTQx/MDAxNTM2Mjc5NTE0NTM2.z3i-tOiPZrvTePunb-5s324otGKjM8viBWIWwqxQD0gg.1sI0fx6nEWVCEGCyJ--SWC_T3t9Mj8qzgDDekX3a6BQg.JPEG/image.jpg', 'label': true },
-          { 'title': '让我帮你充个电吧', 'sub': '快速充电宝', 'img': 'https://vos.line-scdn.net/website/uploads/website_1/zh-tw/wpicon_img_430.png?_30104', 'label': true },
-          { 'title': '粉扑扑来了', 'sub': '粉饼', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA5MDdfMTQx/MDAxNTM2MjgzNDIwNDEx.owhCGcT-j1wF99zP7SX-BA8-Z5EpRuSuHt84YCbOmbkg.ON4VfCsNYBZI-qjM6dblSEn8an0OT7XqrEiKuboIflsg.JPEG/image.jpg', 'label': true },
-          { 'title': '带我回家呗', 'sub': '收纳袋', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA4MzFfMTk1/MDAxNTM1NjkwMjMwNzk5.52vnip5Iu4Qfwu3lT-yqPOrGzNJK0lfW4DrTcv5K-ZUg.SW9G_tbgCkhqKC-A5XbNm1CnqyZ86yYD5AI6DUQQkhAg.JPEG/image.jpg', 'label': false }
+          { 'id': 'g0001', 'title': '人很漂亮 包也很可爱', 'sub': '化妆品收纳袋', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA5MDdfMTQx/MDAxNTM2Mjc5NTE0NTM2.z3i-tOiPZrvTePunb-5s324otGKjM8viBWIWwqxQD0gg.1sI0fx6nEWVCEGCyJ--SWC_T3t9Mj8qzgDDekX3a6BQg.JPEG/image.jpg', 'label': true },
+          { 'id': 'g0002', 'title': '让我帮你充个电吧', 'sub': '快速充电宝', 'img': 'https://vos.line-scdn.net/website/uploads/website_1/zh-tw/wpicon_img_430.png?_30104', 'label': true },
+          { 'id': 'g0003', 'title': '粉扑扑来了', 'sub': '粉饼', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA5MDdfMTQx/MDAxNTM2MjgzNDIwNDEx.owhCGcT-j1wF99zP7SX-BA8-Z5EpRuSuHt84YCbOmbkg.ON4VfCsNYBZI-qjM6dblSEn8an0OT7XqrEiKuboIflsg.JPEG/image.jpg', 'label': true },
+          { 'id': 'g0004', 'title': '带我回家呗', 'sub': '收纳袋', 'img': 'https://lfstore-phinf.pstatic.net/MjAxODA4MzFfMTk1/MDAxNTM1NjkwMjMwNzk5.52vnip5Iu4Qfwu3lT-yqPOrGzNJK0lfW4DrTcv5K-ZUg.SW9G_tbgCkhqKC-A5XbNm1CnqyZ86yYD5AI6DUQQkhAg.JPEG/image.jpg', 'label': false }
         ]
       },
       mhData: {
