@@ -1,13 +1,19 @@
 {
   "g0001": {
-    "title": "可妮",
+    "title": "可妮兔漆皮多功能包",
     "swiper": [
+      "https://www.linefriends.cn/Storage/master/product/images/201809031504520557630.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201809031504499103930.jpg",
-      "https://www.linefriends.cn/Storage/master/product/images/201809031504520557630.jpg"
+      "https://www.linefriends.cn/Storage/master/product/images/201809031504539579850.jpg"
     ]
   },
   "g0002": {
-    "title": "布朗"
+    "title": "布朗熊充电宝",
+    "swiper": [
+      "https://www.linefriends.cn/Storage/master/product/images/201803221918394468230.jpg",
+      "https://www.linefriends.cn/Storage/master/product/images/201803221918394468231.jpg",
+      "https://www.linefriends.cn/Storage/master/product/images/201803221918394477992.jpg"
+    ]    
   },
   "g0003": {
     "title": "秋可"

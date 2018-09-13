@@ -2,10 +2,9 @@
   <div class="detail">
     <div class="main">
       <div class="swiper">
-        <swiper class="swiper-container" indicator-dots="true" autoplay="true" interval="3000" circular="true" duration="500" indicator-active-color="rgba(255,255,255,1)" indicator-color="rgba(255,255,255,.3)">
-          <swiper-item class="swiper-item" style="background-image:url('https://vos.line-scdn.net/website/uploads/website_1/zh-tw/wpicon_img_280.png')"></swiper-item>
-          <swiper-item class="swiper-item" style="background-image:url('https://vos.line-scdn.net/website/uploads/website_1/zh-tw/wpicon_img_191.png')"></swiper-item>
-          <swiper-item class="swiper-item" style="background-image:url('https://vos.line-scdn.net/website/uploads/website_1/zh-tw/wpicon_img_159.png')"></swiper-item>
+        <swiper class="swiper-container" indicator-dots="false" autoplay="true" interval="3000" circular="true" current="2" duration="500" indicator-active-color="rgba(255,255,255,1)" indicator-color="rgba(255,255,255,.3)">
+          <swiper-item v-if="swiperLoading" v-for="(item, index) in goodsInfo.swiper" :key="index" class="swiper-item" :style="{backgroundImage:'url('+item+')'}">
+          </swiper-item>
         </swiper>
         <ul class="slogan">
           <li>
@@ -33,12 +32,19 @@ export default {
   data () {
     return {
       goodsInfo: {},
-      standardPop: false
+      standardPop: false,
+      swiperLoading: false
     }
   },
   onLoad () {
     this.goodsInfo = goods[this.$root.$mp.query.id]
     console.log(this.goodsInfo)
+    wx.setNavigationBarTitle({
+      title: this.goodsInfo.title
+    })
+  },
+  mounted () {
+    this.swiperLoading = true
   },
   methods: {
     showStandardPop () {
@@ -54,17 +60,31 @@ export default {
 <style lang='stylus' scoped>
 @import '../../../assets/styles/index.styl'
 .detail {
+  width 100vw
   & .main {
     & .swiper {
+      background #fff
       border-bottom 8px solid co_10
       & .swiper-container {
-        height 320px
+        background-image url('https://cdn.dribbble.com/users/722246/screenshots/4723489/category-loading.gif')
+        background-position center center
+        background-size contain
+        height 280px
         & .swiper-item {
+          top 0
+          position absolute
+          width 100%
+          height 100%
           overflow hidden
           background-color co_10
           background-position center center
-          background-size auto 100%
+          background-size auto 160%
           background-repeat no-repeat
+          & .img {
+            height 100%
+            width 100%
+            background #000
+          }
           & image {
             position absolute
             left 50%
