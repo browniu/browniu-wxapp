@@ -10,8 +10,8 @@ export default {
   }
 }
 </script>
-
 <style lang='stylus'>
+@import 'assets/styles/iconfont.css'
 html, body {
   margin 0
   padding 0
@@ -28,16 +28,16 @@ html, body {
 }
 @font-face {
   font-family: 'iconfont';  /* project id 796664 */
-  src: url('//at.alicdn.com/t/font_796664_ekixfyr2isj.eot');
-  src: url('//at.alicdn.com/t/font_796664_ekixfyr2isj.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.woff') format('woff'),
-  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_796664_ekixfyr2isj.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_796664_ajmqwcbxjrm.eot');
+  src: url('//at.alicdn.com/t/font_796664_ajmqwcbxjrm.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_796664_ajmqwcbxjrm.woff') format('woff'),
+  url('//at.alicdn.com/t/font_796664_ajmqwcbxjrm.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_796664_ajmqwcbxjrm.svg#iconfont') format('svg');
 }
 .iconfont {
-  font-family: "iconfont";
-  font-size: 16px
-  font-style: normal;
-  color: #9e9595;
+  font-family 'iconfont'
+  font-size 16px
+  font-style normal
+  color #9e9595
 }
 </style>

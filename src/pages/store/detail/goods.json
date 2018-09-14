@@ -1,19 +1,36 @@
 {
   "g0001": {
-    "title": "可妮兔漆皮多功能包",
+    "info": {
+      "title": "可妮兔漆皮多功能包",
+      "label": ["new", "safety", "youhui"],
+      "label1": true,
+      "label2": true,
+      "label3": true,
+      "subTitle": "一下就能抓住你的视线，泛着华彩的多功能漆包",
+      "price": "180",
+      "prePrice": "240"
+    },
     "swiper": [
       "https://www.linefriends.cn/Storage/master/product/images/201809031504520557630.jpg",
-      "https://www.linefriends.cn/Storage/master/product/images/201809031504499103930.jpg",
-      "https://www.linefriends.cn/Storage/master/product/images/201809031504539579850.jpg"
+      "https://www.linefriends.cn/Storage/master/product/images/201809031504539579850.jpg",
+      "https://www.linefriends.cn/Storage/master/product/images/201809031504499103930.jpg"
     ]
   },
   "g0002": {
-    "title": "布朗熊充电宝",
+    "info": {
+      "title": "布朗熊充电宝",
+      "label1": true,
+      "label2": true,
+      "label3": false,
+      "subTitle": "可爱的外形下拥有9000mAh大容量的充电宝",
+      "price": "380",
+      "prePrice": "450"
+    },
     "swiper": [
-      "https://www.linefriends.cn/Storage/master/product/images/201803221918394468230.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201803221918394468231.jpg",
-      "https://www.linefriends.cn/Storage/master/product/images/201803221918394477992.jpg"
-    ]    
+      "https://www.linefriends.cn/Storage/master/product/images/201803221918394477992.jpg",
+      "https://www.linefriends.cn/Storage/master/product/images/201803221918394468230.jpg"
+    ]
   },
   "g0003": {
     "title": "秋可"

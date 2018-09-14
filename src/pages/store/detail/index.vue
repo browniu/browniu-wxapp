@@ -3,7 +3,7 @@
     <div class="main">
       <div class="swiper">
         <swiper class="swiper-container" indicator-dots="false" autoplay="true" interval="3000" circular="true" current="2" duration="500" indicator-active-color="rgba(255,255,255,1)" indicator-color="rgba(255,255,255,.3)">
-          <swiper-item v-if="swiperLoading" v-for="(item, index) in goodsInfo.swiper" :key="index" class="swiper-item" :style="{backgroundImage:'url('+item+')'}">
+          <swiper-item v-if="swiperLoading" v-for="(item, index) in goodsData.swiper" :key="index" class="swiper-item" :style="{backgroundImage:'url('+item+')'}">
           </swiper-item>
         </swiper>
         <ul class="slogan">
@@ -15,7 +15,22 @@
             <i class="iconfont">&#xe786;</i>48小时无忧退款</li>
         </ul>
       </div>
-      <div class="standard" @click="showStandardPop">规格参数</div>
+      <div class="info">
+        <div class="main-title">
+          <div class="title">{{goodsData.info.title}}</div>
+          <div class="label">
+            <span :class="['iconfont','icon-'+item]" v-for="(item, index) in goodsData.info.label" :key="index"></span>
+          </div>
+        </div>
+        <div class="sub-title">{{goodsData.info.subTitle}}</div>
+        <div class="price">
+          <span>{{goodsData.info.price}}元</span>
+          <span>{{goodsData.info.prePrice}}元</span>
+        </div>
+      </div>
+      <div class="standard" @click="showStandardPop">规格参数
+        <i class="iconfont">&#xe7eb;</i>
+      </div>
     </div>
     <div :class="['standard-pop',standardPop?'show':'']">
       <div class="inner">
@@ -31,20 +46,23 @@ import goods from '../detail/goods.json'
 export default {
   data () {
     return {
-      goodsInfo: {},
+      goodsData: {},
       standardPop: false,
       swiperLoading: false
     }
   },
   onLoad () {
-    this.goodsInfo = goods[this.$root.$mp.query.id]
-    console.log(this.goodsInfo)
+    this.goodsData = goods[this.$root.$mp.query.id]
+    console.log(this.goodsData)
     wx.setNavigationBarTitle({
-      title: this.goodsInfo.title
+      title: this.goodsData.info.title
     })
   },
-  mounted () {
-    this.swiperLoading = true
+  onShow () {
+    this.swiperLoading = false
+    setTimeout(() => {
+      this.swiperLoading = true
+    }, 0)
   },
   methods: {
     showStandardPop () {
@@ -110,6 +128,72 @@ export default {
             color co_3
           }
         }
+      }
+    }
+    & .info {
+      border-bottom 1px solid co_10
+      box-sizing border-box
+      padding 18px 15px 13px
+      & .main-title {
+        & .title {
+          font-size 16px
+          color co_11
+          display inline-block
+        }
+        & .label {
+          margin-left 5px
+          display inline-block
+          & span {
+            margin 0 3px
+            &:nth-child(1) {
+              color co_14
+            }
+            &:nth-child(2) {
+              font-size 14px
+              color co_3
+              position relative
+              top -1px
+            }
+            &:nth-child(3) {
+              font-size 12px
+              position relative
+              top -2px
+              color co_15
+            }
+          }
+        }
+      }
+      & .sub-title {
+        font-size 12px
+        color co_2
+        margin 5px 0 10px
+      }
+      & .price {
+        & span {
+          &:first-child {
+            font-size 20px
+            color co_14
+          }
+          &:last-child {
+            font-size 12px
+            color co_2
+            text-decoration line-through
+            margin-left 5px
+          }
+        }
+      }
+    }
+    & .standard {
+      color co_7
+      box-sizing border-box
+      padding 15px
+      font-size 14px
+      border-bottom 10px solid co_10
+      & i {
+        float right
+        position relative
+        top 2px
+        color co_16
       }
     }
   }
