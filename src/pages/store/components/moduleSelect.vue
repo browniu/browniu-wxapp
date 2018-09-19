@@ -36,7 +36,7 @@ export default {
 @import '../../../assets/styles/index.styl'
 .module-select {
   padding 20px 10px 15px
-  //border-bottom 8px solid co_10
+  // border-bottom 8px solid co_10
   .title {
     text-align center
     font-size 14px
@@ -70,11 +70,18 @@ export default {
   }
   .main {
     & .items {
-      display grid
-      grid-template-columns 50% auto
-      grid-column-gap 10px
-      grid-row-gap 30px
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      justify-content center
+      width 100%
       & li {
+        width calc(((100% - 10px) / 2))
+        margin-right 10px
+        margin-bottom 10px
+        &:nth-of-type(2n) {
+          margin-right 0
+        }
         & .item-post {
           border-radius 3px
           height 220px

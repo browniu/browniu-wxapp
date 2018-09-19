@@ -57,17 +57,24 @@ export default {
   }
   .main {
     & .items {
-      display grid
-      grid-template-columns 50% auto
-      grid-column-gap 10px
-      grid-row-gap 10px
+      display flex
+      flex-direction row
+      flex-wrap wrap
+      justify-content center
+      width 100%
       & li {
-        border-radius 2px
+        width calc(((100% - 10px) / 2))
+        border-radius 3px
         height 120px
         background-color co_10
         background-size auto 120%
         background-position left top
         background-repeat no-repeat
+        margin-right 10px
+        margin-bottom 10px
+        &:nth-of-type(2n) {
+          margin-right 0
+        }
         & .item-title {
           transform scale(0.8)
           position relative

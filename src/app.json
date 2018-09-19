@@ -13,7 +13,9 @@
     "pages/store/class/main",
     "pages/store/shopping/main",
     "pages/store/mine/main",
-    "pages/store/detail/main"
+    "pages/store/detail/main",
+    "pages/store/bill/main",
+    "pages/store/shopCar/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

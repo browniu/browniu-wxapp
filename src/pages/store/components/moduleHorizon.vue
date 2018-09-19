@@ -57,7 +57,7 @@ export default {
       float left
       & li {
         display inline-block
-        margin-right 12px
+        margin-right 10px
         & .item-post {
           border-radius 3px
           height 150px
@@ -87,7 +87,7 @@ export default {
             & i {
               color co_14
               font-size 12px
-              transform scale(.9)
+              transform scale(0.9)
               display inline-block
               margin-right 1px
             }

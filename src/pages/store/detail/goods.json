@@ -14,7 +14,49 @@
       "https://www.linefriends.cn/Storage/master/product/images/201809031504520557630.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201809031504539579850.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201809031504499103930.jpg"
-    ]
+    ],
+    "feature": [
+      "https://www.linefriends.cn/Storage/master/gallery/201803/201803271016033048750.jpg",
+      "https://www.linefriends.cn/Storage/master/gallery/20180905/6367176599749433126688042.jpg"
+    ],
+    "argument": [{
+      "title": "规格",
+      "contain": "30×14×27.5cm"
+    }, {
+      "title": "大小",
+      "contain": "中号"
+    }, {
+      "title": "面料",
+      "contain": "牛剖层移膜革"
+    }, {
+      "title": "净重",
+      "contain": "667g"
+    }, {
+      "title": "内部结构",
+      "contain": "拉链袋"
+    }, {
+      "title": "最大容量",
+      "contain": "4.3L"
+    }, {
+      "title": "硬度",
+      "contain": "适中"
+    }],
+    "standard": {
+      "version": [{
+        "name": "普通版",
+        "price": "180",
+        "preprice": "240"
+      }, {
+        "name": "珍藏版",
+        "price": "220",
+        "preprice": "270"
+      }, {
+        "name": "十周年纪念版",
+        "price": "300",
+        "preprice": "340"
+      }],
+      "color": ["粉色", "白色", "红色"]
+    }
   },
   "g0002": {
     "info": {
@@ -30,7 +72,53 @@
       "https://www.linefriends.cn/Storage/master/product/images/201803221918394468231.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201803221918394477992.jpg",
       "https://www.linefriends.cn/Storage/master/product/images/201803221918394468230.jpg"
-    ]
+    ],
+    "feature": [
+      "https://www.linefriends.cn/Storage/master/gallery/201803/201803271016033048750.jpg",
+      "https://www.linefriends.cn/Storage/master/gallery/20180322/6365734312990025566829498.jpg",
+      "http://www.linefriends.cn/Storage/master/gallery/20180330/6365800547046241005732566.jpg",
+      "https://www.linefriends.cn/Storage/master/gallery/20180322/6365734313233857612413160.jpg",
+      "https://www.linefriends.cn/Storage/master/gallery/20180322/6365734313360021412697944.jpg"
+    ],
+    "argument": [{
+      "title": "规格",
+      "contain": "8.9×8.9×7cm"
+    }, {
+      "title": "容量",
+      "contain": "9000mAh"
+    }, {
+      "title": "材质",
+      "contain": "铝壳+钢化玻璃"
+    }, {
+      "title": "输入",
+      "contain": "5VDC 2A，9VDC 1.67A"
+    }, {
+      "title": "输出",
+      "contain": "5VDC 1A，9VDC 1.1A"
+    }, {
+      "title": "快充",
+      "contain": "支持",
+      "sub": "苹果7.5W无线快充／三星手机无线快充"
+    }, {
+      "title": "适用",
+      "contain": "安卓/苹果"
+    }],
+    "standard": {
+      "version": [{
+        "name": "普通版",
+        "price": "380",
+        "preprice": "450"
+      }, {
+        "name": "加量版",
+        "price": "480",
+        "preprice": "520"
+      }, {
+        "name": "十周年纪念版",
+        "price": "600",
+        "preprice": "760"
+      }],
+      "color": ["棕色", "卡其色", "棕红色"]
+    }
   },
   "g0003": {
     "title": "秋可"
