@@ -252,8 +252,8 @@ export default {
       }
     },
     gotoCar () {
-      wx.navigateTo({
-        url: '../shopCar/main'
+      wx.switchTab({
+        url: '../shopping/main'
       })
     },
     buy () {

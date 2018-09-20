@@ -1,0 +1,36 @@
+{
+  "goods": [{
+    "title": "可妮兔漆皮多功能包",
+    "post": "https://www.linefriends.cn/Storage/master/product/images/201809031504499103930.jpg",
+    "price": "250",
+    "number": "1",
+    "standard": {
+      "version": "十周年纪念版",
+      "color": "粉色"
+    }
+  }, {
+    "title": "布朗熊充电宝",
+    "post": "https://www.linefriends.cn/Storage/master/product/images/201803221918394468230.jpg",
+    "price": "380",
+    "number": "2",
+    "standard": {
+      "version": "普通版",
+      "color": "棕色"
+    }
+  }, {
+    "title": "莎莉漆皮护照夹",
+    "post": "https://www.linefriends.cn/Storage/master/product/images/201809031511010868310.jpg",
+    "price": "142",
+    "number": "1",
+    "standard": {
+      "version": "精装版",
+      "color": "黄色"
+    }
+  }],
+  "address": {
+    "name": "小牛",
+    "phone": "17621063119",
+    "detail": "上海市 静安区 昌平路68号 6栋 601室"
+  },
+  "invoice": "个人"
+}

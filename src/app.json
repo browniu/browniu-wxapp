@@ -7,6 +7,7 @@
     "pages/tools/realView/main",
     "pages/tools/w_overTimePay/main",
     "pages/tools/dice/main",
+    "pages/tools/japan/main",
     "pages/tools/lab/main",
     "pages/store/index/main",
     "pages/store/news/main",
@@ -14,8 +15,7 @@
     "pages/store/shopping/main",
     "pages/store/mine/main",
     "pages/store/detail/main",
-    "pages/store/bill/main",
-    "pages/store/shopCar/main"
+    "pages/store/bill/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -22,13 +22,14 @@ export default {
       develop: true,
       access: false,
       login: false,
-      theme: 0,
+      theme: 1,
       tools: [
         { href: '../tools/remainder/main', name: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '旺旺加班费', label: false, access: false },
         { href: '../tools/dice/main', name: '摇骰子', label: false, access: false },
-        { href: '../store/index/main', name: '🚧 施工中', label: false, access: false },
+        { href: '../store/index/main', name: '小卖部', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日友好', label: false, access: false },
         { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true }
       ]
     }
@@ -87,12 +88,12 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../store/detail/main?id=g0001'
+        url: '../tools/japan/main'
       })
     }
   },
   created () {
-    this.theme = Math.floor(Math.random() * 2 + 1)
+    // this.theme = Math.floor(Math.random() * 2 + 1)
   }
 }
 </script>
@@ -122,7 +123,7 @@ export default {
       display flex
       flex-direction row
       flex-wrap wrap
-      justify-content center
+      justify-content left
       width 100%
       & li {
         width calc(((100% - 4px) / 3))
