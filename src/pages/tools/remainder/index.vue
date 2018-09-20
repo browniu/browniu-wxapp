@@ -1,7 +1,7 @@
 <template>
   <div class="remainder">
     <label for="field"></label>
-    <input id="killNumber" name="field" v-model="killNumber" type="text">
+    <input id="killNumber" name="field" v-model="killNumber" type="number">
     <p>能被
       <i>3</i> 整除且最接近输入值的整数是<br>
       <span>{{killNumber - killNumber % 3}}</span>或

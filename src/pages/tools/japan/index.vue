@@ -3,26 +3,32 @@
     <div class="screen">
       <div class="item cny">
         <h1>{{cnyResult}}</h1>
-        <p>¥人民币</p>
+        <p>¥人民币
+          <span v-if="!exchangeSwitch">目标货币</span>
+        </p>
       </div>
       <div class="item jap">
         <h1>{{japResult}}</h1>
-        <p>¥日元</p>
+        <p>¥日元
+          <span v-if="exchangeSwitch">目标货币</span>
+        </p>
       </div>
     </div>
     <div class="control">
-      <div class="switch" @click="exSwitch">
-        <div class="ex">
-          <i :class="['iconfont',!exchangeSwitch?'act':'']">&#xe613;</i>
-          <i :class="['iconfont',exchangeSwitch?'act':'']">&#xe613;</i>
+      <div class="inner">
+        <div class="switch" @click="exSwitch">
+          <div class="ex">
+            <i :class="['iconfont',!exchangeSwitch?'act':'']">&#xe613;</i>
+            <i :class="['iconfont',exchangeSwitch?'act':'']">&#xe613;</i>
+          </div>
+          <div class="flag">
+            <span></span>
+            <span></span>
+          </div>
         </div>
-        <div class="flag">
-          <span></span>
-          <span></span>
+        <div class="keyboard" @click.stop="keyPress">
+          <div @touchstart="keyTouch = item" @touchend="keyDown" :data-value="item" v-for="(item, index) in keyValue" :key="index" :class="['key',keyTouch===item?'touch':'']">{{item}}</div>
         </div>
-      </div>
-      <div class="keyboard" @click.stop="keyPress">
-        <div @touchstart="keyTouch = item" @touchend="keyDown" :data-value="item" v-for="(item, index) in keyValue" :key="index" :class="['key',keyTouch===item?'touch':'']">{{item}}</div>
       </div>
     </div>
   </div>
@@ -135,8 +141,8 @@ keyHeight = calc(((100vw - 2px) / 5.5))
 c_1 = #003a61
 c_2 = #367f9d
 c_2_1 = #4252c0
-c_2_2 = #2f4394
-c_2_3 = #002fba
+c_2_2 = #6340a9
+c_2_3 = #4432d8
 c_2_4 = #1e3479
 .japan {
   height 100vh
@@ -146,13 +152,26 @@ c_2_4 = #1e3479
       box-sizing border-box
       padding 25px
       & h1 {
-        font-size 28px
-        color #fff
+        font-size 36px
+        font-weight lighter
+        font-weight 100
+        color rgba(255, 255, 255, 0.7)
       }
       & p {
-        margin-top 2px
+        margin-top 3px
         font-size 12px
         color rgba(255, 255, 255, 0.5)
+        position relative
+        & span {
+          position absolute
+          top -5px
+          transform scale(0.6)
+          display inline-block
+          background rgba(255, 255, 255, 0.3)
+          padding 5px 8px
+          border-radius 3px
+          font-size 12px
+        }
       }
     }
     .cny {
@@ -160,91 +179,107 @@ c_2_4 = #1e3479
     }
   }
   .control {
-    background linear-gradient(135deg, c_2_2, c_2_1)
     position fixed
     bottom 0
-    .switch {
-      height 65px
-      border-bottom 1px solid rgba(255, 255, 255, 0.03)
+    &:before {
+      z-index 0
+      content ''
+      display inline-block
+      height 100%
+      width 100%
+      position absolute
+      top 0
+      left 0
+      background rgba(10, 29, 88, 0.7)
+      filter blur(10px)
+    }
+    .inner {
       position relative
-      .ex {
-        width 30px
-        height 30px
-        position absolute
-        top 50%
-        left 50%
-        transform translate(-50%, -50%)
-        i {
+      z-index 1
+      background linear-gradient(135deg, c_2_2, c_2_1)
+      .switch {
+        height 65px
+        border-bottom 1px solid rgba(255, 255, 255, 0.03)
+        position relative
+        .ex {
+          width 30px
+          height 30px
           position absolute
-          font-size 12px
-          color rgba(0, 0, 0, 0.15)
-          transform scale(0.7)
-          top 13px
-          &:last-child {
-            top 3px
-            transform scale(0.7) rotate(180deg)
-          }
-          &.act {
-            transform scale(0.9)
-            color rgba(160, 180, 253, 1)
+          top 50%
+          left 50%
+          transform translate(-50%, -50%)
+          i {
+            position absolute
+            font-size 12px
+            color rgba(0, 0, 0, 0.15)
+            transform scale(0.7)
+            top 13px
             &:last-child {
-              transform scale(0.9) rotate(180deg)
+              top 3px
+              transform scale(0.7) rotate(180deg)
+            }
+            &.act {
+              transform scale(0.9)
+              color rgba(160, 180, 253, 1)
+              &:last-child {
+                transform scale(0.9) rotate(180deg)
+              }
+            }
+          }
+        }
+        .flag {
+          height 100%
+          width 42%
+          margin 0 auto
+          position relative
+          & span {
+            position absolute
+            top 50%
+            transform translateY(-50%)
+            float left
+            height 25px
+            width 25px
+            background #fff
+            border-radius 50%
+            display inline-block
+            background url('http://pb85uax7t.bkt.clouddn.com/chinaFlagScreen.jpg')
+            background-size 110%
+            background-position center center
+            background-repeat no-repeat
+            &:last-child {
+              background-image url('http://pb85uax7t.bkt.clouddn.com/japanFlagScreen.jpg')
+              right 0
+              float right
             }
           }
         }
       }
-      .flag {
-        height 100%
-        width 42%
-        margin 0 auto
-        position relative
-        & span {
-          position absolute
-          top 50%
-          transform translateY(-50%)
-          float left
-          height 25px
-          width 25px
-          background #fff
-          border-radius 50%
-          display inline-block
-          background url('http://pb85uax7t.bkt.clouddn.com/chinaFlagScreen.jpg')
-          background-size 110%
-          background-position center center
-          background-repeat no-repeat
-          &:last-child {
-            background-image url('http://pb85uax7t.bkt.clouddn.com/japanFlagScreen.jpg')
-            right 0
-            float right
+      .keyboard {
+        margin-top 15px
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        justify-content left
+        width 100%
+        .key {
+          transition 0.3s
+          height keyHeight
+          line-height keyHeight
+          width keyWidth
+          // background co_10
+          margin-right 1px
+          margin-bottom 1px
+          font-size 18px
+          font-weight light
+          text-align center
+          color rgba(255, 255, 255, 1)
+          background rgba(50, 132, 158, 0)
+          &.touch {
+            background rgba(255, 255, 255, 0.05)
           }
-        }
-      }
-    }
-    .keyboard {
-      margin-top 15px
-      display flex
-      flex-direction row
-      flex-wrap wrap
-      justify-content left
-      width 100%
-      .key {
-        transition 0.3s
-        height keyHeight
-        line-height keyHeight
-        width keyWidth
-        // background co_10
-        margin-right 1px
-        margin-bottom 1px
-        font-size 18px
-        font-weight light
-        text-align center
-        color rgba(255, 255, 255, 1)
-        background rgba(50, 132, 158, 0)
-        &.touch {
-          background rgba(255, 255, 255, 0.05)
-        }
-        &:nth-of-type(3n) {
-          margin-right 0
+          &:nth-of-type(3n) {
+            margin-right 0
+          }
         }
       }
     }

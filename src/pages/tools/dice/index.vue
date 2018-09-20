@@ -1,7 +1,7 @@
 <template>
-  <div class="dice">
+  <div class="dice" @click="shakeDice">
     <div class="main">
-      <div :class="['inner',shake?'rotate':'',dice===1?'dice1':'',dice===2?'dice2':'',dice===3?'dice3':'',dice===4?'dice4':'',dice===5?'dice5':'',dice===6?'dice6':'']" @click="shakeDice">
+      <div :class="['inner',shake?'rotate':'',dice===1?'dice1':'',dice===2?'dice2':'',dice===3?'dice3':'',dice===4?'dice4':'',dice===5?'dice5':'',dice===6?'dice6':'']">
         <li v-for="(item, index) in 6" :key="index"></li>
       </div>
     </div>
@@ -24,17 +24,31 @@ export default {
       }, 0)
       this.dice = Math.floor(Math.random() * 6 + 1)
     }
+  },
+  onLoad () {
+    wx.setNavigationBarTitle({
+      title: '摇骰子'
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#b31217',
+      animation: {
+        duration: 200,
+        timingFunc: 'easeIn'
+      }
+    })
   }
 }
 </script>
 <style lang='stylus' scoped>
 @import '../dice/keyframe.css'
-co_1 = #e639a3
+co_1 = rgba(249, 206, 205, 1)
 co_2 = #663c6d
 .dice {
   height 100vh
   overflow hidden
   background co_2
+  background linear-gradient(to bottom, #b31217, #e52d27)
   position relative
   & .main {
     position absolute
@@ -45,7 +59,7 @@ co_2 = #663c6d
       transition 1s ease
       height 200px
       width 200px
-      border 2px solid co_1
+      border 1px solid co_1
       & li {
         height 15px
         width 15px
@@ -56,7 +70,7 @@ co_2 = #663c6d
         top 50%
         left 50%
         transform translate(-50%, -50%)
-        transition .5s ease 1s
+        transition 0.5s ease 1s
       }
       &.rotate {
         animation shake 1.5s cubic-bezier(0.97, 0.01, 0.27, 1.01)

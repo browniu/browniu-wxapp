@@ -16,7 +16,7 @@
       <form>
         <div class="inputGrop">
           <label :class="[label1State ? 'active' : '']" for="pay">岗位薪资</label>
-          <input type="text" name="pay" @focus="input1Focus" @blur="input1Blur($event)" v-model="pay">
+          <input type="number" name="pay" @focus="input1Focus" @blur="input1Blur($event)" v-model="pay">
         </div>
         <!-- <div class="inputGrop">
           <label :class="[label2State ? 'active' : '']" for="pay">本月需出勤天数</label>
@@ -24,7 +24,7 @@
         </div> -->
         <div class="inputGrop">
           <label :class="[label3State ? 'active' : '']" for="pay">总加班时间（小时）</label>
-          <input type="text" name="pay" @focus="input3Focus" @blur="input3Blur($event)" v-model="hour">
+          <input type="number" name="pay" @focus="input3Focus" @blur="input3Blur($event)" v-model="hour">
         </div>
       </form>
       <p>本月的旺旺加班费是

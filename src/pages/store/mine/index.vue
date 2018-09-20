@@ -15,6 +15,9 @@ export default {
         url: '../../index/main'
       })
     }
+  },
+  onShow () {
+    this.backHome()
   }
 }
 </script>
