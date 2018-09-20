@@ -11,7 +11,7 @@
 export default {
   methods: {
     backHome () {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../../index/main'
       })
     }
