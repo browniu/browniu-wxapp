@@ -19,7 +19,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
