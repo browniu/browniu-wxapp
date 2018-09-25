@@ -1,20 +1,27 @@
 <template>
-  <div :class="['tools',theme===1?'theme1':'',theme===2?'theme2':'']">
+  <scroll-view scroll-y class="tools">
     <main>
       <ol>
         <li v-for="(item, index) in tools" :key="index">
-          <i v-if="item.label">new</i>
-          <a @click="verify(index)" class="counter">{{item.name}}</a>
+          <img v-if="index===0" mode="widthFix" src="../../../static/images/killer.svg" alt="">
+          <img v-if="index===1" mode="widthFix" src="../../../static/images/lab.svg" alt="">
+          <img v-if="index===2" mode="widthFix" src="../../../static/images/timer.svg" alt="">
+          <img v-if="index===3" mode="widthFix" src="../../../static/images/message.svg" alt="">
+          <img v-if="index===4" mode="widthFix" src="../../../static/images/store.svg" alt="">
+          <img v-if="index===5" mode="widthFix" src="../../../static/images/heart.svg" alt="">
+          <img v-if="index===6" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <p>{{item.name}}</p>
+          <a @click="verify(index)"></a>
         </li>
-        <li v-if="!login">
-          <button open-type="getUserInfo" @click="identity">🔑 权限验证</button>
-          <a>🔑 权限验证</a>
+        <li>
+          <img mode="widthFix" src="../../../static/images/lock.svg" alt="">
+          <p>身份验证</p>
+          <button open-type="getUserInfo" @click="identity"></button>
         </li>
       </ol>
     </main>
-  </div>
+  </scroll-view>
 </template>
-
 <script>
 export default {
   data () {
@@ -24,25 +31,26 @@ export default {
       login: false,
       theme: 1,
       tools: [
-        { href: '../tools/remainder/main', name: 'Killer 3', label: false, access: false },
-        { href: '../tools/realView/main', name: '真实视窗', label: false, access: false },
-        { href: '../tools/w_overTimePay/main', name: '旺旺加班费', label: false, access: false },
-        { href: '../tools/dice/main', name: '摇骰子', label: false, access: false },
-        { href: '../store/index/main', name: '小卖部', label: false, access: false },
-        { href: '../tools/japan/main', name: '中日友好', label: false, access: false },
-        { href: '../tools/lab/main', name: '🔬 实验室', label: false, access: true }
+        { href: '../tools/remainder/main', name: 'Killer 3', icon: 'Killer 3', label: false, access: false },
+        { href: '../tools/realView/main', name: '真实视窗', icon: '真实视窗', label: false, access: false },
+        { href: '../tools/w_overTimePay/main', name: '旺旺加班费', icon: 'timer', label: false, access: false },
+        { href: '../tools/dice/main', name: '摇骰子', icon: 'message', label: false, access: false },
+        { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日友好', icon: 'heart', label: false, access: false },
+        { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ]
     }
   },
   methods: {
     verify (index) {
-      if (index === 4 && !this.tools[3].access) {
+      wx.vibrateShort()
+      // store page
+      if (index === 4) {
         wx.switchTab({
           url: '../store/index/main'
         })
         return
       }
-      wx.vibrateShort()
       if (this.tools[index].access) {
         if (this.access) {
           wx.navigateTo({
@@ -68,6 +76,11 @@ export default {
         success: (res) => {
           this.login = true
           this.userInfo = res.userInfo
+          wx.showToast({
+            title: '专属于 ' + res.userInfo.nickName + ' 的魔盒已经开启',
+            icon: 'none',
+            duration: 2000
+          })
           if (res.userInfo.nickName === 'brown') {
             this.access = true
           }
@@ -82,7 +95,6 @@ export default {
     wx.cloud.init({
       traceUser: true
     })
-    this.identity()
     if (this.develop) {
       // wx.switchTab({
       //   url: '../store/index/main'
@@ -92,8 +104,18 @@ export default {
       })
     }
   },
-  created () {
-    // this.theme = Math.floor(Math.random() * 2 + 1)
+  onLoad () {
+    wx.setNavigationBarTitle({
+      title: "brown's magic"
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#38274e',
+      animation: {
+        duration: 200,
+        timingFunc: 'easeIn'
+      }
+    })
   }
 }
 </script>
@@ -103,19 +125,14 @@ export default {
   color co_11
   height 100vh
   position relative
-  background-color #fff
+  background-color #38274e
+  background linear-gradient(to bottom, #38274e, #4f274b)
   background-repeat no-repeat
   overflow hidden
   &.theme1 {
     background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
     background-position bottom right
     background-size 150%
-  }
-  &.theme2 {
-    background-image url('https://cdn.dribbble.com/users/256781/screenshots/2876842/flowers_dribbble-2.gif')
-    background-position bottom center
-    background-position-y 403px
-    background-size 80%
   }
   & main {
     padding 15px
@@ -126,31 +143,30 @@ export default {
       justify-content left
       width 100%
       & li {
-        width calc(((100% - 4px) / 3))
-        font-size 14px
-        color co_7
+        width calc(((100% - 10px) / 3))
+        font-size 12px
+        color #fff
         margin 0
         display inline-block
         text-align center
-        line-height 120px
         height 120px
-        background co_10
+        border-radius 3px
+        background-color rgba(255, 255, 255, 0.03)
         position relative
-        margin-right 2px
-        margin-bottom 2px
+        margin-right 5px
+        margin-bottom 5px
+        box-sizing border-box
+        padding-top 35px
         &:nth-of-type(3n) {
           margin-right 0
         }
-        & i {
-          position absolute
-          top -40%
-          right 5px
-          color co_13
-          font-size 12px
-          font-weight bold
-          transform scale(0.6)
+        & img {
+          width 25%
+          height auto
+          margin-bottom 5px
         }
-        & button {
+        & a, button {
+          display inline-block
           position absolute
           top 0
           left 0

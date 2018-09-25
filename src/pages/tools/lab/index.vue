@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="click" @click="apitest">
-      vibrateLong
-    </div>
-    <p>{{json}}</p>
+    <img src="../../../../static/images/test.svg" alt="">
   </div>
 </template>
 
