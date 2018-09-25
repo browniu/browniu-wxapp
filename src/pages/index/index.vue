@@ -9,7 +9,8 @@
           <img v-if="index===3" mode="widthFix" src="../../../static/images/message.svg" alt="">
           <img v-if="index===4" mode="widthFix" src="../../../static/images/store.svg" alt="">
           <img v-if="index===5" mode="widthFix" src="../../../static/images/heart.svg" alt="">
-          <img v-if="index===6" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <img v-if="index===6" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
+          <img v-if="index===7" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
@@ -26,7 +27,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -37,6 +38,7 @@ export default {
         { href: '../tools/dice/main', name: '摇骰子', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日友好', icon: 'heart', label: false, access: false },
+        { href: '../tools/theDay/main', name: '那一天', icon: 'heart', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ]
     }
@@ -100,7 +102,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/japan/main'
+        url: '../tools/theDay/main'
       })
     }
   },

@@ -9,6 +9,7 @@
     "pages/tools/dice/main",
     "pages/tools/japan/main",
     "pages/tools/lab/main",
+    "pages/tools/theDay/main",
     "pages/store/index/main",
     "pages/store/news/main",
     "pages/store/class/main",
