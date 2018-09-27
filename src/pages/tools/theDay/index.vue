@@ -101,7 +101,7 @@ export default {
         'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_14.jpg',
         'bgc': '28, 2, 11'
       }],
-      themeIndex: 0,
+      themeIndex: 8,
       second: 0,
       dateData: {
         'second': 0,
@@ -186,6 +186,8 @@ export default {
       let month = date.getMonth() + 1
       let day = date.getDate()
       this.dateEnd = year + '-' + month + '-' + day + ',00:00:00'
+      this.pickerDate = [this.dateEnd.split('-')[0], this.dateEnd.split('-')[1], this.dateEnd.split('-')[2].split(',')[0], parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+      this.dateEndShow = this.dateEnd.split(',')[0]
       this.updateData()
     },
     updateData () {
@@ -260,7 +262,7 @@ export default {
         // no record
         if (!res.data[0]) {
           this.initDate()
-          this.tipS('没有查询到你的事件哦')
+          this.tipS('没有查询到你的事件哦,我帮你重置了一个')
           return
         }
         // get record
@@ -272,7 +274,7 @@ export default {
         let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
         if (dateLeft < 0) {
           this.initDate()
-          this.tipS('你的事件已经过期了哦')
+          this.tipS('你的事件已经过期了哦，我帮你重置了一个')
           return
         }
         this.theThing = res.data[0].theThing
