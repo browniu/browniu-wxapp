@@ -1,5 +1,5 @@
 <template>
-  <scroll-view scroll-y class="tools">
+  <scroll-view scroll-y class="tools navigatePosition">
     <main>
       <ol>
         <li v-for="(item, index) in tools" :key="index">
@@ -79,7 +79,7 @@ export default {
           this.login = true
           this.userInfo = res.userInfo
           wx.showToast({
-            title: '专属于 ' + res.userInfo.nickName + ' 的魔盒已经开启',
+            title: '专属 ' + res.userInfo.nickName + ' 的魔盒已开启',
             icon: 'none',
             duration: 2000
           })

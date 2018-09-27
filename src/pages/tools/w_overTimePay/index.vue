@@ -1,5 +1,5 @@
 <template>
-  <div class="overtimePay">
+  <div class="overtimePay navigatePosition">
     <div class="model">
       <div class="face">
         <div class="eye-shade"></div>

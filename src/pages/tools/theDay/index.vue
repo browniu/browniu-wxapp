@@ -1,7 +1,7 @@
 <template>
   <div class="theDay">
     <div class="main" :style="{backgroundImage:'url('+theme[themeIndex].bgi+')'}">
-      <div :class="['gradient',controlPanel?'act':'']" :style="{background:'linear-gradient(to top, rgba('+theme[themeIndex].bgca+', 0), rgba('+theme[themeIndex].bgca+', 1))'}"></div>
+      <div :class="['gradient',controlPanel?'act':'']" :style="{background:'linear-gradient(to top, rgba('+theme[themeIndex].bgc+', 0), rgba('+theme[themeIndex].bgc+', 1))'}"></div>
       <div :class="['inner',controlPanel?'act':'']" @click="cpSwitch">
         <div class="container">
           <div class="title">
@@ -38,7 +38,7 @@
       <div class="slogan">
         <span v-for="(item, index) in slogan" :key="index">{{item}}</span>
       </div>
-      <picker-view class="date-picker" indicator-style="height: 50px;color:green;" mask-style="" @change="pickerChange">
+      <picker-view class="date-picker" indicator-style="height: 50px;color:green;" mask-style="" @change="pickerChange" :value="pickerInit">
         <picker-view-column>
           <view class="picker-item" v-for="(item, index) in pickerItem" :key="index">{{item}}年</view>
         </picker-view-column>
@@ -54,11 +54,12 @@
       </picker-view>
       <!-- <div class="picker-date">{{pickerDate}}</div> -->
       <input type="text" placeholder="你在等什么？" v-model="theThingCache">
-      <div class="theme-picker">
-        <span @click="themeSwitch(index)" :class="['item',themeIndex===index?'act':'']" v-for="(item, index) in theme" :key="index" :style="{backgroundImage:'url('+item.bgi+')'}">
-        </span>
-      </div>
-      <div @click="submit" class="button" :style="{backgroundColor:theme[themeIndex].bgc}">就这么决定了</div>
+      <scroll-view scroll-x class="theme-picker">
+        <div class="inner">
+          <span @click="themeSwitch(index)" :class="['item',themeIndex===index?'act':'']" v-for="(item, index) in theme" :key="index" :style="{backgroundImage:'url('+item.bgi+')'}"></span>
+        </div>
+      </scroll-view>
+      <div @click="submit" class="button" :style="{backgroundColor:'rgba('+theme[themeIndex].bgc+', .8)'}">开始吧</div>
     </div>
   </div>
 </template>
@@ -71,12 +72,34 @@ export default {
       controlPanel: false,
       theme: [{
         'bgi': 'http://pb85uax7t.bkt.clouddn.com/stock-photo-172526585.jpg',
-        'bgc': '#a69f91',
-        'bgca': '166, 159, 145'
+        'bgc': '166, 159, 145'
       }, {
         'bgi': 'http://pb85uax7t.bkt.clouddn.com/stock-photo-179567537.jpg',
-        'bgc': '#2d8f64',
-        'bgca': '45, 143, 100'
+        'bgc': '45, 143, 100'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_1.jpg',
+        'bgc': '7, 109, 85'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_3.jpg',
+        'bgc': '26, 31, 31'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_6.jpg',
+        'bgc': '145, 157, 168'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_7.jpg',
+        'bgc': '20, 116, 160'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_9.jpg',
+        'bgc': '30, 31, 36'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_12.jpg',
+        'bgc': '55, 39, 47'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_13.jpg',
+        'bgc': '11, 16, 45'
+      }, {
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_14.jpg',
+        'bgc': '28, 2, 11'
       }],
       themeIndex: 0,
       second: 0,
@@ -89,12 +112,8 @@ export default {
       dateEnd: '2018-10-02,00:00:00',
       dateEndShow: '0000-00-00',
       pickerItem: [],
-      pickerDate: {
-        'year': 0,
-        'month': 0,
-        'day': 0,
-        'hour': 0
-      },
+      pickerInit: [3, 3, 3, 3],
+      pickerDate: [],
       slogan: ['一个时间', '一件事情', '一场等待', '一份执念'],
       theThing: '等风来',
       theThingCache: ''
@@ -107,6 +126,8 @@ export default {
       } else {
         this.controlPanel = true
       }
+      this.pickerInit = [this.dateEnd.split('-')[0] - 2018, this.dateEnd.split('-')[1] - 1, this.dateEnd.split('-')[2].split(',')[0] - 1, parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+      this.theThingCache = this.theThing
     },
     getTime () {
       let dateNow = new Date()
@@ -126,22 +147,16 @@ export default {
     pickerChange (e) {
       let pd = e.target.value
       this.pickerDate = [pd[0] + 2018, pd[1] + 1, pd[2] + 1, pd[3]]
+      this.pickerInit = [pd[0], pd[1], pd[2], pd[3]]
     },
     themeSwitch (e) {
       this.themeIndex = e
-      wx.setNavigationBarColor({
-        frontColor: '#ffffff',
-        backgroundColor: this.theme[this.themeIndex].bgc,
-        animation: {
-          duration: 0,
-          timingFunc: 'easeIn'
-        }
-      })
     },
     submit () {
       // verify timeline
       let dateNow = new Date()
       let dateEnd = new Date(this.pickerDate[0] + '-' + this.pickerDate[1] + '-' + this.pickerDate[2] + ',' + this.pickerDate[3] + ':00:00')
+      console.log(this.pickerDate)
       let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
       if (isNaN(dateLeft) || dateLeft < 0) {
         wx.vibrateLong()
@@ -262,6 +277,12 @@ export default {
         }
         this.theThing = res.data[0].theThing
         this.themeIndex = res.data[0].theme
+        this.dateEndShow = (this.dateEnd).split(',')[0]
+        this.pickerInit = [this.dateEnd.split('-')[0] - 2018, this.dateEnd.split('-')[1] - 1, this.dateEnd.split('-')[2].split(',')[0] - 1, parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+        let dateSplit = this.dateEnd.split(/[-,:]/)[0] - 2018
+        this.pickerInit = [dateSplit[0] - 2018, dateSplit[1] - 1, dateSplit[2] - 1, dateSplit[3]]
+        this.pickerDate = [this.dateEnd.split('-')[0], this.dateEnd.split('-')[1], this.dateEnd.split('-')[2].split(',')[0], parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+        console.log(this.pickerInit)
         wx.setNavigationBarColor({
           frontColor: '#ffffff',
           backgroundColor: this.theme[this.themeIndex].bgc,
@@ -275,7 +296,6 @@ export default {
         console.error('[数据库] [查询记录] 失败：', err)
       }
     })
-    this.dateEndShow = (this.dateEnd).split(',')[0]
     for (let index = 0; index < 101; index++) {
       this.pickerItem.push(2018 + index)
     }
@@ -288,6 +308,9 @@ export default {
 <style lang='stylus' scoped>
 @import '../../../assets/styles/index.styl'
 .theDay {
+  position fixed
+  height 100vh
+  overflow hidden
   .main {
     height 100vh
     width 100vw
@@ -301,7 +324,7 @@ export default {
       width 100%
       top 0
       left 0
-      background rgba(0, 0, 0, 0.3)
+      background rgba(0, 0, 0, 0.2)
       position absolute
       z-index 0
     }
@@ -313,7 +336,7 @@ export default {
       width 100%
       height 50px
       &.act {
-        height 150px
+        height 50%
       }
     }
     .inner {
@@ -327,10 +350,10 @@ export default {
       &.act {
         border-radius 10px
         max-width 80%
-        top 15%
+        top 25%
         transform translate(-50%, -50%)
         & .blur {
-          top 185%
+          top 175%
           opacity 0
         }
       }
@@ -341,12 +364,12 @@ export default {
         left 50%
         transform translate(-50%, -50%)
         height 100vh
-        width 100vw
+        width 110vw
         background-size auto 100%
         background-repeat no-repeat
         background-position top center
-        filter blur(10px)
-        opacity 0.85
+        filter blur(15px)
+        opacity 0.88
       }
       & .container {
         position relative
@@ -397,7 +420,7 @@ export default {
   .panel {
     z-index 10
     position absolute
-    height 70%
+    height 55%
     width 100%
     background rgba(255, 255, 255, 0.9)
     transition 0.3s
@@ -428,6 +451,7 @@ export default {
       font-size 14px
       color co_2
       padding 15px
+      display none
       & span {
         display inline-block
         margin-right 10px
@@ -455,22 +479,26 @@ export default {
       font-size 14px
       margin-top 8px
       width 100%
-      height 80px
+      height 60px
       // background #fff
       box-sizing border-box
-      padding 10px
-      & .item {
+      padding 0 15px
+      & .inner {
         height 100%
-        width 100px
-        margin-right 5px
-        display inline-block
-        background-size cover
-        background-position center center
-        background-repeat no-repeat
-        border 1px solid #fff
-        box-sizing border-box
-        &.act {
-          border 1px solid green
+        white-space nowrap
+        & .item {
+          height 100%
+          width 100px
+          margin-right 5px
+          display inline-block
+          background-size cover
+          background-position center center
+          background-repeat no-repeat
+          border 1px solid #fff
+          box-sizing border-box
+          &.act {
+            border 1px solid brown
+          }
         }
       }
     }

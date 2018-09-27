@@ -1,5 +1,5 @@
 <template>
-  <div class="japan">
+  <div class="japan navigatePosition">
     <div class="screen">
       <div class="item cny">
         <h1>{{cnyResult}}</h1>
@@ -147,6 +147,7 @@ c_2_4 = #1e3479
 .japan {
   height 100vh
   background linear-gradient(to bottom, c_2_4, c_2_3)
+  padding-top 50px
   .screen {
     & .item {
       box-sizing border-box

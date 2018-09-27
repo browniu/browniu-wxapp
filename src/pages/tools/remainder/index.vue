@@ -1,5 +1,5 @@
 <template>
-  <div class="remainder">
+  <div class="remainder navigatePosition">
     <label for="field"></label>
     <input id="killNumber" name="field" v-model="killNumber" type="number">
     <p>能被

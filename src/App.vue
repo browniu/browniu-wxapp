@@ -38,4 +38,8 @@ html, body {
   font-style normal
   color #9e9595
 }
+.navigatePosition {
+  box-sizing border-box
+  padding-top 70px
+}
 </style>

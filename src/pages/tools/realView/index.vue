@@ -1,5 +1,5 @@
 <template>
-  <div class="deviceView">
+  <div class="deviceView navigatePosition">
     <main>
       <div class="container">
         <h1>[<span>{{viewHeight}}</span>,<span>{{viewWidth}}</span>]</h1>
