@@ -4,7 +4,7 @@
     <input id="killNumber" name="field" v-model="killNumber" type="number">
     <p>能被
       <i>3</i> 整除且最接近输入值的整数是<br>
-      <span>{{killNumber - killNumber % 3}}</span>或
+      <span :class="((killNumber % 3)===0?'act':'')">{{killNumber - killNumber % 3}}</span> ||
       <span>{{killNumber - killNumber % 3 + 3}}</span>
     </p>
   </div>
@@ -30,9 +30,11 @@ export default {
 .remainder {
   // height 100vh
   width 100vw
+  height 100vh
+  overflow hidden
   background #fff
   text-align center
-  // background-image url('https://www.transparenttextures.com/patterns/brilliant.png')
+  background-image url('https://www.transparenttextures.com/patterns/brilliant.png')
   padding-top 80px
   &>input {
     text-align center
@@ -66,9 +68,15 @@ export default {
     margin 0 5px
   }
   & span {
+    font-size 18px
     color co_3
     font-weight bold
     margin 0 5px
+    transition 0.3s
+    &.act {
+      color co_13
+      font-weight bolder
+    }
   }
 }
 </style>

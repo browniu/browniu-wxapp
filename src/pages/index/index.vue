@@ -1,8 +1,9 @@
 <template>
   <scroll-view scroll-y class="tools navigatePosition">
-    <!-- <div class="navigetion">
-      <div class="title">brown's magic</div>
-    </div> -->
+    <div class="navigetion">
+      brown's magic
+    </div>
+    <div v-if="tipsSwitch" class="tips">{{tipsInfo}}</div>
     <main>
       <ol>
         <li v-for="(item, index) in tools" :key="index">
@@ -13,7 +14,8 @@
           <img v-if="index===4" mode="widthFix" src="../../../static/images/store.svg" alt="">
           <img v-if="index===5" mode="widthFix" src="../../../static/images/heart.svg" alt="">
           <img v-if="index===6" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
-          <img v-if="index===7" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <img v-if="index===7" mode="widthFix" src="../../../static/images/organization.svg" alt="">
+          <img v-if="index===8" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
@@ -33,18 +35,21 @@ export default {
       develop: false,
       access: false,
       login: false,
-      firstLoad: true,
       theme: 1,
       tools: [
-        { href: '../tools/remainder/main', name: 'Killer 3', icon: 'Killer 3', label: false, access: false },
+        { href: '../tools/remainder/main', name: '除以3', icon: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真实视窗', icon: '真实视窗', label: false, access: false },
-        { href: '../tools/w_overTimePay/main', name: '旺旺加班费', icon: 'timer', label: false, access: false },
-        { href: '../tools/dice/main', name: '摇骰子', icon: 'message', label: false, access: false },
+        { href: '../tools/w_overTimePay/main', name: '加班旺旺', icon: 'timer', label: false, access: false },
+        { href: '../tools/dice/main', name: '转转乐', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: '小卖部 (施工中)', icon: 'store', label: false, access: false },
-        { href: '../tools/japan/main', name: '中日友好', icon: 'heart', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日互惠', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
+        { href: '../tools/theDay/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
-      ]
+      ],
+      tipsInfo: '这是一条小提示',
+      tipsSwitch: false,
+      firstLoad: true
     }
   },
   methods: {
@@ -52,9 +57,16 @@ export default {
       wx.vibrateShort()
       // store page
       if (index === 4) {
-        wx.switchTab({
-          url: '../store/index/main'
-        })
+        this.tips('临时开放 出口在右下角')
+        setTimeout(() => {
+          wx.switchTab({
+            url: '../store/index/main'
+          })
+        }, 2000)
+        return
+      }
+      if (index === 7) {
+        this.tips('仍在内测阶段')
         return
       }
       if (this.tools[index].access) {
@@ -64,17 +76,22 @@ export default {
           })
         } else {
           wx.vibrateLong()
-          wx.hideToast({})
-          wx.showToast({
-            title: '立入禁止',
-            icon: 'none',
-            duration: 2000
-          })
+          this.tips('立入禁止')
         }
       } else {
-        wx.navigateTo({
-          url: this.tools[index].href
-        })
+        if (this.firstLoad) {
+          this.firstLoad = false
+          this.tips('滑动左侧返回')
+          setTimeout(() => {
+            wx.navigateTo({
+              url: this.tools[index].href
+            })
+          }, 2000)
+        } else {
+          wx.navigateTo({
+            url: this.tools[index].href
+          })
+        }
       }
     },
     identity () {
@@ -83,19 +100,19 @@ export default {
         success: (res) => {
           this.login = true
           this.userInfo = res.userInfo
-          wx.showToast({
-            title: '专属 ' + res.userInfo.nickName + ' 的魔盒已开启',
-            icon: 'none',
-            duration: 2000
-          })
+          this.tips('专属 ' + res.userInfo.nickName + ' 的魔盒已开启')
           if (res.userInfo.nickName === 'brown') {
             this.access = true
           }
         }
       })
     },
-    vibrate () {
-      wx.vibrateLong()
+    tips (e) {
+      this.tipsInfo = e
+      this.tipsSwitch = true
+      setTimeout(() => {
+        this.tipsSwitch = false
+      }, 2000)
     }
   },
   mounted () {
@@ -110,25 +127,17 @@ export default {
         url: '../tools/theDay/main'
       })
     }
-  },
-  onLoad () {
-    wx.setNavigationBarTitle({
-      title: "brown's magic"
-    })
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
-      backgroundColor: '#38274e',
+      backgroundColor: '#000000',
       animation: {
-        duration: 200,
+        duration: 0,
         timingFunc: 'easeIn'
       }
     })
-    if (this.firstLoad) {
-      this.firstLoad = false
-      wx.switchTab({
-        url: '../store/mine/main'
-      })
-    }
+  },
+  onLoad () {
+    console.log(wx.getSystemInfoSync())
   }
 }
 </script>
@@ -148,12 +157,13 @@ export default {
     background-size 150%
   }
   & .navigetion {
+    display none
+    width 100%
     box-sizing border-box
-    padding 30px 15px
-    & .title {
-      font-size 16px
-      color #fff
-    }
+    padding 0 15px
+    font-size 18px
+    color #fff
+    margin-bottom 10px
   }
   & main {
     padding 15px
@@ -201,6 +211,18 @@ export default {
         }
       }
     }
+  }
+  & .tips {
+    z-index 9999
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    color #fff
+    font-size 12px
+    padding 10px 15px
+    background rgba(0, 0, 0, 0.3)
+    border-radius 3px
   }
 }
 </style>

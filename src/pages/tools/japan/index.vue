@@ -131,6 +131,11 @@ export default {
         timingFunc: 'easeIn'
       }
     })
+  },
+  onHide () {
+    wx.redirectTo({
+      url: '../../index/main'
+    })
   }
 }
 </script>

@@ -262,7 +262,7 @@ export default {
         // no record
         if (!res.data[0]) {
           this.initDate()
-          this.tipS('没有查询到你的事件哦,我帮你重置了一个')
+          this.tipS('触摸时间开始设置吧')
           return
         }
         // get record
@@ -274,7 +274,7 @@ export default {
         let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
         if (dateLeft < 0) {
           this.initDate()
-          this.tipS('你的事件已经过期了哦，我帮你重置了一个')
+          this.tipS('你的事件已经过期了哦')
           return
         }
         this.theThing = res.data[0].theThing
