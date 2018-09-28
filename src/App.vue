@@ -40,6 +40,6 @@ html, body {
 }
 .navigatePosition {
   box-sizing border-box
-  padding-top 70px
+  padding-top 80px
 }
 </style>

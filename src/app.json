@@ -52,7 +52,7 @@
       "pagePath": "pages/store/mine/main",
       "iconPath": "static/images/mine.png",
       "selectedIconPath": "static/images/mine_s.png",
-      "text": "我的"
+      "text": "临时出口"
     }]
   }
 }

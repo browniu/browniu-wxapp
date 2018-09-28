@@ -1,6 +1,7 @@
 <template>
   <scroll-view scroll-y class="store-index" @scroll="fixedTabTop($event)">
     <!-- <div class="info">{{info}}</div> -->
+
     <head>
       <div class="search">
         <i class="iconfont">&#xe7e3;</i>
