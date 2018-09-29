@@ -1,23 +1,24 @@
 <template>
   <div class="colorful-make">
     <div class="upload" @click="choose">
-      <canvas canvas-id="canvasIn" class="canvas"></canvas>
-      <div class="image" :style="{backgroundImage:'url('+imgPath+')'}"></div>
+      <canvas :style="{width:canvasWidth+'px',height:canvasHeight+'px'}" canvas-id="canvasIn" class="canvas"></canvas>
+      <!-- <div class="image" :style="{backgroundImage:'url('+imgPath+')'}"></div> -->
     </div>
-    <div class="card" :style="{backgroundColor:'rgb('+domainColor+')'}"></div>
+    <div class="card">
+      <div class="color" :style="{backgroundColor:'rgb('+item[0]+','+item[1]+','+item[2]+')'}" v-for="(item, index) in colors" :key="index"></div>
+    </div>
   </div>
 </template>
 
 <script>
 import ColorThief from '../../../utils/colorThief.js'
-
 export default {
   data () {
     return {
       imgPath: null,
       canvasWidth: 0,
       canvasHeight: 400,
-      domainColor: ''
+      colors: []
     }
   },
   methods: {
@@ -26,30 +27,19 @@ export default {
         success: (res) => {
           wx.getImageInfo({
             src: res.tempFilePaths[0],
-            success: (res) => {
+            success: (imgInfo) => {
+              this.canvasWidth = imgInfo.width
+              this.canvasHeight = imgInfo.height
+              this.imgPath = imgInfo.path
               this.colorThief.getPalette({
-                width: res.width,
-                height: res.height,
-                imgPath: res.path,
-                colorCount: 100
+                width: this.canvasWidth,
+                height: this.canvasHeight,
+                imgPath: this.imgPath,
+                colorCount: 51,
+                quality: 1
               }, (colors) => {
                 console.log('colors', colors)
-                this.domainColor = colors[0][0] + ',' + colors[0][1] + ',' + colors[0][2]
-              })
-              this.imgPath = res.path
-              const ctx = wx.createCanvasContext('canvasIn', this)
-              ctx.drawImage(res.path, 0, 0, res.width, res.height)
-              ctx.draw(false, () => {
-                wx.canvasGetImageData({
-                  canvasId: 'canvasIn',
-                  x: 0,
-                  y: 0,
-                  width: res.width,
-                  height: res.height,
-                  success: (res) => {
-                    console.log(res)
-                  }
-                })
+                this.colors = colors
               })
             }
           })
@@ -74,9 +64,6 @@ export default {
       position absolute
       top 0
       left 0
-      height 1px
-      width 1px
-      opacity 0
     }
     .image {
       width 100%
@@ -88,10 +75,13 @@ export default {
     }
   }
   .card {
-    height 100px
+    height 50vh
     width 100%
-    margin-top 10px
-    background #000
+    & .color {
+      width 2%
+      height 100%
+      display inline-block
+    }
   }
 }
 </style>
