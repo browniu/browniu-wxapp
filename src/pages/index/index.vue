@@ -1,8 +1,8 @@
 <template>
   <scroll-view scroll-y class="tools navigatePosition">
-    <div class="navigetion">
+    <!-- <div class="navigetion">
       brown's magic
-    </div>
+    </div> -->
     <div v-if="tipsSwitch" class="tips">{{tipsInfo}}</div>
     <main>
       <ol>
@@ -32,7 +32,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -44,7 +44,7 @@ export default {
         { href: '../store/index/main', name: '小卖部 (施工中)', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日互惠', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
-        { href: '../tools/theDay/main', name: '自然色', icon: 'heart', label: false, access: false },
+        { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -63,10 +63,6 @@ export default {
             url: '../store/index/main'
           })
         }, 2000)
-        return
-      }
-      if (index === 7) {
-        this.tips('仍在内测阶段')
         return
       }
       if (this.tools[index].access) {
@@ -124,7 +120,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/theDay/main'
+        url: '../tools/colorful/main'
       })
     }
     wx.setNavigationBarColor({
@@ -135,9 +131,6 @@ export default {
         timingFunc: 'easeIn'
       }
     })
-  },
-  onLoad () {
-    console.log(wx.getSystemInfoSync())
   }
 }
 </script>
