@@ -34,7 +34,7 @@ export default {
 .colorful {
   height 100vh
   width 100vw
-  background linear-gradient(45deg, #7d51fb, #51c9ff)
+  // background linear-gradient(45deg, #7d51fb, #51c9ff)
   overflow hidden
   box-sizing border-box
   // padding-top 30px
