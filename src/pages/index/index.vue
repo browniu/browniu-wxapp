@@ -75,19 +75,9 @@ export default {
           this.tips('立入禁止')
         }
       } else {
-        if (this.firstLoad) {
-          this.firstLoad = false
-          this.tips('滑动左侧返回')
-          setTimeout(() => {
-            wx.navigateTo({
-              url: this.tools[index].href
-            })
-          }, 2000)
-        } else {
-          wx.navigateTo({
-            url: this.tools[index].href
-          })
-        }
+        wx.navigateTo({
+          url: this.tools[index].href
+        })
       }
     },
     identity () {

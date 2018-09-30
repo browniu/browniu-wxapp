@@ -46,15 +46,9 @@ export default {
             title: '正在提取'
           })
           this.imgPath = res.tempFilePaths[0]
-          console.log('this.imgPath:' + this.imgPath)
           wx.getImageInfo({
-            src: res.tempFilePaths[0],
+            src: this.imgPath,
             success: (imgInfo) => {
-              // this.canvasWidth = imgInfo.width
-              // this.canvasHeight = imgInfo.height
-              let {
-                path
-              } = imgInfo
               let scale = 0.1 * 350 / Math.max(imgInfo.width, imgInfo.height)
               this.canvasWidth = Math.floor(scale * imgInfo.width)
               this.canvasHeight = Math.floor(scale * imgInfo.height)
@@ -63,11 +57,10 @@ export default {
                 this.colorThief.getPalette({
                   width: this.canvasWidth,
                   height: this.canvasHeight,
-                  imgPath: path,
+                  imgPath: this.imgPath,
                   colorCount: 5,
                   quality: 1
                 }, (colors) => {
-                  console.log('colors', colors)
                   this.colorsSelect = [colors[0], colors[1], colors[2], colors[3], colors[4]]
                 })
               }, 1500)
@@ -76,11 +69,10 @@ export default {
                 this.colorThief.getPalette({
                   width: this.canvasWidth,
                   height: this.canvasHeight,
-                  imgPath: path,
+                  imgPath: this.imgPath,
                   colorCount: 51,
                   quality: 1
                 }, (colors) => {
-                  console.log('colors', colors)
                   this.colors = colors
                   wx.hideLoading()
                 })
@@ -93,11 +85,12 @@ export default {
     getCode (e, item) {
       wx.setClipboardData({
         data: this.RGB2Hex(item),
+        icon: 'none',
         success: (res) => {
           wx.vibrateShort()
           wx.showToast({
-            title: '已复制色值',
             icon: 'succeed',
+            title: '已复制色值',
             during: '1000'
           })
         }
@@ -106,9 +99,6 @@ export default {
     RGB2Hex (e) {
       return '#' + ((1 << 24) + (e[0] << 16) + (e[1] << 8) + e[2]).toString(16).slice(1)
     }
-  },
-  onLoad () {
-    this.colorThief = new ColorThief('canvasIn')
   }
 }
 </script>
@@ -179,7 +169,7 @@ export default {
           opacity 1
           font-size 18px
           color #333
-          opacity .3
+          opacity 0.3
         }
       }
     }
