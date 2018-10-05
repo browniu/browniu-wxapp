@@ -18,7 +18,7 @@ import cFavorite from '../colorful/cFavorite.vue'
 export default {
   data () {
     return {
-      tab: 1,
+      tab: 0,
       tabMenu: ['探索', '制作', '收藏']
     }
   },
@@ -39,12 +39,15 @@ export default {
   box-sizing border-box
   // padding-top 30px
   .main {
+    height calc(100% - 40px)
   }
   .tab {
     position fixed
+    z-index 9999
     bottom 0
     width 100%
-    background-color rgba(0, 0, 0, 0.5)
+    //background-color rgba(0, 0, 0, 0.5)
+    background-color #000
     & .item {
       transition 0.1s
       display inline-block

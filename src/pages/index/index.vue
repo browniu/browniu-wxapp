@@ -32,7 +32,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
@@ -41,7 +41,7 @@ export default {
         { href: '../tools/realView/main', name: '真实视窗', icon: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '加班旺旺', icon: 'timer', label: false, access: false },
         { href: '../tools/dice/main', name: '转转乐', icon: 'message', label: false, access: false },
-        { href: '../store/index/main', name: '小卖部 (施工中)', icon: 'store', label: false, access: false },
+        { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日互惠', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },

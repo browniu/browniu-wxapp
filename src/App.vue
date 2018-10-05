@@ -28,9 +28,12 @@ html, body {
   -o-transition width 2s
 }
 @font-face {
-  font-family 'iconfont' /* project id 796664 */
-  src url('//at.alicdn.com/t/font_796664_o203xek2cr.eot')
-  src url('//at.alicdn.com/t/font_796664_o203xek2cr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_796664_o203xek2cr.woff') format('woff'), url('//at.alicdn.com/t/font_796664_o203xek2cr.ttf') format('truetype'), url('//at.alicdn.com/t/font_796664_o203xek2cr.svg#iconfont') format('svg')
+  font-family: 'iconfont';  /* project id 796664 */
+  src: url('//at.alicdn.com/t/font_796664_vf542tvwlzp.eot');
+  src: url('//at.alicdn.com/t/font_796664_vf542tvwlzp.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_796664_vf542tvwlzp.woff') format('woff'),
+  url('//at.alicdn.com/t/font_796664_vf542tvwlzp.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_796664_vf542tvwlzp.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family 'iconfont'
