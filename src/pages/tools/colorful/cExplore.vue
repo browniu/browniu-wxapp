@@ -1,11 +1,11 @@
 <template>
   <div class="colorful-explore" @click="next" @longpress="getPlan">
     <div :class="['colors',nextSwitch?'during':'',afterSwitch?'after':'',lastSwitch?'last':'']">
-      <li class="item" v-for="(item, index) in colorsBefore" :key="index" :style="{backgroundColor:item}">
+      <li class="item" @click="current(item,index)" v-for="(item, index) in colorsBefore" :key="index" :style="{backgroundColor:item}">
         <span>{{item}}</span>
       </li>
-      <li class="item" v-for="(item, index) in colorsAfter" :key="index" :style="{backgroundColor:item}">
-        <span> {{item}}</span>
+      <li class="item" @click="current(item,index)" v-for="(item, index) in colorsAfter" :key="index" :style="{backgroundColor:item}">
+        <span>{{item}}</span>
       </li>
     </div>
   </div>
@@ -21,7 +21,6 @@ export default {
         ['#550527', '#688E26', '#FAA613', '#F44708', '#A10702'],
         ['#2176AE', '#57B8FF', '#B66D0D', '#FBB13C', '#FE6847'],
         ['#003049', '#D62828', '#F77F00', '#FCBF49', '#EAE2B7'],
-        ['#2176AE', '#57B8FF', '#B66D0D', '#FBB13C', '#FE6847'],
         ['#002500', '#929982', '#EDCBB1', '#B7245C', '#7C3238'],
         ['#B8D8D8', '#7A9E9F', '#4F6367', '#EEF5DB', '#FE5F55'],
         ['#CA054D', '#3B1C32', '#A4D4B4', '#FFCF9C', '#B96D40'],
@@ -38,26 +37,28 @@ export default {
       resortList: [],
       nextSwitch: false,
       afterSwitch: false,
-      showIndex: 1
+      showIndex: 1,
+      currentPlan: []
     }
   },
   methods: {
     next () {
       wx.vibrateShort()
       this.showIndex++
-      console.log(this.showIndex)
-      if (this.showIndex < 17) {
+      if (this.showIndex < this.colorList.length) {
         if (!this.nextSwitch && !this.afterSwitch) {
           this.nextSwitch = true
           setTimeout(() => {
-            this.colorsBefore = this.colorList[this.showIndex]
+            console.log(this.showIndex)
+            this.colorsBefore = this.resortList[this.showIndex]
             this.afterSwitch = true
           }, 700)
         } else {
           this.afterSwitch = false
           this.lastSwitch = true
           setTimeout(() => {
-            this.colorsAfter = this.colorList[this.showIndex]
+            console.log(this.showIndex)
+            this.colorsAfter = this.resortList[this.showIndex]
             this.nextSwitch = false
             this.lastSwitch = false
           }, 700)
@@ -68,8 +69,9 @@ export default {
     },
     getPlan () {
       wx.vibrateLong()
+      // console.log(this.colorsBefore, this.colorsAfter, this.nextSwitch, this.afterSwitch, this.lastSwitch)
       wx.setClipboardData({
-        data: (this.colorsBefore).toString(),
+        data: (this.currentPlan).toString(),
         icon: 'none',
         success: (res) => {
           wx.showToast({
@@ -115,12 +117,20 @@ export default {
         const element = randomIndex[index] - 1
         this.resortList.push(this.colorList[element])
       }
+    },
+    current (item, index) {
+      if (this.colorsBefore[index] === item) {
+        this.currentPlan = this.colorsAfter
+      } else {
+        this.currentPlan = this.colorsBefore
+      }
     }
   },
   onLoad () {
     this.resortArray(this.colorList)
     this.colorsBefore = this.resortList[this.showIndex]
     this.colorsAfter = this.resortList[this.showIndex + 1]
+    this.currentPlan = this.colorsBefore
   }
 }
 </script>

@@ -187,7 +187,6 @@ export default {
   onLoad () {
     let dateNow = new Date()
     this.theDate = dateNow.getFullYear() + '-' + dateNow.getMonth() + '-' + dateNow.getDate()
-    console.log(this.theDate)
   }
 }
 </script>
