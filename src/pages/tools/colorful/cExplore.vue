@@ -11,29 +11,13 @@
   </div>
 </template>
 <script>
+import colorList from '../colorful/colors.json'
 export default {
   data () {
     return {
       colorsBefore: [],
       colorsAfter: [],
-      colorList: [
-        ['#f7f4e3', '#d2e1c8', '#fee4a6', '#f9c4aa', '#494949'],
-        ['#550527', '#688E26', '#FAA613', '#F44708', '#A10702'],
-        ['#2176AE', '#57B8FF', '#B66D0D', '#FBB13C', '#FE6847'],
-        ['#003049', '#D62828', '#F77F00', '#FCBF49', '#EAE2B7'],
-        ['#002500', '#929982', '#EDCBB1', '#B7245C', '#7C3238'],
-        ['#B8D8D8', '#7A9E9F', '#4F6367', '#EEF5DB', '#FE5F55'],
-        ['#CA054D', '#3B1C32', '#A4D4B4', '#FFCF9C', '#B96D40'],
-        ['#25283D', '#8F3985', '#98DFEA', '#07BEB8', '#EFD9CE'],
-        ['#7C9EB2', '#52528C', '#372554', '#231123', '#000000'],
-        ['#F0B67F', '#FE5F55', '#D6D1B1', '#C7EFCF', '#EEF5DB'],
-        ['#3A3335', '#D81E5B', '#F0544F', '#FDF0D5', '#C6D8D3'],
-        ['#F18F01', '#048BA8', '#2E4057', '#99C24D', '#2F2D2E'],
-        ['#2B193D', '#2C365E', '#484D6D', '#4B8F8C', '#C5979D'],
-        ['#2B59C3', '#253C78', '#D36582', '#FFEECF', '#C9A690'],
-        ['#584B53', '#57B8FF', '#9D5C63', '#FEF5EF', '#E4BB97'],
-        ['#011627', '#FDFFFC', '#2EC4B6', '#E71D36', '#FF9F1C']
-      ],
+      colorsList: [],
       resortList: [],
       nextSwitch: false,
       afterSwitch: false,
@@ -45,7 +29,7 @@ export default {
     next () {
       wx.vibrateShort()
       this.showIndex++
-      if (this.showIndex < this.colorList.length) {
+      if (this.showIndex < this.colorsList.length) {
         if (!this.nextSwitch && !this.afterSwitch) {
           this.nextSwitch = true
           setTimeout(() => {
@@ -112,10 +96,10 @@ export default {
       return arr
     },
     resortArray (list) {
-      let randomIndex = this.randomArray(this.colorList.length)
+      let randomIndex = this.randomArray(this.colorsList.length)
       for (let index = 0; index < randomIndex.length; index++) {
         const element = randomIndex[index] - 1
-        this.resortList.push(this.colorList[element])
+        this.resortList.push(this.colorsList[element])
       }
     },
     current (item, index) {
@@ -127,9 +111,11 @@ export default {
     }
   },
   onLoad () {
-    this.resortArray(this.colorList)
+    this.colorsList = colorList.colorList
+    console.log(this.colorsList)
+    this.resortArray(this.colorsfList)
     this.colorsBefore = this.resortList[this.showIndex]
-    this.colorsAfter = this.resortList[this.showIndex + 1]
+    this.colorsAfter = this.resortList[this.showIndex + this.colorsList.length - 2]
     this.currentPlan = this.colorsBefore
   }
 }
