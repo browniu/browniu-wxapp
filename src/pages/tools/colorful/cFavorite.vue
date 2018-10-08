@@ -227,9 +227,9 @@ export default {
               color #a9bdd3
               font-size 12px
               border 0px solid #e9f2f9
-              &:nth-child(2) {
-                display none
-              }
+              // &:nth-child(2) {
+              //   display none
+              // }
               & i {
                 display inline-block
                 margin-right 3px

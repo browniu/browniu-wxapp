@@ -193,8 +193,11 @@ export default {
 <style lang='stylus' scoped>
 @import '../../../assets/styles/index.styl'
 .colorful-make {
+  height 100vh
+  overflow hidden
   .tips {
     padding-top 30%
+    box-sizing border-box
     position absolute
     top 0
     left 0

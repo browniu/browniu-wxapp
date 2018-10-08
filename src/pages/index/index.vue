@@ -21,7 +21,7 @@
         </li>
         <li>
           <img mode="widthFix" src="../../../static/images/lock.svg" alt="">
-          <p>身份验证</p>
+          <p>开启专属</p>
           <button open-type="getUserInfo" @click="identity"></button>
         </li>
       </ol>
@@ -38,11 +38,11 @@ export default {
       theme: 1,
       tools: [
         { href: '../tools/remainder/main', name: '除以3', icon: 'Killer 3', label: false, access: false },
-        { href: '../tools/realView/main', name: '真实视窗', icon: '真实视窗', label: false, access: false },
-        { href: '../tools/w_overTimePay/main', name: '加班旺旺', icon: 'timer', label: false, access: false },
-        { href: '../tools/dice/main', name: '转转乐', icon: 'message', label: false, access: false },
+        { href: '../tools/realView/main', name: '真视窗', icon: '真实视窗', label: false, access: false },
+        { href: '../tools/w_overTimePay/main', name: '旺旺加班', icon: 'timer', label: false, access: false },
+        { href: '../tools/dice/main', name: '大富翁', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
-        { href: '../tools/japan/main', name: '中日互惠', icon: 'heart', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日惠', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
@@ -72,7 +72,7 @@ export default {
           })
         } else {
           wx.vibrateLong()
-          this.tips('立入禁止')
+          this.tips('权限不足')
         }
       } else {
         wx.navigateTo({
@@ -132,6 +132,7 @@ export default {
   position relative
   background-color #38274e
   background linear-gradient(to bottom, #38274e, #4f274b)
+  background: linear-gradient(135deg, #3ca55c, #b5ac49)
   background-repeat no-repeat
   overflow hidden
   &.theme1 {

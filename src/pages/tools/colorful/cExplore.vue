@@ -1,5 +1,5 @@
 <template>
-  <div class="colorful-explore" @click="next" @longpress="getPlan">
+  <div class="colorful-explore" @click="next" @longpress="favorite">
     <div :class="['colors',nextSwitch?'during':'',afterSwitch?'after':'',lastSwitch?'last':'']">
       <li class="item" @click="current(item,index)" v-for="(item, index) in colorsBefore" :key="index" :style="{backgroundColor:item}">
         <span>{{item}}</span>
@@ -22,7 +22,8 @@ export default {
       nextSwitch: false,
       afterSwitch: false,
       showIndex: 1,
-      currentPlan: []
+      currentPlan: [],
+      theDate: ''
     }
   },
   methods: {
@@ -53,7 +54,6 @@ export default {
     },
     getPlan () {
       wx.vibrateLong()
-      // console.log(this.colorsBefore, this.colorsAfter, this.nextSwitch, this.afterSwitch, this.lastSwitch)
       wx.setClipboardData({
         data: (this.currentPlan).toString(),
         icon: 'none',
@@ -76,6 +76,64 @@ export default {
             title: '已拷贝色值 ',
             during: '1000'
           })
+        }
+      })
+    },
+    favorite (e) {
+      const db = wx.cloud.database()
+      db.collection('colorful').get({
+        success: res => {
+          if (res.data.length > 19) {
+            wx.vibrateShort()
+            wx.showToast({
+              title: '目前只能收藏20条',
+              icon: 'none',
+              during: 3000
+            })
+          } else {
+            this.uploadData()
+          }
+        }
+      })
+    },
+    uploadData () {
+      const db = wx.cloud.database()
+      db.collection('colorful').where({
+        colors: this.currentPlan
+      }).get({
+        success: res => {
+          console.log('[数据库] [查询记录] 成功: ', res.data)
+          if (res.data.length === 0) {
+            console.log('is new')
+            db.collection('colorful').add({
+              data: {
+                colors: this.currentPlan,
+                date: this.theDate
+              },
+              success: function (res) {
+                wx.vibrateLong()
+                console.log(res)
+                wx.showToast({
+                  title: '已加入收藏',
+                  icon: 'succeed',
+                  during: 2000
+                })
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '已经存在了哦',
+              icon: 'succeed',
+              during: 2000
+            })
+          }
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
         }
       })
     },
@@ -111,8 +169,9 @@ export default {
     }
   },
   onLoad () {
+    let dateNow = new Date()
+    this.theDate = dateNow.getFullYear() + '-' + dateNow.getMonth() + '-' + dateNow.getDate()
     this.colorsList = colorList.colorList
-    console.log(this.colorsList)
     this.resortArray(this.colorsfList)
     this.colorsBefore = this.resortList[this.showIndex]
     this.colorsAfter = this.resortList[this.showIndex + this.colorsList.length - 2]
