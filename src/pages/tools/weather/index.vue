@@ -212,7 +212,7 @@ c3 = #929194
       }
       .weather {
         margin-left 100px
-        font-size 48px
+        font-size 45px
         letter-spacing 5px
       }
       p {
