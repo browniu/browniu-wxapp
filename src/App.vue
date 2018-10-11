@@ -28,12 +28,9 @@ html, body {
   -o-transition width 2s
 }
 @font-face {
-  font-family: 'iconfont';  /* project id 796664 */
-  src: url('//at.alicdn.com/t/font_796664_tg1deevt5d.eot');
-  src: url('//at.alicdn.com/t/font_796664_tg1deevt5d.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_796664_tg1deevt5d.woff') format('woff'),
-  url('//at.alicdn.com/t/font_796664_tg1deevt5d.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_796664_tg1deevt5d.svg#iconfont') format('svg');
+  font-family 'iconfont' /* project id 796664 */
+  src url('//at.alicdn.com/t/font_796664_n0dnve1v1o8.eot')
+  src url('//at.alicdn.com/t/font_796664_n0dnve1v1o8.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_796664_n0dnve1v1o8.woff') format('woff'), url('//at.alicdn.com/t/font_796664_n0dnve1v1o8.ttf') format('truetype'), url('//at.alicdn.com/t/font_796664_n0dnve1v1o8.svg#iconfont') format('svg')
 }
 .iconfont {
   font-family 'iconfont'
