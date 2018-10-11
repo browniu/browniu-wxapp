@@ -28,7 +28,7 @@
     </div>
     <div class="label">
       <span>{{currentLocation}}</span>
-      <div class="feeling"><b>{{moreFeel[0]}}</b></div>
+      <div class="feeling"><b>{{currentFeel}}</b></div>
       <div class="date">{{currentDate}}</div>
       <div class="angle"></div>
     </div>
@@ -63,6 +63,7 @@ export default {
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
+      currentFeel: '舒',
       moreWeather: ['#DCD4CC', '#445454', '#8C9CA4', '#445454'],
       moreWeatherInfo: [
         { 'date': '十月十日 日曜日', 'temperature': '二十至十五度', 'weather': '阴转多云', 'wind': '微风' },
@@ -111,7 +112,7 @@ export default {
         return '和风细雨'
       }
       if (e === '阴') {
-        return '重云如盖'
+        return '阴云密布'
       }
       if (e === '阴转多云') {
         return '拨云见日'
@@ -217,6 +218,21 @@ export default {
       }
       return [windDes, direction]
     },
+    FEEL (e) {
+      if (e < -30) { return '封' }
+      if (e < -10) { return '冰' }
+      if (e < 0) { return '寒' }
+      if (e < 10) { return '冻' }
+      if (e < 20) { return '冷' }
+      if (e < 24) { return '凉' }
+      if (e < 28) { return '舒' }
+      if (e < 32) { return '暖' }
+      if (e < 36) { return '热' }
+      if (e < 42) { return '炎' }
+      if (e < 48) { return '酷' }
+      if (e < 52) { return '火' }
+      if (e > 55) { return '爆' }
+    },
     someDayAgo (e) {
       let date = new Date()
       date.setDate(date.getDate() + e)
@@ -264,7 +280,8 @@ export default {
       }
     },
     getMore () {
-      console.log(this.originalData.index[0].zs)
+      console.log(this.originalData.weather_data[0].temperature.split(' ')[2].split('℃')[0])
+      console.log(this.originalData.weather_data[0].temperature.split(' ')[0])
       // get more data
       this.moreWind = [
         this.WIND(this.originalData.weather_data[0].wind)[0] + '风 ' + this.WIND(this.originalData.weather_data[0].wind)[1],
@@ -284,6 +301,13 @@ export default {
         this.CHN(this.originalData.weather_data[2].temperature.split(' ')[2].split('℃')[0]) + '至' + this.CHN(this.originalData.weather_data[2].temperature.split(' ')[0]) + '度',
         this.CHN(this.originalData.weather_data[3].temperature.split(' ')[2].split('℃')[0]) + '至' + this.CHN(this.originalData.weather_data[3].temperature.split(' ')[0]) + '度'
       ]
+      this.moreFeel = [
+        this.FEEL((parseInt(this.originalData.weather_data[0].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[0].temperature.split(' ')[2].split('℃')[0])) / 2),
+        this.FEEL((parseInt(this.originalData.weather_data[1].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[1].temperature.split(' ')[2].split('℃')[0])) / 2),
+        this.FEEL((parseInt(this.originalData.weather_data[2].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[2].temperature.split(' ')[2].split('℃')[0])) / 2),
+        this.FEEL((parseInt(this.originalData.weather_data[3].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[3].temperature.split(' ')[2].split('℃')[0])) / 2)
+      ]
+      console.log(this.moreFeel)
     }
   },
   onLoad: function () {
@@ -301,12 +325,15 @@ export default {
         this.currentWind = this.WIND(this.currentData.wind)[0] + '风'
         this.currentLocation = this.currentData.currentCity.split('市')[0]
         this.currentTemprature = this.CHN(this.currentData.date.split('：')[1].split('℃')[0]) + '度'
-        console.log(this.currentTemprature)
+        this.currentFeel = this.FEEL(this.currentData.date.split('：')[1].split('℃')[0])
         if (this.currentTemprature.length === 2 && this.currentTemprature !== '零度') {
           this.currentTemprature = '零上' + this.currentTemprature
         }
         if (this.currentTemprature === '零度') {
           this.currentTemprature = '永恒' + this.currentTemprature
+        }
+        if (this.currentTemprature[0] === '十') {
+          this.currentTemprature = '一' + this.currentTemprature
         }
         this.currentTemp = this.currentData.date.split('：')[1].split('℃')[0]
         if (this.currentTemp > this.tempOpen && this.currentTemp < this.tempEnd) {
