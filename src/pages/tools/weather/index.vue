@@ -28,6 +28,7 @@
     </div>
     <div class="label">
       <span>{{currentLocation}}</span>
+      <div class="feeling"><b>{{moreFeel[0]}}</b></div>
       <div class="date">{{currentDate}}</div>
       <div class="angle"></div>
     </div>
@@ -37,7 +38,7 @@
           <div :class="['owInfo',moreIndex===index?'act':'']">
             <div class="ow-temp">{{moreTemp[index]}}·{{moreWind[index]}}</div>
             <div class="ow-des">{{moreDes[index]}}</div>
-            <div class="ow-date">{{moreDate[index]}}</div>
+            <div class="ow-date">{{moreDate[index]}} <b>{{moreFeel[index]}}</b></div>
           </div>
         </div>
         <div :class="['arrow',moreIndex===index-1?'act':'']"></div>
@@ -73,6 +74,7 @@ export default {
       moreWind: ['微风 西北', '微风 西北', '微风 西北', '微风 西北'],
       moreDate: ['十月十日 日曜日', '十月十日 日曜日', '十月十日 日曜日', '十月十日 日曜日'],
       moreTemp: ['二十至十五度', '二十至十五度', '二十至十五度', '二十至十五度'],
+      moreFeel: ['寒', '冷', '舒', '暖', '热', '炎'],
       currentTime: [],
       isDay: true,
       clockDeg: 0,
@@ -237,10 +239,10 @@ export default {
       }
       this.currentDate = this.CHN(this.currentTime[2]) + cm + this.CHN(this.currentTime[3]) + cd
       this.moreDate = [
-        this.CHN(this.someDayAgo(0)[0]) + '月' + this.CHN(this.someDayAgo(0)[1]) + '日 ' + this.QYR(this.someDayAgo(0)[2]),
-        this.CHN(this.someDayAgo(1)[0]) + '月' + this.CHN(this.someDayAgo(1)[1]) + '日 ' + this.QYR(this.someDayAgo(1)[2]),
-        this.CHN(this.someDayAgo(2)[0]) + '月' + this.CHN(this.someDayAgo(2)[1]) + '日 ' + this.QYR(this.someDayAgo(2)[2]),
-        this.CHN(this.someDayAgo(3)[0]) + '月' + this.CHN(this.someDayAgo(3)[1]) + '日 ' + this.QYR(this.someDayAgo(3)[2])
+        this.CHN(this.someDayAgo(0)[0]) + '月' + this.CHN(this.someDayAgo(0)[1]) + this.QYR(this.someDayAgo(0)[2]),
+        this.CHN(this.someDayAgo(1)[0]) + '月' + this.CHN(this.someDayAgo(1)[1]) + this.QYR(this.someDayAgo(1)[2]),
+        this.CHN(this.someDayAgo(2)[0]) + '月' + this.CHN(this.someDayAgo(2)[1]) + this.QYR(this.someDayAgo(2)[2]),
+        this.CHN(this.someDayAgo(3)[0]) + '月' + this.CHN(this.someDayAgo(3)[1]) + this.QYR(this.someDayAgo(3)[2])
       ]
     },
     moreSwitch (e) {
@@ -262,6 +264,7 @@ export default {
       }
     },
     getMore () {
+      console.log(this.originalData.index[0].zs)
       // get more data
       this.moreWind = [
         this.WIND(this.originalData.weather_data[0].wind)[0] + '风 ' + this.WIND(this.originalData.weather_data[0].wind)[1],
@@ -297,9 +300,13 @@ export default {
         this.currentWeather = this.DE(this.currentData.weatherDesc)
         this.currentWind = this.WIND(this.currentData.wind)[0] + '风'
         this.currentLocation = this.currentData.currentCity.split('市')[0]
-        this.currentTemprature = this.DX(this.currentData.date.split('：')[1].split('℃')[0])
-        if (this.currentTemprature.length === 2) {
+        this.currentTemprature = this.CHN(this.currentData.date.split('：')[1].split('℃')[0]) + '度'
+        console.log(this.currentTemprature)
+        if (this.currentTemprature.length === 2 && this.currentTemprature !== '零度') {
           this.currentTemprature = '零上' + this.currentTemprature
+        }
+        if (this.currentTemprature === '零度') {
+          this.currentTemprature = '永恒' + this.currentTemprature
         }
         this.currentTemp = this.currentData.date.split('：')[1].split('℃')[0]
         if (this.currentTemp > this.tempOpen && this.currentTemp < this.tempEnd) {
@@ -458,6 +465,34 @@ c3 = #929194
       overflow hidden
       color #fff
     }
+    & .feeling {
+      position relative
+      height 18px
+      top -2px
+      width 100%
+      display inline-block
+      &:before {
+        position absolute
+        border-radius 50%
+        content ''
+        display inline-block
+        height 15px
+        width 15px
+        border 1px solid co_14
+        opacity 0.5
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+      }
+      & b {
+        color co_14
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%) scale(0.8)
+        font-size 12px
+      }
+    }
     & .date {
       position relative
       z-index 10
@@ -530,7 +565,7 @@ c3 = #929194
         position absolute
         top 50%
         left 50%
-        transform translate(-50%, -50%)
+        transform translate(-50%, -50%) scale(0.8)
         color #aaa
         opacity 0
         &.act {
@@ -563,6 +598,27 @@ c3 = #929194
             color #666
             margin-left 3px
             white-space nowrap
+            & b {
+              position relative
+              top 0px
+              left 1px
+              display inline-block
+              color co_14
+              transform scale(0.8)
+              &:before {
+                position absolute
+                border-radius 50%
+                content ''
+                display inline-block
+                height 18px
+                width 18px
+                border 1px solid co_14
+                opacity 0.5
+                top 45%
+                left 50%
+                transform translate(-50%, -50%)
+              }
+            }
           }
         }
       }
