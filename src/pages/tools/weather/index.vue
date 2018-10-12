@@ -60,6 +60,7 @@ export default {
       currentTemprature: '二十五度',
       currentTemp: '25',
       currentWeather: '万里晴空',
+      currentWeatherIndex: [0, 0, 0],
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
@@ -103,60 +104,79 @@ export default {
     },
     DE (e) {
       if (e === '晴') {
+        this.currentWeatherIndex = 1
         return '晴空万里'
       }
       if (e === '晴转阴') {
+        this.currentWeatherIndex = 2
         return '风起云涌'
       }
       if (e === '晴转小雨') {
+        this.currentWeatherIndex = 3
         return '和风细雨'
       }
       if (e === '阴') {
+        this.currentWeatherIndex = 4
         return '阴云密布'
       }
       if (e === '阴转多云') {
+        this.currentWeatherIndex = 5
         return '拨云见日'
       }
       if (e === '多云') {
+        this.currentWeatherIndex = 6
         return '云卷云舒'
       }
       if (e === '多云转阴') {
+        this.currentWeatherIndex = 7
         return '山雨欲来'
       }
       if (e === '多云转晴') {
+        this.currentWeatherIndex = 8
         return '云淡风轻'
       }
       if (e === '多云转小雨') {
+        this.currentWeatherIndex = 9
         return '春风化雨'
       }
       if (e === '多云转阵雨') {
+        this.currentWeatherIndex = 10
         return '风驰雨骤'
       }
       if (e === '晴转多云') {
+        this.currentWeatherIndex = 11
         return '云合雾集'
       }
       if (e === '多云') {
+        this.currentWeatherIndex = 12
         return '阴云密布'
       }
       if (e === '小雨转阴') {
+        this.currentWeatherIndex = 13
         return '未雨绸缪'
       }
       if (e === '小雨转多云') {
+        this.currentWeatherIndex = 14
         return '朝云暮雨'
       }
       if (e === '阴转小雨') {
+        this.currentWeatherIndex = 15
         return '烟雨蒙蒙'
       }
       if (e === '阴转晴') {
+        this.currentWeatherIndex = 16
         return '烟消云散'
       }
       if (e === '小雨') {
+        this.currentWeatherIndex = 17
         return '细雨霏霏'
       }
       if (e === '阵雨') {
+        this.currentWeatherIndex = 18
         return '急风骤雨'
       }
       if (e === '阵雨转晴') {
+        this.currentWeatherIndex = 19
         return '雨过天晴'
       }
       return '风花雪月'
@@ -193,24 +213,12 @@ export default {
       let windDes = '清'
       if (e.indexOf('级') > -1) {
         let level = e.split('风')[1].split('级')[0].split('-')[0]
-        if (level > 2) {
-          windDes = '微'
-        }
-        if (level > 4) {
-          windDes = '阵'
-        }
-        if (level > 6) {
-          windDes = '烈'
-        }
-        if (level > 8) {
-          windDes = '狂'
-        }
-        if (level > 10) {
-          windDes = '飓'
-        }
-        if (level > 12) {
-          windDes = '暴'
-        }
+        if (level > 2) { windDes = '微' }
+        if (level > 4) { windDes = '阵' }
+        if (level > 6) { windDes = '烈' }
+        if (level > 8) { windDes = '狂' }
+        if (level > 10) { windDes = '飓' }
+        if (level > 12) { windDes = '暴' }
       }
       if (e.indexOf('无') > -1) {
         windDes = '缭乱'
@@ -223,8 +231,9 @@ export default {
       if (e < -10) { return '冰' }
       if (e < 0) { return '寒' }
       if (e < 10) { return '冻' }
-      if (e < 20) { return '冷' }
-      if (e < 24) { return '凉' }
+      if (e < 15) { return '冷' }
+      if (e < 20) { return '凉' }
+      if (e < 24) { return '爽' }
       if (e < 28) { return '舒' }
       if (e < 32) { return '暖' }
       if (e < 36) { return '热' }
@@ -280,8 +289,6 @@ export default {
       }
     },
     getMore () {
-      console.log(this.originalData.weather_data[0].temperature.split(' ')[2].split('℃')[0])
-      console.log(this.originalData.weather_data[0].temperature.split(' ')[0])
       // get more data
       this.moreWind = [
         this.WIND(this.originalData.weather_data[0].wind)[0] + '风 ' + this.WIND(this.originalData.weather_data[0].wind)[1],
@@ -307,7 +314,6 @@ export default {
         this.FEEL((parseInt(this.originalData.weather_data[2].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[2].temperature.split(' ')[2].split('℃')[0])) / 2),
         this.FEEL((parseInt(this.originalData.weather_data[3].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[3].temperature.split(' ')[2].split('℃')[0])) / 2)
       ]
-      console.log(this.moreFeel)
     }
   },
   onLoad: function () {
