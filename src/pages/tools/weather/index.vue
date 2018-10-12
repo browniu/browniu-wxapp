@@ -8,7 +8,12 @@
             <div class="inner" :style="{transform:'rotate('+clockDeg+'deg)'}">
               <div class="clockItem" :style="{transform:'rotate(-'+clockDeg+'deg)'}"><span :style="{backgroundColor:tempColor}"></span>
                 <i :style="{backgroundColor:tempColor}">
-                  <b class="iconfont">&#xe605;</b>
+                  <b class="iconfont w1" v-if="currentWeatherIndex[0]===1&&isDay">&#xe62f;</b>
+                  <b class="iconfont w12" v-if="currentWeatherIndex[0]===1&&!isDay">&#xe9ff;</b>
+                  <b class="iconfont w2" v-if="currentWeatherIndex[0]===2">&#xe72e;</b>
+                  <b class="iconfont w3" v-if="currentWeatherIndex[0]===3">&#xe67d;</b>
+                  <b class="iconfont w4" v-if="currentWeatherIndex[0]===4">&#xe605;</b>
+                  <b class="iconfont w5" v-if="currentWeatherIndex[0]===5">&#xe692;</b>
                 </i>
               </div>
             </div>
@@ -60,7 +65,7 @@ export default {
       currentTemprature: '二十五度',
       currentTemp: '25',
       currentWeather: '万里晴空',
-      currentWeatherIndex: [0, 0, 0],
+      currentWeatherIndex: [1, 6, 1],
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
@@ -104,80 +109,80 @@ export default {
     },
     DE (e) {
       if (e === '晴') {
-        this.currentWeatherIndex = 1
+        this.currentWeatherIndex[0] = 1
         return '晴空万里'
       }
       if (e === '晴转阴') {
-        this.currentWeatherIndex = 2
+        this.currentWeatherIndex[0] = 3
         return '风起云涌'
       }
       if (e === '晴转小雨') {
-        this.currentWeatherIndex = 3
+        this.currentWeatherIndex[0] = 4
         return '和风细雨'
       }
       if (e === '阴') {
-        this.currentWeatherIndex = 4
+        this.currentWeatherIndex[0] = 3
         return '阴云密布'
       }
       if (e === '阴转多云') {
-        this.currentWeatherIndex = 5
+        this.currentWeatherIndex[0] = 2
         return '拨云见日'
       }
       if (e === '多云') {
-        this.currentWeatherIndex = 6
+        this.currentWeatherIndex[0] = 2
         return '云卷云舒'
       }
       if (e === '多云转阴') {
-        this.currentWeatherIndex = 7
+        this.currentWeatherIndex[0] = 3
         return '山雨欲来'
       }
       if (e === '多云转晴') {
-        this.currentWeatherIndex = 8
+        this.currentWeatherIndex[0] = 1
         return '云淡风轻'
       }
       if (e === '多云转小雨') {
-        this.currentWeatherIndex = 9
+        this.currentWeatherIndex[0] = 4
         return '春风化雨'
       }
       if (e === '多云转阵雨') {
-        this.currentWeatherIndex = 10
+        this.currentWeatherIndex[0] = 4
         return '风驰雨骤'
       }
       if (e === '晴转多云') {
-        this.currentWeatherIndex = 11
+        this.currentWeatherIndex[0] = 2
         return '云合雾集'
       }
-      if (e === '多云') {
-        this.currentWeatherIndex = 12
-        return '阴云密布'
-      }
       if (e === '小雨转阴') {
-        this.currentWeatherIndex = 13
-        return '未雨绸缪'
+        this.currentWeatherIndex[0] = 3
+        return '风歇水止'
       }
       if (e === '小雨转多云') {
-        this.currentWeatherIndex = 14
+        this.currentWeatherIndex[0] = 2
         return '朝云暮雨'
       }
       if (e === '阴转小雨') {
-        this.currentWeatherIndex = 15
-        return '烟雨蒙蒙'
+        this.currentWeatherIndex[0] = 4
+        return '础润而雨'
       }
       if (e === '阴转晴') {
-        this.currentWeatherIndex = 16
+        this.currentWeatherIndex[0] = 1
         return '烟消云散'
       }
       if (e === '小雨') {
-        this.currentWeatherIndex = 17
-        return '细雨霏霏'
+        this.currentWeatherIndex[0] = 4
+        return '淫雨霏霏'
       }
       if (e === '阵雨') {
-        this.currentWeatherIndex = 18
+        this.currentWeatherIndex[0] = 4
         return '急风骤雨'
       }
       if (e === '阵雨转晴') {
-        this.currentWeatherIndex = 19
+        this.currentWeatherIndex[0] = 1
         return '雨过天晴'
+      }
+      if (e === '阵雨转多云') {
+        this.currentWeatherIndex[0] = 1
+        return '雨后初霁'
       }
       return '风花雪月'
     },
@@ -229,14 +234,38 @@ export default {
     FEEL (e) {
       if (e < -30) { return '封' }
       if (e < -10) { return '冰' }
-      if (e < 0) { return '寒' }
-      if (e < 10) { return '冻' }
-      if (e < 15) { return '冷' }
-      if (e < 20) { return '凉' }
-      if (e < 24) { return '爽' }
-      if (e < 28) { return '舒' }
-      if (e < 32) { return '暖' }
-      if (e < 36) { return '热' }
+      if (e < 0) {
+        this.currentWeatherIndex[1] = 1
+        return '寒'
+      }
+      if (e < 10) {
+        this.currentWeatherIndex[1] = 2
+        return '冻'
+      }
+      if (e < 15) {
+        this.currentWeatherIndex[1] = 3
+        return '冷'
+      }
+      if (e < 20) {
+        this.currentWeatherIndex[1] = 3
+        return '凉'
+      }
+      if (e < 24) {
+        this.currentWeatherIndex[1] = 4
+        return '爽'
+      }
+      if (e < 28) {
+        this.currentWeatherIndex[1] = 4
+        return '舒'
+      }
+      if (e < 32) {
+        this.currentWeatherIndex[1] = 5
+        return '暖'
+      }
+      if (e < 36) {
+        this.currentWeatherIndex[1] = 5
+        return '热'
+      }
       if (e < 42) { return '炎' }
       if (e < 48) { return '酷' }
       if (e < 52) { return '火' }
@@ -253,6 +282,7 @@ export default {
       this.clockDeg = this.currentTime[0] * 30 + this.currentTime[1] * 0.25
       if (this.currentTime[0] > 18 && this.currentTime[0] < 6) {
         this.isDay = false
+        this.currentWeatherIndex[2] = 2
       }
       let cm = '月'
       let cd = '日'
@@ -264,10 +294,10 @@ export default {
       }
       this.currentDate = this.CHN(this.currentTime[2]) + cm + this.CHN(this.currentTime[3]) + cd
       this.moreDate = [
-        this.CHN(this.someDayAgo(0)[0]) + '月' + this.CHN(this.someDayAgo(0)[1]) + this.QYR(this.someDayAgo(0)[2]),
-        this.CHN(this.someDayAgo(1)[0]) + '月' + this.CHN(this.someDayAgo(1)[1]) + this.QYR(this.someDayAgo(1)[2]),
-        this.CHN(this.someDayAgo(2)[0]) + '月' + this.CHN(this.someDayAgo(2)[1]) + this.QYR(this.someDayAgo(2)[2]),
-        this.CHN(this.someDayAgo(3)[0]) + '月' + this.CHN(this.someDayAgo(3)[1]) + this.QYR(this.someDayAgo(3)[2])
+        this.CHN(this.someDayAgo(0)[0]) + '月' + this.CHN(this.someDayAgo(0)[1]) + ' ' + this.QYR(this.someDayAgo(0)[2]),
+        this.CHN(this.someDayAgo(1)[0]) + '月' + this.CHN(this.someDayAgo(1)[1]) + ' ' + this.QYR(this.someDayAgo(1)[2]),
+        this.CHN(this.someDayAgo(2)[0]) + '月' + this.CHN(this.someDayAgo(2)[1]) + ' ' + this.QYR(this.someDayAgo(2)[2]),
+        this.CHN(this.someDayAgo(3)[0]) + '月' + this.CHN(this.someDayAgo(3)[1]) + ' ' + this.QYR(this.someDayAgo(3)[2])
       ]
     },
     moreSwitch (e) {
@@ -326,6 +356,8 @@ export default {
         console.log(res)
         this.currentData = res.currentWeather[0]
         this.originalData = res.originalData.results[0]
+        // get more data
+        this.getMore()
         // get current data
         this.currentWeather = this.DE(this.currentData.weatherDesc)
         this.currentWind = this.WIND(this.currentData.wind)[0] + '风'
@@ -346,8 +378,8 @@ export default {
           this.tempColor = temp.temp[this.currentTemp].bgc
           this.tempImage = temp.temp[this.currentTemp].bgi
         }
-        // get more data
-        this.getMore()
+        // this.currentWeatherIndex = parseInt(this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2])
+        console.log(this.currentWeatherIndex)
       }
     })
     // get time
