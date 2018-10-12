@@ -1,6 +1,6 @@
 <template>
   <div class="weather">
-    <div class="texture" :style="{backgroundImage:'url('+tempImage+')'}"></div>
+    <div class="texture" :style="{backgroundImage:'url('+CWI+')'}"></div>
     <div class="main">
       <div class="window" @longpress="imgSwitch">
         <div :class="['container',isDay?'bright':'']">
@@ -18,7 +18,7 @@
               </div>
             </div>
           </div>
-          <div class="inner" :style="{backgroundImage:'url('+tempImage+')'}">
+          <div class="inner" :style="{backgroundImage:'url('+CWI+')'}">
           </div>
         </div>
       </div>
@@ -56,6 +56,7 @@
 
 <script>
 import temp from '../weather/temp.json'
+import CWI from '../weather/currentWeatherImg.json'
 let bmap = require('../../../utils/bmap-wx.js')
 export default {
   data () {
@@ -66,6 +67,7 @@ export default {
       currentTemp: '25',
       currentWeather: '万里晴空',
       currentWeatherIndex: [1, 6, 1],
+      CWI: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539145924402&di=14054b87eaada69222a5bcf9623d3928&imgtype=0&src=http%3A%2F%2F3img.zhuokearts.com%2Fauction.pics%2F2012%2F10%2F6%2Fzc-8339-4854.jpg',
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
@@ -380,6 +382,8 @@ export default {
         }
         // this.currentWeatherIndex = parseInt(this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2])
         console.log(this.currentWeatherIndex)
+        this.CWI = CWI.CWI[this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2]].split('|')[1]
+        console.log(this.CWI)
       }
     })
     // get time
