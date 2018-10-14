@@ -383,7 +383,7 @@ export default {
         // this.currentWeatherIndex = parseInt(this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2])
         console.log(this.currentWeatherIndex)
         this.CWI = CWI.CWI[this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2]].split('|')[1]
-        console.log(this.CWI)
+        console.log(CWI.CWI[this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2]].split('|')[0])
       }
     })
     // get time
@@ -410,7 +410,7 @@ c3 = #929194
     height 100%
     width 100%
     background-image url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539145924402&di=14054b87eaada69222a5bcf9623d3928&imgtype=0&src=http%3A%2F%2F3img.zhuokearts.com%2Fauction.pics%2F2012%2F10%2F6%2Fzc-8339-4854.jpg')
-    background-size auto 110%
+    background-size cover
     background-position top center
     background-repeat no-repeat
     position absolute
