@@ -2,7 +2,7 @@
   <div class="weather">
     <div class="texture" :style="{backgroundImage:'url('+CWI+')'}"></div>
     <div class="main">
-      <div class="window" @longpress="imgSwitch">
+      <div class="window">
         <div :class="['container',isDay?'bright':'']">
           <div class="clock">
             <div class="inner" :style="{transform:'rotate('+clockDeg+'deg)'}">
@@ -24,7 +24,7 @@
       </div>
       <div class="info">
         <div class="temprature">
-          <p>【{{currentWeather}}·{{currentWind}}】</p>
+          <p><span>【</span>{{currentWeather}}·{{currentWind}}<span>】</span></p>
           <span class="weather">
             {{currentTemprature}}
           </span>
@@ -67,7 +67,7 @@ export default {
       currentTemp: '25',
       currentWeather: '万里晴空',
       currentWeatherIndex: [1, 6, 1],
-      CWI: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539145924402&di=14054b87eaada69222a5bcf9623d3928&imgtype=0&src=http%3A%2F%2F3img.zhuokearts.com%2Fauction.pics%2F2012%2F10%2F6%2Fzc-8339-4854.jpg',
+      CWI: 'http://pb85uax7t.bkt.clouddn.com/cwi-000.jpg',
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
@@ -88,7 +88,7 @@ export default {
       isDay: true,
       clockDeg: 0,
       tempColor: '#ff5027',
-      tempImage: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539145924402&di=14054b87eaada69222a5bcf9623d3928&imgtype=0&src=http%3A%2F%2F3img.zhuokearts.com%2Fauction.pics%2F2012%2F10%2F6%2Fzc-8339-4854.jpg',
+      tempImage: 'http://pb85uax7t.bkt.clouddn.com/cwi-000.jpg',
       moreIndex: 0,
       tempOpen: 3,
       tempEnd: 31
@@ -124,7 +124,7 @@ export default {
       }
       if (e === '阴') {
         this.currentWeatherIndex[0] = 3
-        return '阴云密布'
+        return '密云不雨'
       }
       if (e === '阴转多云') {
         this.currentWeatherIndex[0] = 2
@@ -144,7 +144,7 @@ export default {
       }
       if (e === '多云转小雨') {
         this.currentWeatherIndex[0] = 4
-        return '春风化雨'
+        return '秋风化雨'
       }
       if (e === '多云转阵雨') {
         this.currentWeatherIndex[0] = 4
@@ -174,9 +174,37 @@ export default {
         this.currentWeatherIndex[0] = 4
         return '淫雨霏霏'
       }
+      if (e === '小雨转大雪') {
+        this.currentWeatherIndex[0] = 4
+        return '大雪纷飞'
+      }
+      if (e === '小雨转大雨') {
+        this.currentWeatherIndex[0] = 4
+        return '大雨滂沱'
+      }
+      if (e === '小雨转晴') {
+        this.currentWeatherIndex[0] = 4
+        return '虹销雨霁'
+      }
+      if (e === '小雨转中雨') {
+        this.currentWeatherIndex[0] = 4
+        return '满城风雨'
+      }
+      if (e === '中雨转小雨') {
+        this.currentWeatherIndex[0] = 4
+        return '秋雨绵绵'
+      }
+      if (e === '中雨转雷阵雨') {
+        this.currentWeatherIndex[0] = 4
+        return '风雨飘摇'
+      }
       if (e === '阵雨') {
         this.currentWeatherIndex[0] = 4
         return '急风骤雨'
+      }
+      if (e === '阵雨转小雨') {
+        this.currentWeatherIndex[0] = 4
+        return '阑风长雨'
       }
       if (e === '阵雨转晴') {
         this.currentWeatherIndex[0] = 1
@@ -186,6 +214,31 @@ export default {
         this.currentWeatherIndex[0] = 1
         return '雨后初霁'
       }
+      if (e === '雷阵雨转阴') {
+        this.currentWeatherIndex[0] = 1
+        return '雨后初霁'
+      }
+      if (e === '大雨转暴雨') {
+        this.currentWeatherIndex[0] = 1
+        return '狂风暴雨'
+      }
+      // recode undefined weather
+      const db = wx.cloud.database()
+      db.collection('weather').where({
+        undefinedWeather: e
+      }).get({
+        success: res => {
+          if (res.data.length === 0) {
+            console.log('undefined weather ' + e)
+            db.collection('weather').add({
+              data: {
+                undefinedWeather: e,
+                weatherInfo: this.originalData
+              }
+            })
+          }
+        }
+      })
       return '风花雪月'
     },
     CHN (e) {
@@ -399,7 +452,7 @@ c3 = #929194
 @import '../../../assets/styles/index.styl'
 @font-face {
   font-family 'qingke'
-  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke.TTF') format('truetype')
+  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke254.TTF') format('truetype')
 }
 .weather {
   height 100vh
@@ -514,6 +567,15 @@ c3 = #929194
         font-size 14px
         color co_6
         letter-spacing 3px
+        & span {
+          position relative
+          left -2px
+          display inline-block
+          transform rotate(90deg)
+          &:last-child {
+            top -2px
+          }
+        }
       }
     }
   }

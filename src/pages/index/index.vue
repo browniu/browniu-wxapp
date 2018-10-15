@@ -33,7 +33,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
@@ -134,7 +134,7 @@ export default {
   position relative
   background-color #38274e
   background linear-gradient(to bottom, #38274e, #4f274b)
-  background: linear-gradient(135deg, #3ca55c, #b5ac49)
+  background linear-gradient(135deg, #3ca55c, #b5ac49)
   background-repeat no-repeat
   overflow hidden
   &.theme1 {

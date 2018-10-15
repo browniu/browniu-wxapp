@@ -42,14 +42,13 @@ export default {
 </script>
 <style lang='stylus' scoped>
 @import '../dice/keyframe.css'
-co_1 = rgba(249, 206, 205, 1)
+co_1 = #fff
 co_2 = #663c6d
 .dice {
   height 100vh
   overflow hidden
   background co_2
-  background linear-gradient(to bottom, #b31217, #e52d27)
-  position relative
+  background linear-gradient(45deg, #003973, #e5e5be)
   & .main {
     position absolute
     top 50%
