@@ -166,6 +166,10 @@ export default {
         this.currentWeatherIndex[0] = 4
         return '础润而雨'
       }
+      if (e === '阴转大雨') {
+        this.currentWeatherIndex[0] = 4
+        return '云期雨信'
+      }
       if (e === '阴转晴') {
         this.currentWeatherIndex[0] = 1
         return '烟消云散'
@@ -214,6 +218,18 @@ export default {
         this.currentWeatherIndex[0] = 1
         return '雨后初霁'
       }
+      if (e === '阵雨转阴') {
+        this.currentWeatherIndex[0] = 1
+        return '风箕雨毕'
+      }
+      if (e === '阵雨转大雨') {
+        this.currentWeatherIndex[0] = 4
+        return '暴雨如注'
+      }
+      if (e === '大雨') {
+        this.currentWeatherIndex[0] = 4
+        return '风雨交加'
+      }
       if (e === '雷阵雨转阴') {
         this.currentWeatherIndex[0] = 1
         return '雨后初霁'
@@ -239,6 +255,10 @@ export default {
           }
         }
       })
+      if (e.length === 4) return e
+      if (e.length === 2) return '如期' + e
+      if (e.length === 3) return '恰似' + e
+      if (e.length > 4) return e[0] + e[1] + e[2] + e[3]
       return '风花雪月'
     },
     CHN (e) {
@@ -335,7 +355,8 @@ export default {
       this.currentTime = new Date()
       this.currentTime = [this.currentTime.getHours(), this.currentTime.getMinutes(), this.currentTime.getMonth() + 1, this.currentTime.getDate()]
       this.clockDeg = this.currentTime[0] * 30 + this.currentTime[1] * 0.25
-      if (this.currentTime[0] > 18 && this.currentTime[0] < 6) {
+      console.log(this.currentTime[0])
+      if (this.currentTime[0] > 17 || this.currentTime[0] < 5) {
         this.isDay = false
         this.currentWeatherIndex[2] = 2
       }
@@ -452,7 +473,7 @@ c3 = #929194
 @import '../../../assets/styles/index.styl'
 @font-face {
   font-family 'qingke'
-  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke254.TTF') format('truetype')
+  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke255.TTF') format('truetype')
 }
 .weather {
   height 100vh

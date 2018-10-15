@@ -2,7 +2,32 @@
   from {
     transform: rotate(0deg)
   }
+
   to {
-    transform: rotate(720deg)
+    transform: rotate(1080deg)
+  }
+}
+
+@keyframes unshake {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(-1080deg)
+  }
+}
+
+@keyframes ushake {
+  from {
+    background: rgba(255, 255, 255, 1)
+  }
+
+  50% {
+    background: rgba(36, 17, 26, 0)
+  }
+
+  to {
+    background: rgba(255, 255, 255, 1)
   }
 }

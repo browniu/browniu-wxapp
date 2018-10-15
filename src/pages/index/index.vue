@@ -41,7 +41,7 @@ export default {
         { href: '../tools/remainder/main', name: '除以3', icon: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真视窗', icon: '真实视窗', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '旺旺加班', icon: 'timer', label: false, access: false },
-        { href: '../tools/dice/main', name: '大富翁', icon: 'message', label: false, access: false },
+        { href: '../tools/dice/main', name: '十二骰', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日惠', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
