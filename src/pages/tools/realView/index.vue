@@ -143,6 +143,9 @@ export default {
     const db = wx.cloud.database()
     db.collection('realView').get().then(res => {
       this.dataList = res.data
+      if (this.dataList.view1Device.length > 10) {
+        console.log(this.dataList[0].view1Device.length)
+      }
     })
   }
 }
@@ -232,7 +235,7 @@ co_g_5 = #a3a9ad
           // transform scale(0.8)
           // width 100%
           & thead {
-            padding 8px 10px 
+            padding 8px 10px
             font-size 12px
             background co_10
             color co_2
@@ -273,13 +276,16 @@ co_g_5 = #a3a9ad
                 margin-top 10px
                 overflow hidden
                 box-sizing border-box
+                overflow hidden
                 &:nth-child(1) {
-                  position relative 
+                  position relative
                   left 10px
-                  width 25%
+                  width 20%
+                  box-sizing border-box
+                  margin-right 5%
                 }
                 &:nth-child(2) {
-                  position relative 
+                  position relative
                   left 10px
                   width 20%
                 }
