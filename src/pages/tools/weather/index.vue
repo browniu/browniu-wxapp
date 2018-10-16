@@ -146,6 +146,10 @@ export default {
         this.currentWeatherIndex[0] = 4
         return '秋风化雨'
       }
+      if (e === '多云转雷阵雨') {
+        this.currentWeatherIndex[0] = 4
+        return '雷嗔电怒'
+      }
       if (e === '多云转阵雨') {
         this.currentWeatherIndex[0] = 4
         return '风驰雨骤'
@@ -198,6 +202,10 @@ export default {
         this.currentWeatherIndex[0] = 4
         return '秋雨绵绵'
       }
+      if (e === '中雨转多云') {
+        this.currentWeatherIndex[0] = 2
+        return '雨消云合'
+      }
       if (e === '中雨转雷阵雨') {
         this.currentWeatherIndex[0] = 4
         return '风雨飘摇'
@@ -231,11 +239,15 @@ export default {
         return '风雨交加'
       }
       if (e === '雷阵雨转阴') {
-        this.currentWeatherIndex[0] = 1
+        this.currentWeatherIndex[0] = 3
         return '雨后初霁'
       }
+      if (e === '雷阵雨') {
+        this.currentWeatherIndex[0] = 4
+        return '冬雷震震'
+      }
       if (e === '大雨转暴雨') {
-        this.currentWeatherIndex[0] = 1
+        this.currentWeatherIndex[0] = 4
         return '狂风暴雨'
       }
       // recode undefined weather
@@ -257,7 +269,7 @@ export default {
       })
       if (e.length === 4) return e
       if (e.length === 2) return '如期' + e
-      if (e.length === 3) return '恰似' + e
+      if (e.length === 3) return '绝' + e
       if (e.length > 4) return e[0] + e[1] + e[2] + e[3]
       return '风花雪月'
     },
@@ -473,7 +485,7 @@ c3 = #929194
 @import '../../../assets/styles/index.styl'
 @font-face {
   font-family 'qingke'
-  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke255.TTF') format('truetype')
+  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke257.TTF') format('truetype')
 }
 .weather {
   height 100vh
