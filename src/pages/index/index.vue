@@ -1,8 +1,9 @@
 <template>
-  <scroll-view scroll-y class="tools navigatePosition">
+  <scroll-view scroll-y class="tools">
     <!-- <div class="navigetion">
       brown's magic
     </div> -->
+    <div class="texture"></div>
     <div v-if="tipsSwitch" class="tips">{{tipsInfo}}</div>
     <main>
       <ol>
@@ -135,7 +136,6 @@ export default {
   background-color #38274e
   background linear-gradient(to bottom, #38274e, #4f274b)
   background linear-gradient(135deg, #3ca55c, #b5ac49)
-  background-repeat no-repeat
   overflow hidden
   &.theme1 {
     background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
@@ -153,6 +153,7 @@ export default {
   }
   & main {
     padding 15px
+    padding-top 80px
     ol {
       display flex
       flex-direction row
@@ -168,7 +169,7 @@ export default {
         text-align center
         height 120px
         border-radius 3px
-        background-color rgba(255, 255, 255, 0.03)
+        background-color rgba(255, 255, 255, 0.05)
         position relative
         margin-right 5px
         margin-bottom 5px
@@ -209,6 +210,18 @@ export default {
     padding 10px 15px
     background rgba(0, 0, 0, 0.3)
     border-radius 3px
+  }
+  & .texture {
+    position absolute
+    top 0
+    left 0
+    height 100vh
+    width 100vw
+    background-image url('http://pb85uax7t.bkt.clouddn.com/indexbg-80.jpg')
+    background-size cover
+    background-position top left
+    background-repeat no-repeat
+    opacity 0.8
   }
 }
 </style>
