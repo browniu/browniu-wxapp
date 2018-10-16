@@ -65,7 +65,7 @@ export default {
       originalData: ['currentCity', ['des', 'tipt', 'title', 'zs'], 'pm25', ['date', 'dayPictureUrl', 'nightPictureUrl', 'temperature', 'weather', 'wind']],
       currentTemprature: '二十五度',
       currentTemp: '25',
-      currentWeather: '万里晴空',
+      currentWeather: '晴空万里',
       currentWeatherIndex: [1, 6, 1],
       CWI: 'http://pb85uax7t.bkt.clouddn.com/cwi-000.jpg',
       currentWind: '微',
@@ -79,7 +79,7 @@ export default {
         { 'date': '十月十二 火耀日', 'temperature': '二十至十三度', 'weather': '晴空万里', 'wind': '强风' },
         { 'date': '十月十三 水耀日', 'temperature': '十至八度', 'weather': '晴转多云', 'wind': '微风' }
       ],
-      moreDes: ['晴空万里', '晴空万里', '晴空万里', '晴空万里'],
+      moreDes: ['晴空万里', '云卷云舒', '晴天霹雳', '瓢泼大雨'],
       moreWind: ['微风 西北', '微风 西北', '微风 西北', '微风 西北'],
       moreDate: ['十月十日 日曜日', '十月十日 日曜日', '十月十日 日曜日', '十月十日 日曜日'],
       moreTemp: ['二十至十五度', '二十至十五度', '二十至十五度', '二十至十五度'],
@@ -201,6 +201,10 @@ export default {
       if (e === '中雨转小雨') {
         this.currentWeatherIndex[0] = 4
         return '秋雨绵绵'
+      }
+      if (e === '中雨转大雨') {
+        this.currentWeatherIndex[0] = 4
+        return '瓢泼大雨'
       }
       if (e === '中雨转多云') {
         this.currentWeatherIndex[0] = 2

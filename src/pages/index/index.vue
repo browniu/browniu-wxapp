@@ -39,12 +39,12 @@ export default {
       login: false,
       theme: 1,
       tools: [
-        { href: '../tools/remainder/main', name: '除以3', icon: 'Killer 3', label: false, access: false },
+        { href: '../tools/remainder/main', name: '除以三', icon: 'Killer 3', label: false, access: false },
         { href: '../tools/realView/main', name: '真视窗', icon: '真实视窗', label: false, access: false },
-        { href: '../tools/w_overTimePay/main', name: '旺旺加班', icon: 'timer', label: false, access: false },
+        { href: '../tools/w_overTimePay/main', name: '旺旺汪', icon: 'timer', label: false, access: false },
         { href: '../tools/dice/main', name: '十二骰', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
-        { href: '../tools/japan/main', name: '中日惠', icon: 'heart', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日汇', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
@@ -75,7 +75,7 @@ export default {
           })
         } else {
           wx.vibrateLong()
-          this.tips('权限不足')
+          this.tips('联系作者申请内测资格')
         }
       } else {
         wx.navigateTo({

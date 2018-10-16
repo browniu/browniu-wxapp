@@ -143,9 +143,6 @@ export default {
     const db = wx.cloud.database()
     db.collection('realView').get().then(res => {
       this.dataList = res.data
-      if (this.dataList.view1Device.length > 10) {
-        console.log(this.dataList[0].view1Device.length)
-      }
     })
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="japan navigatePosition">
+    <div class="texture"></div>
     <div class="screen">
       <div class="item cny">
         <h1>{{cnyResult}}</h1>
@@ -147,13 +148,31 @@ c_1 = #003a61
 c_2 = #367f9d
 c_2_1 = #4252c0
 c_2_2 = #6340a9
-c_2_3 = #8e32d8
-c_2_4 = #1e3479
+c_2_3 = #bfe9ff
+c_2_4 = #ff6e7f
+themeimg = 'http://pb85uax7t.bkt.clouddn.com/sakura.jpg'
 .japan {
   height 100vh
-  background linear-gradient(to bottom, c_2_4, c_2_3)
+  background linear-gradient(45deg, c_2_4, c_2_3)
+  background-size cover
+  background-position top right
   padding-top 50px
+  background rgba(255, 141, 158, 0.8)
+  .texture {
+    opacity 1
+    background-image url(themeimg)
+    background-size cover
+    background-position center bottom
+    height 100vh
+    width 100vw
+    position absolute
+    top 0
+    z-index 0
+    left 0
+  }
   .screen {
+    position relative
+    z-index 1
     & .item {
       box-sizing border-box
       padding 25px
@@ -161,7 +180,7 @@ c_2_4 = #1e3479
         font-size 36px
         font-weight lighter
         font-weight 100
-        color rgba(255, 255, 255, 0.7)
+        color rgba(255, 255, 255, 1)
       }
       & p {
         margin-top 3px
@@ -185,8 +204,10 @@ c_2_4 = #1e3479
     }
   }
   .control {
+    background #000
     position fixed
     bottom 0
+    box-shadow 0px -2px 5px rgba(0, 0, 0, 0.3)
     &:before {
       z-index 0
       content ''
@@ -196,16 +217,18 @@ c_2_4 = #1e3479
       position absolute
       top 0
       left 0
-      background rgba(10, 29, 88, 0.7)
-      filter blur(10px)
+      background-image url(themeimg)
+      opacity 0.8
+      background-position bottom center
+      background-size auto 100vh
+      filter saturate(30%)
     }
     .inner {
       position relative
       z-index 1
-      background linear-gradient(135deg, c_2_2, c_2_1)
       .switch {
         height 65px
-        border-bottom 1px solid rgba(255, 255, 255, 0.03)
+        border-bottom 1px solid rgba(255, 255, 255, 0.1)
         position relative
         .ex {
           width 30px
@@ -217,7 +240,7 @@ c_2_4 = #1e3479
           i {
             position absolute
             font-size 12px
-            color rgba(0, 0, 0, 0.15)
+            color rgba(255, 155, 255, 0.3)
             transform scale(0.7)
             top 13px
             &:last-child {
@@ -226,7 +249,7 @@ c_2_4 = #1e3479
             }
             &.act {
               transform scale(0.9)
-              color rgba(160, 180, 253, 1)
+              color rgba(255, 255, 255, 1)
               &:last-child {
                 transform scale(0.9) rotate(180deg)
               }
@@ -268,7 +291,7 @@ c_2_4 = #1e3479
         justify-content left
         width 100%
         .key {
-          transition 0.3s
+          transition 0.1s ease
           height keyHeight
           line-height keyHeight
           width keyWidth
@@ -281,7 +304,7 @@ c_2_4 = #1e3479
           color rgba(255, 255, 255, 1)
           background rgba(50, 132, 158, 0)
           &.touch {
-            background rgba(255, 255, 255, 0.05)
+            background rgba(255, 255, 255, 0.1)
           }
           &:nth-of-type(3n) {
             margin-right 0
