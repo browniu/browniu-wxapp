@@ -17,7 +17,8 @@
           <img v-if="index===6" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
           <img v-if="index===7" mode="widthFix" src="../../../static/images/organization.svg" alt="">
           <img v-if="index===8" mode="widthFix" src="../../../static/images/download.svg" alt="">
-          <img v-if="index===9" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <img v-if="index===9" mode="widthFix" src="../../../static/images/files.svg" alt="">
+          <img v-if="index===10" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
@@ -34,7 +35,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -48,6 +49,7 @@ export default {
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
+        { href: '../tools/songs/main', name: '蒹葭', icon: 'heart', label: false, access: true },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -113,7 +115,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/weather/main'
+        url: '../tools/songs/main'
       })
     }
     wx.setNavigationBarColor({

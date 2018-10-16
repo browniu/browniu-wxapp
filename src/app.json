@@ -1,6 +1,13 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/store/index/main",
+    "pages/store/news/main",
+    "pages/store/class/main",
+    "pages/store/shopping/main",
+    "pages/store/mine/main",
+    "pages/store/detail/main",
+    "pages/store/bill/main",
     "pages/tools/logs/main",
     "pages/tools/counter/main",
     "pages/tools/remainder/main",
@@ -12,13 +19,7 @@
     "pages/tools/theDay/main",
     "pages/tools/colorful/main",
     "pages/tools/weather/main",
-    "pages/store/index/main",
-    "pages/store/news/main",
-    "pages/store/class/main",
-    "pages/store/shopping/main",
-    "pages/store/mine/main",
-    "pages/store/detail/main",
-    "pages/store/bill/main"
+    "pages/tools/songs/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
