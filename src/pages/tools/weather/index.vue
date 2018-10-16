@@ -466,6 +466,12 @@ export default {
           this.tempColor = temp.temp[this.currentTemp].bgc
           this.tempImage = temp.temp[this.currentTemp].bgi
         }
+        if (this.currentTemp < this.tempOpen) {
+          this.tempColor = '#a3cad0'
+        }
+        if (this.currentTemp > this.tempEnd) {
+          this.tempColor = '#f5063c'
+        }
         // this.currentWeatherIndex = parseInt(this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2])
         console.log(this.currentWeatherIndex)
         this.CWI = CWI.CWI[this.currentWeatherIndex[0] + '' + this.currentWeatherIndex[1] + '' + this.currentWeatherIndex[2]].split('|')[1]
