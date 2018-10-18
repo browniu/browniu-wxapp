@@ -18,7 +18,8 @@
           <img v-if="index===7" mode="widthFix" src="../../../static/images/organization.svg" alt="">
           <img v-if="index===8" mode="widthFix" src="../../../static/images/download.svg" alt="">
           <img v-if="index===9" mode="widthFix" src="../../../static/images/heart.svg" alt="">
-          <img v-if="index===10" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <img v-if="index===10" mode="widthFix" src="../../../static/images/list.svg" alt="">
+          <img v-if="index===11" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
@@ -50,6 +51,7 @@ export default {
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
+        { href: '../tools/voice/main', name: '声纹', icon: 'heart', label: false, access: true },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -115,7 +117,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/songs/main'
+        url: '../tools/voice/main'
       })
     }
     wx.setNavigationBarColor({
@@ -214,7 +216,7 @@ export default {
     border-radius 3px
   }
   & .texture {
-    position absolute
+    position fixed
     top 0
     left 0
     height 100vh
@@ -224,6 +226,11 @@ export default {
     background-position top left
     background-repeat no-repeat
     opacity 0.8
+  }
+  ::-webkit-scrollbar {
+    width 0
+    height 0
+    color transparent
   }
 }
 </style>

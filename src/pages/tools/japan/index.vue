@@ -150,7 +150,7 @@ c_2_1 = #4252c0
 c_2_2 = #6340a9
 c_2_3 = #bfe9ff
 c_2_4 = #ff6e7f
-themeimg = 'http://pb85uax7t.bkt.clouddn.com/sakura.jpg'
+themeimg = 'http://pb85uax7t.bkt.clouddn.com/Japan-2.jpg'
 .japan {
   height 100vh
   background linear-gradient(45deg, c_2_4, c_2_3)

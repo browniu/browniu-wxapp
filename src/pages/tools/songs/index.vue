@@ -13,7 +13,7 @@
             <!-- <div @click="listSwitch" :class="['switch',songIndex===index&&songList?'act':'']">1</div> -->
           </h1>
         </div>
-        <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1000" @scroll="scrollView">
+        <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1500" @scroll="scrollView">
           <span class="content-inner" v-for="(item, index) in songs[songIndex][3]" :key="index">
             <p>{{item}}</p><br>
           </span>
@@ -49,7 +49,7 @@ export default {
         this.scrollC = e.target.scrollLeft
         this.scrollP = (((this.scrollW - this.scrollC) / this.scrollW) * 100).toFixed(4)
       }
-      console.log(this.scrollP)
+      // console.log(this.scrollP)
     },
     listSwitch (e) {
       if (this.songList) {
@@ -59,16 +59,43 @@ export default {
           this.scrollReflash = false
           setTimeout(() => {
             this.scrollReflash = true
-          }, 10)
+          }, 1)
         }, 500)
         return
       }
       this.songList = true
       this.songIndex = e
+    },
+    // 打乱重组
+    randomArray (length) {
+      var i, index, temp
+      let arr = [length]
+      for (i = 1; i <= length; i++) {
+        arr[i - 1] = i
+      }
+      for (i = 1; i <= length; i++) {
+        index = parseInt(Math.random() * (length - i)) + i
+        if (index !== i) {
+          temp = arr[i]
+          arr[i] = arr[index]
+          arr[index] = temp
+        }
+      }
+      return arr
+    },
+    resortArray (oraginList) {
+      let randomIndex = this.randomArray(oraginList.length)
+      var targetList = []
+      for (let index = 0; index < randomIndex.length; index++) {
+        const element = randomIndex[index] - 1
+        targetList.push(oraginList[element])
+      }
+      console.log(targetList)
+      return targetList
     }
   },
   onLoad () {
-    this.songs = songs.songs
+    this.songs = this.resortArray(songs.songs).slice(1, 9)
   }
 }
 </script>
@@ -89,7 +116,7 @@ c6 = #493b32
   height 100vh
   width 100vw
   overflow hidden
-  background c4
+  background #fff
   color c3
   font-family qingke
   & .texture {
@@ -106,7 +133,7 @@ c6 = #493b32
     background-repeat no-repeat
     background-size 120% auto
     background-position 0% bottom
-    opacity 0.15
+    opacity 0.25
   }
   & .inner {
     box-sizing border-box
