@@ -55,6 +55,7 @@ export default class Main {
 
     this.bg = new BackGround(ctx)
     this.player = new Player(ctx)
+    this.Flower = new Flower(ctx)
     this.gameinfo = new GameInfo()
     this.music = new Music()
 
@@ -82,7 +83,10 @@ export default class Main {
     // this.bg.render(ctx)
 
     // 渲染主角
-    this.player.drawToCanvas(ctx)
+    // this.player.drawToCanvas(ctx)
+    
+    // 渲染彼岸花
+    this.Flower.drawToCanvas(ctx)
 
     // 渲染分数
     this.gameinfo.renderGameScore(ctx, databus.score)
