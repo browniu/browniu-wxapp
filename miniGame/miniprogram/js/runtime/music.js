@@ -12,7 +12,7 @@ export default class Music {
 
     this.bgmAudio = new Audio()
     this.bgmAudio.loop = true
-    this.bgmAudio.src = 'audio/bgm.mp3'
+    this.bgmAudio.src = 'http://pb85uax7t.bkt.clouddn.com/QNXT.mp3'
 
     this.shootAudio = new Audio()
     this.shootAudio.src = 'audio/bullet.mp3'
@@ -20,7 +20,7 @@ export default class Music {
     this.boomAudio = new Audio()
     this.boomAudio.src = 'audio/boom.mp3'
 
-    //this.playBgm()
+    // this.playBgm()
   }
 
   playBgm() {
