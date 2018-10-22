@@ -36,7 +36,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -51,7 +51,7 @@ export default {
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
-        { href: '../tools/voice/main', name: '声纹', icon: 'heart', label: false, access: true },
+        { href: '../tools/voice/main', name: '万花筒', icon: 'heart', label: false, access: true },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -94,7 +94,7 @@ export default {
           this.login = true
           this.userInfo = res.userInfo
           this.tips('专属 ' + res.userInfo.nickName + ' 的魔盒已开启')
-          if (res.userInfo.nickName === 'brown') {
+          if (res.userInfo.nickName === 'Zodiarts') {
             this.access = true
           }
         }

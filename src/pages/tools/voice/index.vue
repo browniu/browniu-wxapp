@@ -1,31 +1,60 @@
 <template>
   <div class="voice">
-    <canvas style="width: 300px; height: 200px;" canvas-id="myCanvas"></canvas>
-    <navigator target="miniProgram" open-type="navigate" app-id="wx2b2d3506dcaec625" path="" extra-data="" version="release">打开绑定的小程序</navigator>
+    <canvas canvas-id="myCanvas"></canvas>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      info: 1,
+      vh: wx.getSystemInfoSync().screenHeight,
+      vw: wx.getSystemInfoSync().screenWidth,
+      number: 20,
+      step: 0.1,
+      timer: {}
+    }
+  },
+  methods: {
+    drew () {
+      const ctx = wx.createCanvasContext('myCanvas')
+      let time = setInterval(() => {
+        this.info = this.info + this.step
+        // console.log(this.info++)
+        ctx.clearRect(0, 0, this.vh, this.vw)
+        ctx.setFillStyle('brown')
+        ctx.globalCompositeOperation = 'lighter'
+        for (let index = 0; index < this.number; index++) {
+          ctx.fillRect(((this.vw / this.number) - 5) * index, 0, this.vw / this.number, this.info)
+        }
+        if (this.info > this.vh) {
+          clearInterval(time)
+        }
+        ctx.draw()
+      }, 15)
+    },
+    music () {
+      const innerAudioContext = wx.createInnerAudioContext()
+      innerAudioContext.autoplay = false
+      innerAudioContext.src = 'http://pb85uax7t.bkt.clouddn.com/QNXT.mp3'
+      innerAudioContext.onPlay(() => {
+        console.log('开始播放')
+      })
+      innerAudioContext.onError((res) => {
+        console.log(res.errMsg)
+        console.log(res.errCode)
+      })
+    }
+  },
   onLoad () {
-    // audio
-    const innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.autoplay = false
-    innerAudioContext.src = 'http://pb85uax7t.bkt.clouddn.com/QNXT.mp3'
-    innerAudioContext.onPlay(() => {
-      console.log('开始播放')
+    wx.getSystemInfoSync({
+      success: (res) => {
+        console.log(res)
+      }
     })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-    console.log(innerAudioContext)
-    // canvas
-    const ctx = wx.createCanvasContext('myCanvas')
-    ctx.setFillStyle('green')
-    ctx.fillRect(10, 10, 150, 75)
-    ctx.draw()
-    // animation
+    this.music()
+    this.drew()
   }
 }
 </script>
@@ -33,5 +62,10 @@ export default {
 @import '../../../assets/styles/index.styl'
 .voice {
   color co_3
+  canvas {
+    background #000
+    height 100vh
+    width 100vw
+  }
 }
 </style>
