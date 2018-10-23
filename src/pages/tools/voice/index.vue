@@ -1,6 +1,7 @@
 <template>
   <div class="voice">
-    <canvas canvas-id="myCanvas"></canvas>
+    <!-- <canvas canvas-id="myCanvas"></canvas> -->
+    <div class="go" @click="go">立即体验</div>
   </div>
 </template>
 
@@ -13,7 +14,9 @@ export default {
       vw: wx.getSystemInfoSync().screenWidth,
       number: 20,
       step: 0.1,
-      timer: {}
+      timer: {},
+      voiceData: [],
+      dataList: []
     }
   },
   methods: {
@@ -21,7 +24,7 @@ export default {
       const ctx = wx.createCanvasContext('myCanvas')
       let time = setInterval(() => {
         this.info = this.info + this.step
-        // console.log(this.info++)
+        // console.log(this.info)
         ctx.clearRect(0, 0, this.vh, this.vw)
         ctx.setFillStyle('brown')
         ctx.globalCompositeOperation = 'lighter'
@@ -34,27 +37,34 @@ export default {
         ctx.draw()
       }, 15)
     },
+    display () {
+      setInterval(() => {
+        this.info = this.info + this.step
+        console.log(this.info)
+      }, 15)
+    },
     music () {
       const innerAudioContext = wx.createInnerAudioContext()
-      innerAudioContext.autoplay = false
+      innerAudioContext.autoplay = true
       innerAudioContext.src = 'http://pb85uax7t.bkt.clouddn.com/QNXT.mp3'
       innerAudioContext.onPlay(() => {
         console.log('开始播放')
+        this.drew()
+        // this.display()
       })
       innerAudioContext.onError((res) => {
         console.log(res.errMsg)
         console.log(res.errCode)
       })
+    },
+    go () {
+      console.log('go')
+      wx.navigateToMiniProgram({ appId: 'wx2b2d3506dcaec625' })
     }
   },
   onLoad () {
-    wx.getSystemInfoSync({
-      success: (res) => {
-        console.log(res)
-      }
-    })
-    this.music()
-    this.drew()
+    // this.music()
+    // this.drew()
   }
 }
 </script>
@@ -63,9 +73,16 @@ export default {
 .voice {
   color co_3
   canvas {
-    background #000
+    background #fff
     height 100vh
     width 100vw
+  }
+  .go {
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    font-size 16px
   }
 }
 </style>
