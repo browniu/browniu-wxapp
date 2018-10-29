@@ -36,7 +36,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -51,7 +51,7 @@ export default {
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
-        { href: '../tools/voice/main', name: '万花筒', icon: 'heart', label: false, access: true },
+        { href: '../tools/voice/main', name: '冲鸭', icon: 'heart', label: false, access: true },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -117,7 +117,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/voice/main'
+        url: '../tools/lab/main'
       })
     }
     wx.setNavigationBarColor({

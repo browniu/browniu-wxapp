@@ -1,8 +1,11 @@
 <template>
-  <scroll-view scroll-y class="store-index" @scroll="fixedTabTop($event)">
+  <scroll-view scroll-y class="store-index">
     <!-- <div class="info">{{info}}</div> -->
 
     <head>
+      <div class="title" :style="{paddingTop:(statusBarHeight+25)+'rpx'}">
+        Friend's Store
+      </div>
       <div class="search">
         <i class="iconfont">&#xe7e3;</i>
         <span>搜索商品, 共13241款好物</span>
@@ -66,7 +69,8 @@ export default {
       info: '',
       tabTopFixed: false,
       itemState: 0,
-      indexItems: ['新品推荐', '服饰配件', '玩偶抱枕', '数位家电', '家居旅行', '萌宠文具', '儿童']
+      indexItems: ['新品推荐', '服饰配件', '玩偶抱枕', '数位家电', '家居旅行', '萌宠文具', '儿童'],
+      statusBarHeight: wx.getSystemInfoSync().statusBarHeight
     }
   },
   methods: {
@@ -81,6 +85,9 @@ export default {
         this.tabTopFixed = false
       }
     }
+  },
+  created () {
+    // console.log(this.statusBarHeight)
   },
   mounted () {
     wx.setNavigationBarTitle({
@@ -104,6 +111,10 @@ export default {
   & head {
     padding 0 15px
     box-sizing border-box
+    & .title {
+      height 50px
+      line-height 50px
+    }
     & .search {
       background co_10
       height 35px

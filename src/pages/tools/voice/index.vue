@@ -1,7 +1,6 @@
 <template>
   <div class="voice">
-    <!-- <canvas canvas-id="myCanvas"></canvas> -->
-    <div class="go" @click="go">立即体验</div>
+    <canvas canvas-id="myCanvas"></canvas>
   </div>
 </template>
 
@@ -56,15 +55,11 @@ export default {
         console.log(res.errMsg)
         console.log(res.errCode)
       })
-    },
-    go () {
-      console.log('go')
-      wx.navigateToMiniProgram({ appId: 'wx2b2d3506dcaec625' })
     }
   },
   onLoad () {
     // this.music()
-    // this.drew()
+    this.drew()
   }
 }
 </script>
