@@ -27,3 +27,13 @@
     background-position: 0px -96px;
   }
 }
+
+@keyframes animPipe {
+  0% {
+    left: 900px;
+  }
+
+  100% {
+    left: -100px;
+  }
+}
