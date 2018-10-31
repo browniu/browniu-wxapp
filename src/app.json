@@ -20,7 +20,7 @@
     "pages/tools/colorful/main",
     "pages/tools/weather/main",
     "pages/tools/songs/main",
-    "pages/tools/voice/main"
+    "pages/tools/bird/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

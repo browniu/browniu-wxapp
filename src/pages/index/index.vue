@@ -14,19 +14,22 @@
           <img v-if="index===3" mode="widthFix" src="../../../static/images/message.svg" alt="">
           <img v-if="index===4" mode="widthFix" src="../../../static/images/store.svg" alt="">
           <img v-if="index===5" mode="widthFix" src="../../../static/images/out.svg" alt="">
-          <img v-if="index===6" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
+          <img v-if="index===6" mode="widthFix" src="../../../static/images/list.svg" alt="">
           <img v-if="index===7" mode="widthFix" src="../../../static/images/organization.svg" alt="">
           <img v-if="index===8" mode="widthFix" src="../../../static/images/download.svg" alt="">
           <img v-if="index===9" mode="widthFix" src="../../../static/images/heart.svg" alt="">
-          <img v-if="index===10" mode="widthFix" src="../../../static/images/list.svg" alt="">
+          <img v-if="index===10" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
           <img v-if="index===11" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
-        <li>
+        <!-- <li>
           <img mode="widthFix" src="../../../static/images/lock.svg" alt="">
           <p>开启专属</p>
           <button open-type="getUserInfo" @click="identity"></button>
+        </li> -->
+        <li>
+          <span></span>
         </li>
       </ol>
     </main>
@@ -41,17 +44,17 @@ export default {
       login: false,
       theme: 1,
       tools: [
-        { href: '../tools/remainder/main', name: '除以三', icon: 'Killer 3', label: false, access: false },
-        { href: '../tools/realView/main', name: '真视窗', icon: '真实视窗', label: false, access: false },
-        { href: '../tools/w_overTimePay/main', name: '旺旺汪', icon: 'timer', label: false, access: false },
-        { href: '../tools/dice/main', name: '十二骰', icon: 'message', label: false, access: false },
-        { href: '../store/index/main', name: '小卖部', icon: 'store', label: false, access: false },
+        { href: '../tools/remainder/main', name: '杀手三', icon: 'Killer 3', label: false, access: false },
+        { href: '../tools/realView/main', name: '适配档案', icon: '真实视窗', label: false, access: false },
+        { href: '../tools/w_overTimePay/main', name: '加班汪', icon: 'timer', label: false, access: false },
+        { href: '../tools/dice/main', name: '变色骰', icon: 'message', label: false, access: false },
+        { href: '../store/index/main', name: 'Friend\'s', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日汇', icon: 'heart', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
-        { href: '../tools/voice/main', name: '冲鸭', icon: 'heart', label: false, access: true },
+        { href: '../tools/bird/main', name: '冲鸭小宝贝', icon: 'heart', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
       ],
       tipsInfo: '这是一条小提示',
@@ -64,12 +67,9 @@ export default {
       wx.vibrateShort()
       // store page
       if (index === 4) {
-        this.tips('临时开放 出口在右下角')
-        setTimeout(() => {
-          wx.switchTab({
-            url: '../store/index/main'
-          })
-        }, 2000)
+        wx.switchTab({
+          url: '../store/index/main'
+        })
         return
       }
       if (this.tools[index].access) {
@@ -79,7 +79,7 @@ export default {
           })
         } else {
           wx.vibrateLong()
-          this.tips('联系作者申请内测资格')
+          this.tips('立入禁止')
         }
       } else {
         wx.navigateTo({
@@ -181,6 +181,37 @@ export default {
         padding-top 35px
         &:nth-of-type(3n) {
           margin-right 0
+        }
+        &:last-child {
+          height 50px
+          padding-top 0px
+          & span {
+            margin 0
+            opacity 0.5
+            position relative
+            top 50%
+            transform translateY(-120%)
+            height 7px
+            width 7px
+            border-radius 50%
+            background #fff
+            display inline-block
+            &:before, &:after {
+              height 7px
+              width 7px
+              border-radius 50%
+              background #fff
+              display inline-block
+              content ''
+              position absolute
+            }
+            &:before {
+              left -12px
+            }
+            &:after {
+              right -12px
+            }
+          }
         }
         & img {
           width 25%
