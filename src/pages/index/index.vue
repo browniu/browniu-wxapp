@@ -7,28 +7,29 @@
     <div v-if="tipsSwitch" class="tips">{{tipsInfo}}</div>
     <main>
       <ol>
-        <li v-for="(item, index) in tools" :key="index">
-          <img v-if="index===0" mode="widthFix" src="../../../static/images/killer.svg" alt="">
-          <img v-if="index===1" mode="widthFix" src="../../../static/images/lab.svg" alt="">
-          <img v-if="index===2" mode="widthFix" src="../../../static/images/timer.svg" alt="">
-          <img v-if="index===3" mode="widthFix" src="../../../static/images/message.svg" alt="">
-          <img v-if="index===4" mode="widthFix" src="../../../static/images/store.svg" alt="">
-          <img v-if="index===5" mode="widthFix" src="../../../static/images/out.svg" alt="">
-          <img v-if="index===6" mode="widthFix" src="../../../static/images/list.svg" alt="">
-          <img v-if="index===7" mode="widthFix" src="../../../static/images/organization.svg" alt="">
-          <img v-if="index===8" mode="widthFix" src="../../../static/images/download.svg" alt="">
-          <img v-if="index===9" mode="widthFix" src="../../../static/images/heart.svg" alt="">
-          <img v-if="index===10" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
-          <img v-if="index===11" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+        <li v-for="(item, index) in list" :key="index">
+          <img v-if="item.icon==='killer'" mode="widthFix" src="../../../static/images/killer.svg" alt="">
+          <img v-if="item.icon==='lab'" mode="widthFix" src="../../../static/images/lab.svg" alt="">
+          <img v-if="item.icon==='timer'" mode="widthFix" src="../../../static/images/timer.svg" alt="">
+          <img v-if="item.icon==='message'" mode="widthFix" src="../../../static/images/message.svg" alt="">
+          <img v-if="item.icon==='store'" mode="widthFix" src="../../../static/images/store.svg" alt="">
+          <img v-if="item.icon==='out'" mode="widthFix" src="../../../static/images/out.svg" alt="">
+          <img v-if="item.icon==='list'" mode="widthFix" src="../../../static/images/list.svg" alt="">
+          <img v-if="item.icon==='organization'" mode="widthFix" src="../../../static/images/organization.svg" alt="">
+          <img v-if="item.icon==='download'" mode="widthFix" src="../../../static/images/download.svg" alt="">
+          <img v-if="item.icon==='heart'" mode="widthFix" src="../../../static/images/heart.svg" alt="">
+          <img v-if="item.icon==='favorite'" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
+          <img v-if="item.icon==='realView'" mode="widthFix" src="../../../static/images/realView.svg" alt="">
+          <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}"></div> -->
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
-        <!-- <li>
+        <li v-if="more">
           <img mode="widthFix" src="../../../static/images/lock.svg" alt="">
           <p>开启专属</p>
           <button open-type="getUserInfo" @click="identity"></button>
-        </li> -->
-        <li>
+        </li>
+        <li class="more" v-if="!more" @click="moreSwitch">
           <span></span>
         </li>
       </ol>
@@ -43,23 +44,26 @@ export default {
       access: false,
       login: false,
       theme: 1,
+      test: './',
       tools: [
-        { href: '../tools/remainder/main', name: '杀手三', icon: 'Killer 3', label: false, access: false },
-        { href: '../tools/realView/main', name: '适配档案', icon: '真实视窗', label: false, access: false },
+        { href: '../tools/remainder/main', name: '杀手三', icon: 'killer', label: false, access: false },
+        { href: '../tools/realView/main', name: '适配档案', icon: 'lab', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '加班汪', icon: 'timer', label: false, access: false },
         { href: '../tools/dice/main', name: '变色骰', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: 'Friend\'s', icon: 'store', label: false, access: false },
-        { href: '../tools/japan/main', name: '中日汇', icon: 'heart', label: false, access: false },
-        { href: '../tools/theDay/main', name: '等风来', icon: 'heart', label: false, access: false },
-        { href: '../tools/colorful/main', name: '自然色', icon: 'heart', label: false, access: false },
-        { href: '../tools/weather/main', name: '冷暖自知', icon: 'heart', label: false, access: false },
+        { href: '../tools/japan/main', name: '中日汇', icon: 'out', label: false, access: false },
+        { href: '../tools/theDay/main', name: '等风来', icon: 'list', label: false, access: false },
+        { href: '../tools/colorful/main', name: '自然色', icon: 'organization', label: false, access: false },
+        { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
-        { href: '../tools/bird/main', name: '冲鸭小宝贝', icon: 'heart', label: false, access: false },
-        { href: '../tools/lab/main', name: '实验室', icon: 'lab', label: false, access: true }
+        { href: '../tools/bird/main', name: '冲鸭小宝贝', icon: 'favorite', label: false, access: false },
+        { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
+      list: [],
       tipsInfo: '这是一条小提示',
       tipsSwitch: false,
-      firstLoad: true
+      firstLoad: true,
+      more: false
     }
   },
   methods: {
@@ -106,7 +110,18 @@ export default {
       setTimeout(() => {
         this.tipsSwitch = false
       }, 2000)
+    },
+    moreSwitch () {
+      console.log('xixixi')
+      this.more = true
+      this.list = this.tools
     }
+  },
+  onShow () {
+    this.more = false
+  },
+  onLoad () {
+    this.list = this.tools.slice(0, 12)
   },
   mounted () {
     wx.cloud.init({
@@ -117,7 +132,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/lab/main'
+        url: '../tools/bird/main'
       })
     }
     wx.setNavigationBarColor({
@@ -182,7 +197,7 @@ export default {
         &:nth-of-type(3n) {
           margin-right 0
         }
-        &:last-child {
+        &.more {
           height 50px
           padding-top 0px
           & span {
@@ -217,6 +232,14 @@ export default {
           width 25%
           height auto
           margin-bottom 5px
+        }
+        & .icon {
+          height 30px
+          width 30px
+          display inline-block
+          background-image url('../../../static/images/killer.svg')
+          background-size contain
+          background-position center
         }
         & a, button {
           display inline-block

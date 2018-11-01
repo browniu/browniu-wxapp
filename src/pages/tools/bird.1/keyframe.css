@@ -4,7 +4,7 @@
   }
 
   100% {
-    background-position: -224px 0px;
+    background-position: -335px 0px;
   }
 }
 
@@ -30,10 +30,10 @@
 
 @keyframes animPipe {
   0% {
-    transform: translateX(0px)
+    left: 900px;
   }
 
   100% {
-    transform: translateX(-1000px)
+    left: -100px;
   }
 }

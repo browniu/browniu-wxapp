@@ -29,14 +29,17 @@ export default {
       ctx: {},
       landX: 0,
       skyX: 0,
+      pipeX: 0,
       music: [0, 0, 0, 0],
       save: true,
       scope: 0,
       scopeData: [0, 0, 0],
       buff: 0,
-      ftp: 60,
+      ftp: 10,
       gravity: 0.25,
-      running: false
+      running: false,
+      pipeTopH: 300,
+      pipeBotH: 400
     }
   },
   methods: {
@@ -46,15 +49,18 @@ export default {
       this.ctx = ctx
       this.timer = setInterval(() => {
         ctx.clearRect(0, 0, this.vh, this.vw)
-        ctx.setFillStyle('brown')
+        // ctx.setFillStyle('brown')
         // ctx.fillRect((this.vw / 2 - 25), this.heroPosition, 50, 50)
         // ctx.rotate(30 * Math.PI / 180)
-        this.renderScene(ctx)
+        this.renderSky(ctx)
         if (this.running) {
+          this.renderPipes(ctx, 0)
+          this.renderPipes(ctx, 200)
           this.renderHero(ctx)
           this.scopeCout()
           this.renderScope(ctx)
         }
+        this.renderLand(ctx)
         ctx.draw()
       }, 1000 / this.ftp)
     },
@@ -85,20 +91,22 @@ export default {
       ctx.drawImage('../../../assets/images/duck/bird.png', 0, 24 * this.swing, 34, 24, 0, -10, 34, 24)
       ctx.restore()
     },
-    renderScene (ctx) {
+    renderLand (ctx) {
       this.landX -= 0.6
-      this.skyX -= 0.2
-      // console.log(this.landX)
       if (this.landX < -48) this.landX = 0
+      ctx.save()
+      ctx.drawImage('../../../assets/images/duck/land.png', 0 + this.landX, this.vh - 100)
+      ctx.drawImage('../../../assets/images/duck/land.png', 336 + this.landX, this.vh - 100)
+      ctx.restore()
+    },
+    renderSky (ctx) {
+      this.skyX -= 0.2
       if (this.skyX < -275) this.skyX = 0
       ctx.save()
       // draw sky
       ctx.drawImage('../../../assets/images/duck/sky.png', 0 + this.skyX, this.vh - 200)
       ctx.drawImage('../../../assets/images/duck/sky.png', 275 + this.skyX, this.vh - 200)
       ctx.drawImage('../../../assets/images/duck/sky.png', 550 + this.skyX, this.vh - 200)
-      // draw land
-      ctx.drawImage('../../../assets/images/duck/land.png', 0 + this.landX, this.vh - 100)
-      ctx.drawImage('../../../assets/images/duck/land.png', 336 + this.landX, this.vh - 100)
       ctx.restore()
     },
     renderScope (ctx) {
@@ -107,6 +115,17 @@ export default {
         ctx.drawImage('../../../assets/images/duck/f_' + this.scopeData[i] + '.png', 20 + 40 * i, 50)
       }
       ctx.restore()
+    },
+    renderPipes (ctx, position) {
+      this.pipeX -= 0.6
+      if (this.pipeX < -this.vw - 100 - position) {
+        this.pipeTopH = Math.random() * 200 + 100
+        this.pipeBotH = this.pipeTopH + 100
+        this.pipeX = 0
+      }
+      ctx.save()
+      ctx.drawImage('../../../assets/images/duck/pipetop.png', position + this.vw + 50 + this.pipeX, this.pipeTopH - 512)
+      ctx.drawImage('../../../assets/images/duck/pipebottom.png', position + this.vw + 50 + this.pipeX, this.pipeBotH)
     },
     display () {
       setInterval(() => {
@@ -150,9 +169,9 @@ export default {
     }
   },
   onLoad () {
-    this.musicLoader()
-    this.renderZ()
-    this.scopeCover(0)
+    // this.musicLoader()
+    // this.renderZ()
+    // this.scopeCover(0)
   }
 }
 </script>

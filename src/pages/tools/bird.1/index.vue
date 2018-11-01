@@ -1,10 +1,11 @@
 <template>
   <div class="duck" @click="fly">
-    <canvas canvas-id="myCanvas" class="hero" @click="fly"></canvas>
     <div class="main">
+      <!-- <img src="../../../assets/images/duck/sky.png" alt=""> -->
       <div class="inner">
         <div :class="['sky',running?'act':'']">
           <div class="playground">
+            <div v-show="running" class="hero" :style="{top:heroPosition+'px',transform:'translateY(-50%) rotate('+heroRotation+'deg)'}"></div>
             <div :class="['pipes',pipesStatus?'act':'']">
               <div v-if="index>pipesIndex" class="item" v-for="(item, index) in pipes" :key="index">
                 <div class="top" :style="{height:(item*10)+'%'}"></div>
@@ -14,7 +15,7 @@
           </div>
         </div>
         <div :class="['land',running?'act':'']">
-          <div :class="['scope',getScop?'act':'']">
+          <div class="scope">
             <div :style="{backgroundImage:'url(http://pb85uax7t.bkt.clouddn.com/f_'+item+'.png)'}" class="item" v-for="(item, index) in scopeData" :key="index"></div>
           </div>
         </div>
@@ -37,7 +38,7 @@ export default {
       sourceCount: 0,
       loaded: false,
       running: false,
-      music: [0, 0, 0, 0, 0],
+      music: [0, 0, 0],
       heroPosition: 200,
       heroRotation: 0,
       heroStatus: 0,
@@ -55,14 +56,7 @@ export default {
       scope: 0,
       scopeData: [],
       viewHeight: wx.getSystemInfoSync().windowHeight,
-      level: 8,
-      gravity: 0.25,
-      vh: wx.getSystemInfoSync().screenHeight,
-      vw: wx.getSystemInfoSync().screenWidth,
-      save: true,
-      swing: 0,
-      swingIndex: 0,
-      getScop: false
+      level: 8
     }
   },
   methods: {
@@ -82,12 +76,35 @@ export default {
         this.running = false
         this.reset()
       } else {
-        this.music[4].play()
         this.running = true
+        let gravity = 0.25
         this.scopeShow(0)
         this.timer = setInterval(() => {
-          this.renderZ()
-          this.crash()
+          this.k++
+          this.heroStatus = (this.heroPosition / this.viewHeight) * 10
+          // 坠毁地面
+          if (this.heroStatus > 8) {
+            this.over()
+            return
+          }
+          // 碰撞区间
+          if (this.k > 75 && this.k < 90 && this.pipesStatus > 0) {
+            if (this.heroStatus < this.pipeBot || this.heroStatus > this.pipeTop) {
+              this.over()
+              return
+            }
+            // console.log('k:' + this.k, 'pipesStatus:' + this.pipesStatus, 'heroStatus:' + this.heroStatus, 'pipeBottom:' + this.pipeBot, 'pipeTop:' + this.pipeTop)
+            if (this.k === 80) {
+              this.scope = this.scope + 1
+              this.scopeShow(this.scope)
+            }
+          }
+
+          this.velocity += gravity
+          this.heroRotation = Math.min((this.velocity / 20) * 90, 90)
+          if (this.velocity < 20) {
+            this.heroPosition += this.velocity
+          }
         }, 1000.0 / 60.0)
         this.pipesGen = setInterval(() => {
           this.pipesStatus++
@@ -112,7 +129,6 @@ export default {
       this.pipesStatus = -3
       this.pipesIndex = 0
       this.scope = 0
-      this.save = true
       console.log('reset')
       clearInterval(this.timer)
       clearInterval(this.pipesGen)
@@ -120,132 +136,36 @@ export default {
       clearTimeout(this.pipesDelate)
     },
     fly () {
-      this.music[0].play()
-      setTimeout(() => {
-        this.music[0].stop()
-      }, 300)
-      this.save = true
+      // this.music[0].play()
       this.velocity = -4.5
     },
     over () {
-      this.ctx.clearRect(0, 0, this.vh, this.vw)
-      this.music[4].stop()
-      this.music[3].play()
-      setTimeout(() => {
-        this.music[4].stop()
-        this.music[3].stop()
-      }, 800)
+      // this.music[2].play()
       this.running = true
       this.run()
     },
-    bounce () {
-
-    },
     musicLoader () {
-      this.music[0] = wx.createInnerAudioContext()
-      this.music[0].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_wing.mp3'
+      // this.music[0] = wx.createInnerAudioContext()
+      // this.music[0].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_wing.mp3'
       this.music[1] = wx.createInnerAudioContext()
       this.music[1].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_point.ogg'
       this.music[2] = wx.createInnerAudioContext()
       this.music[2].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_die.ogg'
-      this.music[3] = wx.createInnerAudioContext()
-      this.music[3].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_hit.ogg'
-      this.music[4] = wx.createInnerAudioContext()
-      this.music[4].src = 'http://pb85uax7t.bkt.clouddn.com/Nintendo.mp3'
-    },
-    bgm () {
-      this.music = wx.createInnerAudioContext()
-      this.music.src = 'http://pb85uax7t.bkt.clouddn.com/Nintendo.mp3'
     },
     scopeShow (s) {
-      // this.music[1].play()
+      this.music[1].play()
       let scopes = s.toString()
       this.scopeData = []
       for (let i = 0; i < scopes.length; i++) {
         this.scopeData.push(scopes[i])
       }
-    },
-    createCtx () {
-      const ctx = wx.createCanvasContext('myCanvas')
-      this.ctx = ctx
-      ctx.setFillStyle('brown')
-      ctx.fillRect((this.vw / 2 - 25), this.heroPosition, 50, 50)
-    },
-    renderZ () {
-      let ctx = this.ctx
-      ctx.clearRect(0, 0, this.vh, this.vw)
-      this.velocity += this.gravity
-      this.heroRotation = Math.min((this.velocity / 20) * 90, 90)
-      this.heroPosition += this.velocity
-      if (this.heroPosition > this.vh - 150) {
-        if (this.save) {
-          this.music[3].play()
-          setTimeout(() => {
-            this.music[3].stop()
-          }, 800)
-          this.save = false
-        } else {
-          this.music[0].play()
-          setTimeout(() => {
-            this.music[0].stop()
-          }, 300)
-        }
-        this.velocity = -6
-      }
-      this.swingIndex++
-      if (this.swingIndex === 10) {
-        this.swingIndex = 0
-        this.swing++
-        if (this.swing === 4) {
-          this.swing = 0
-        }
-      }
-      ctx.save()
-      // ctx.fillRect((this.vw / 2 - 25), this.heroPosition, 50, 50)
-      ctx.translate((this.vw / 2 - 17), this.heroPosition)
-      ctx.rotate(this.heroRotation * Math.PI / 180)
-      ctx.drawImage('../../../assets/images/duck/bird.png', 0, 24 * this.swing, 34, 24, 0, -10, 34, 24)
-      ctx.restore()
-      ctx.draw()
-    },
-    crash () {
-      this.k++
-      this.heroStatus = (this.heroPosition / this.viewHeight) * 10
-      // 坠毁地面
-      // if (this.heroStatus > 8) {
-      //   this.over()
-      //   return
-      // }
-      // 碰撞区间
-      if (this.k > 75 && this.k < 90 && this.pipesStatus > 0) {
-        if (this.heroStatus < this.pipeBot || this.heroStatus > this.pipeTop) {
-          this.over()
-          return
-        }
-        if (this.k === 80) {
-          this.scope = this.scope + 1
-          this.getScop = true
-          this.music[1].play()
-          setTimeout(() => {
-            this.music[1].stop()
-            this.getScop = false
-          }, 800)
-          this.scopeShow(this.scope)
-        }
-      }
     }
   },
   onShow () {
-    this.music[4].stop()
     this.over()
-  },
-  onHide () {
-    this.music[4].stop()
   },
   onLoad () {
     this.musicLoader()
-    // this.bgm()
-    this.createCtx()
   }
 }
 </script>
@@ -253,23 +173,14 @@ export default {
 @import '../../../assets/styles/index.styl'
 @import 'keyframe.css'
 .duck {
-  background #b0e1e3
-  background linear-gradient(to top, #e1f4fe, #cff0ff)
+  background #4ec0ca
   height 100vh
   width 100vw
   overflow hidden
-  canvas {
-    height 100vh
-    width 100vw
-    position absolute
-    z-index 1
-    top 0
-    left 0
-  }
   .inner {
     .sky {
       height 80vh
-      // background-image url('../../../assets/images/duck/sky.png')
+      background-image url('../../../assets/images/duck/sky.png')
       background-repeat repeat-x
       background-position 0 100%
       animation animSky 7s linear infinite
@@ -296,7 +207,7 @@ export default {
             width 50px
             display inline-block
             position absolute
-            left 900px
+            left 0
             animation animPipe 6000ms linear infinite
             &:last-child {
               left -100px
@@ -309,8 +220,7 @@ export default {
               top 0
               left 0
               width 100%
-              // background-image url('../../../assets/images/duck/pipe.png')
-              background green
+              background-image url('../../../assets/images/duck/pipe.png')
               background-repeat repeat-y
               background-size 100% auto
               background-position 0 0
@@ -325,15 +235,14 @@ export default {
                 background-image url('../../../assets/images/duck/pipe-down.png')
                 background-repeat no-repeat
                 background-size 100% auto
-                display none
               }
             }
             & .bottom {
               position absolute
               bottom 0
               width 100%
-              background green
-              // background-image url('../../../assets/images/duck/pipe.png')
+              background #000
+              background-image url('../../../assets/images/duck/pipe.png')
               &:before {
                 height 30px
                 width 103%
@@ -345,7 +254,6 @@ export default {
                 background-image url('../../../assets/images/duck/pipe-up.png')
                 background-repeat no-repeat
                 background-size 100% auto
-                display none
               }
             }
           }
@@ -357,7 +265,7 @@ export default {
       bottom 0
       height 20vh
       width 100%
-      background-image url('../../../assets/images/duck/land3.png')
+      background-image url('../../../assets/images/duck/land.png')
       background-repeat repeat-x
       background-size auto 100%
       animation animLand 2516ms linear infinite
@@ -370,9 +278,6 @@ export default {
         position relative
         top 50%
         transform translateY(-30%)
-        &.act {
-          transform translateY(-30%) scale(1.3)
-        }
         & .item {
           background-image url('../../../assets/images/duck/f_0.png')
           background-repeat no-repeat
@@ -387,7 +292,6 @@ export default {
   }
   .panel {
     position absolute
-    z-index 100
     top 50%
     left 50%
     transform translate(-50%, -80%)

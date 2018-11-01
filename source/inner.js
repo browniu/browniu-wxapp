@@ -259,7 +259,7 @@ Game.prototype.display = function () {
       this.ctx.drawImage(images.pipebottom, this.pipes[i].x, this.pipes[i].y, this.pipes[i].width, images.pipetop.height);
     }
   }
-
+e
   this.ctx.fillStyle = "#FFC600";
   this.ctx.strokeStyle = "#CE9E00";
   for (var i in this.birds) {
