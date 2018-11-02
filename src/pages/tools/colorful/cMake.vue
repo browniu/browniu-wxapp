@@ -2,7 +2,7 @@
   <div class="colorful-make">
     <div class="tips" v-if="!imgPath">
       <img @click="choose" src="https://cdn.dribbble.com/users/34020/screenshots/3993396/otp_icon_upload.gif" alt="">
-      <p>触摸图标拍照或传图吧</p>
+      <p>点击图标拍照取色吧</p>
     </div>
     <div class="upload">
       <div v-if="imgPath" class="panel">
@@ -10,6 +10,7 @@
         <i :class="['iconfont',favoriteSwitch?'act':'']" @click="favorite">&#xe6a2;</i>
       </div>
       <canvas :style="{width:canvasWidth+'px',height:canvasHeight+'px'}" canvas-id="canvasIn" class="canvas"></canvas>
+      <canvas canvas-id="canvasShow" class="canvasShow"></canvas>
       <div v-if="imgPath" class="image" :style="{backgroundImage:'url('+imgPath+')'}"></div>
     </div>
     <div class="card">
@@ -42,7 +43,9 @@ export default {
       favoriteSwitch: false,
       colorBarSwitch: false,
       hexs: [],
-      theDate: ''
+      theDate: '',
+      vh: wx.getSystemInfoSync().screenHeight,
+      vw: wx.getSystemInfoSync().screenWidth
     }
   },
   methods: {
@@ -61,6 +64,9 @@ export default {
           wx.getImageInfo({
             src: this.imgPath,
             success: (imgInfo) => {
+              let imgRate = imgInfo.width / imgInfo.height
+              console.log(imgRate)
+              this.renderCanvasShow(imgRate)
               let scale = 0.1 * 350 / Math.max(imgInfo.width, imgInfo.height)
               this.canvasWidth = Math.floor(scale * imgInfo.width)
               this.canvasHeight = Math.floor(scale * imgInfo.height)
@@ -182,6 +188,17 @@ export default {
           console.error('[数据库] [查询记录] 失败：', err)
         }
       })
+    },
+    renderCanvasShow (imgRate) {
+      const ctx = wx.createCanvasContext('canvasShow')
+      ctx.save()
+      if (imgRate < 1) {
+        ctx.drawImage(this.imgPath, 0, -((this.vw / imgRate) - (this.vh / 2)) / 2, this.vw, this.vw / imgRate)
+      } else {
+        ctx.drawImage(this.imgPath, -(((this.vh / 2) * imgRate) - this.vw) / 2, 0, (this.vh / 2) * imgRate, this.vh / 2)
+      }
+      ctx.restore()
+      ctx.draw()
     }
   },
   onLoad () {
@@ -264,14 +281,23 @@ export default {
         top 0
       }
     }
+    .canvasShow {
+      position absolute
+      height 50vh
+      width 100vw
+      background #000
+      z-index 98 !important
+    }
     .image {
       width 100%
       height 100%
+      background green
       background-position center center
       background-size cover
       background-repeat no-repeat
       position relative
       z-index 100
+      display none
     }
     .switch-tip {
       position absolute

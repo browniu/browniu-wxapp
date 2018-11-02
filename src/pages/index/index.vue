@@ -40,7 +40,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
@@ -49,7 +49,7 @@ export default {
         { href: '../tools/remainder/main', name: '杀手三', icon: 'killer', label: false, access: false },
         { href: '../tools/realView/main', name: '适配档案', icon: 'lab', label: false, access: false },
         { href: '../tools/w_overTimePay/main', name: '加班汪', icon: 'timer', label: false, access: false },
-        { href: '../tools/dice/main', name: '变色骰', icon: 'message', label: false, access: false },
+        { href: '../tools/dice/main', name: '大富翁', icon: 'message', label: false, access: false },
         { href: '../store/index/main', name: 'Friend\'s', icon: 'store', label: false, access: false },
         { href: '../tools/japan/main', name: '中日汇', icon: 'out', label: false, access: false },
         { href: '../tools/theDay/main', name: '等风来', icon: 'list', label: false, access: false },
@@ -132,7 +132,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/bird/main'
+        url: '../tools/colorful/main'
       })
     }
     wx.setNavigationBarColor({

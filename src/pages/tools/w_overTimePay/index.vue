@@ -1,14 +1,15 @@
 <template>
-  <div class="overtimePay navigatePosition">
+  <div class="overtimePay">
+    <div class="texture"></div>
     <div class="model">
       <div class="face">
         <div class="eye-shade"></div>
         <div :class="['eye-white',eyeClose?'eye_close':'']">
-          <div :class="['eye-ball',eyeState?'active':'']"></div>
+          <div :style="{transform:'translateX('+eyeMove*0.7+'px)'}" :class="['eye-ball',eyeState?'active':'']"></div>
         </div>
         <div class="eye-shade right"></div>
         <div :class="['eye-white right',eyeClose?'eye_close':'']">
-          <div :class="['eye-ball',eyeState?'active':'']"></div>
+          <div :style="{transform:'translateX('+eyeMove*0.7+'px)'}" :class="['eye-ball',eyeState?'active':'']"></div>
         </div>
       </div>
     </div>
@@ -16,20 +17,16 @@
       <form>
         <div class="inputGrop">
           <label :class="[label1State ? 'active' : '']" for="pay">岗位薪资</label>
-          <input type="number" name="pay" @focus="input1Focus" @blur="input1Blur($event)" v-model="pay">
+          <input type="number" name="pay" @input="enterValue($event)" @focus="input1Focus" @blur="input1Blur($event)" v-model="pay">
         </div>
-        <!-- <div class="inputGrop">
-          <label :class="[label2State ? 'active' : '']" for="pay">本月需出勤天数</label>
-          <input type="text" name="pay" @focus="input2Focus" @blur="input2Blur($event)" v-model="day">
-        </div> -->
         <div class="inputGrop">
           <label :class="[label3State ? 'active' : '']" for="pay">总加班时间（小时）</label>
-          <input type="number" name="pay" @focus="input3Focus" @blur="input3Blur($event)" v-model="hour">
+          <input type="number" name="pay" @input="enterValue($event)" @focus="input3Focus" @blur="input3Blur($event)" v-model="hour">
         </div>
       </form>
       <p>本月的旺旺加班费是
         <span>{{overtimePay}}</span>
-        块钱</p>
+        元</p>
     </main>
   </div>
 </template>
@@ -44,7 +41,8 @@ export default {
       label1State: false,
       label2State: false,
       label3State: false,
-      eyeState: false
+      eyeState: false,
+      eyeMove: 0
     }
   },
   computed: {
@@ -60,26 +58,28 @@ export default {
       this.label1State = true
       this.eyeState = true
     },
-    input2Focus () {
-      this.label2State = true
-    },
     input3Focus () {
       this.label3State = true
+      this.eyeState = true
     },
     input1Blur (ev) {
+      this.eyeMove = 0
+      this.eyeState = false
       if (ev.target.value.length === 0) {
         this.label1State = false
       }
     },
-    input2Blur (ev) {
-      if (ev.target.value.length === 0) {
-        this.label2State = false
-      }
-    },
     input3Blur (ev) {
+      this.eyeMove = 0
       this.eyeState = false
       if (ev.target.value.length === 0) {
         this.label3State = false
+      }
+    },
+    enterValue (e) {
+      console.log(e.target.value.length)
+      if (e.target.value.length < 10) {
+        this.eyeMove = e.target.value.length
       }
     }
   },
@@ -98,14 +98,20 @@ export default {
   height 100vh
   position relative
   background-color #fff
-  // background-image url('https://cdn.dribbble.com/users/1756402/screenshots/4748068/vacation.gif')
-  background-position bottom center
-  background-size 60%
-  background-repeat no-repeat
   overflow hidden
+  & .texture {
+    height 100vh
+    width 100vw
+    position fixed
+    top 0
+    left 0
+    background-image url('http://www.hotkidclub.com/cpn/ceo-intro/images/theme-pattern_5.jpg')
+    opacity 0.2
+  }
   & .model {
-    font-size 30px
+    font-size 60px
     margin-bottom 15px
+    margin-top 80px
     & .face {
       height 2em
       width 2em
@@ -145,8 +151,8 @@ export default {
           position absolute
           right 0
           top 0.1em
-          height 6px
-          width 6px
+          height 0.2em
+          width 0.2em
           border-radius 50%
           transition transform 0.7s
           background #231815
@@ -178,7 +184,7 @@ export default {
           left 10px
           transform translateY(-50%)
           color #aaa
-          font-weight lighter
+          // font-weight lighter
           font-size 14px
           transition 0.15s ease
           &.active {
@@ -195,12 +201,13 @@ export default {
           border-radius 3px
           height 50px
           width 250px
+          letter-spacing 3px
           outline none
           border 0
           font-size 16px
           padding 0 10px
           margin-bottom 25px
-          background co_10
+          background #fff
         }
       }
     }
@@ -209,6 +216,7 @@ export default {
       color co_7
       & span {
         color co_3
+        font-weight bolder
       }
     }
   }

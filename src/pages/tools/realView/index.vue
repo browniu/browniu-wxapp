@@ -88,13 +88,17 @@ export default {
             console.log('[数据库] [查询记录] 成功: ', res)
             if (res.data.length === 0) {
               console.log('is new')
+              wx.showToast({
+                icon: 'succeed',
+                title: '已加入数据库'
+              })
               db.collection('realView').add({
                 data: {
                   view1Device: this.viewDevice,
                   view2Height: this.viewHeight,
                   view3Width: this.viewWidth,
                   view4Info: this.viewInfo,
-                  due: new Date('2018-09-01')
+                  due: new Date()
                 },
                 success: function (res) {
                   console.log(res)
@@ -106,6 +110,7 @@ export default {
                 title: '数据已收录'
               })
             }
+            this.getAllData('realView', this.dataList)
           },
           fail: err => {
             wx.showToast({
@@ -134,16 +139,35 @@ export default {
       if (this.subCount > 5) {
         this.buttonInfo = '你皮任你皮'
       }
+    },
+    getAllData (base, container) {
+      const db = wx.cloud.database()
+      db.collection(base).count().then(res => {
+        let time = Math.ceil(res.total / 20)
+        for (let i = 0; i < time; i++) {
+          if (i === 0) {
+            db.collection(base).get().then(res => {
+              for (let i = 0; i < res.data.length; i++) {
+                container.push(res.data[i])
+              }
+            })
+          } else {
+            db.collection(base).skip(20 * i).get().then(res => {
+              for (let i = 0; i < res.data.length; i++) {
+                container.push(res.data[i])
+              }
+              // console.log(container)
+            })
+          }
+        }
+      })
     }
   },
   mounted () {
     wx.setNavigationBarTitle({
       title: '真实视窗'
     })
-    const db = wx.cloud.database()
-    db.collection('realView').get().then(res => {
-      this.dataList = res.data
-    })
+    this.getAllData('realView', this.dataList)
   }
 }
 </script>
@@ -162,10 +186,6 @@ co_g_5 = #a3a9ad
   text-align center
   position relative
   & main {
-    position absolute
-    top 50%
-    left 50%
-    transform translate(-50%, -50%)
     width 100%
     & .container {
       & h1 {
@@ -197,7 +217,7 @@ co_g_5 = #a3a9ad
       & .button {
         user-select none
         text-align center
-        margin 30px 0 10px
+        margin 10px 0 10px
         color #fff
         height 50px
         line-height 50px
@@ -261,7 +281,7 @@ co_g_5 = #a3a9ad
             }
           }
           & .tbody {
-            height 200px
+            height calc(70vh - 200px)
             overflow hidden
             & li {
               font-size 12px

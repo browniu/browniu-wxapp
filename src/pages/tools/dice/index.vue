@@ -1,10 +1,10 @@
 <template>
   <div class="dice" @click="shakeDice">
-    <div class="texture">
+    <!-- <div class="texture">
       <div :style="{background:'rgb('+colors[dice-1][0]+')'}" :class="['texture-inner',shake?'rotate':'']">
         <span :style="{borderTopColor:'rgb('+colors[dice-1][1]+')',borderRightColor:'rgb('+colors[dice-1][1]+')'}"></span>
       </div>
-    </div>
+    </div> -->
     <div class="main">
       <div :class="['inner',shake?'rotate':'',dice===1?'dice1':'',dice===2?'dice2':'',dice===3?'dice3':'',dice===4?'dice4':'',dice===5?'dice5':'',dice===6?'dice6':'']">
         <li :class="['texture-inner',shake?'rotate':'']" v-for="(item, index) in 6" :key="index"></li>
@@ -42,7 +42,7 @@ export default {
   onLoad () {
     this.shakeDice()
     wx.setNavigationBarTitle({
-      title: '十二骰'
+      title: '大富翁'
     })
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -76,15 +76,15 @@ textureInnerSize = 60vh
     background #000
     z-index 0
     & .texture-inner {
-      transition background 1.5s cubic-bezier(0.86, 0.01, 0, 1)
+      transition background 2s cubic-bezier(0.86, 0.01, 0, 1)
       height 100%
       width 100%
       background #dd3e54
       &.rotate {
-        animation unshake 1.5s cubic-bezier(0.86, 0.01, 0, 1)
+        animation unshake 5s cubic-bezier(0.86, 0.01, 0, 1)
       }
       & span {
-        transition 1.5s cubic-bezier(0.86, 0.01, 0, 1)
+        transition 2s cubic-bezier(0.86, 0.01, 0, 1)
         display inline-block
         height 0
         width 0
@@ -103,8 +103,8 @@ textureInnerSize = 60vh
       transition 1s ease
       height 200px
       width 200px
-      border-top-left-radius 50%
-      border-bottom-right-radius 50%
+      // border-top-left-radius 50%
+      // border-bottom-right-radius 50%
       border 1px solid co_1
       & li {
         height 15px
@@ -117,9 +117,6 @@ textureInnerSize = 60vh
         left 50%
         transform translate(-50%, -50%)
         transition 0.7s ease 0.7s
-        &.rotate {
-          animation ushake 1.2s ease
-        }
       }
       &.rotate {
         animation shake 1.5s cubic-bezier(0.86, 0.01, 0, 1)
@@ -134,36 +131,20 @@ textureInnerSize = 60vh
         & li:nth-child(odd) {
           top 25%
           left 75%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(even) {
           top 75%
           left 25%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
       }
       &.dice3 {
         & li:nth-child(odd) {
           top 25%
           left 75%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(even) {
           top 75%
           left 25%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:last-child {
           top 50%
@@ -175,68 +156,36 @@ textureInnerSize = 60vh
         & li:nth-child(1) {
           top 25%
           left 25%
-          border-top-right-radius 50%
-          border-bottom-left-radius 50%
-          border-top-left-radius 0%
-          border-bottom-right-radius 0%
         }
         & li:nth-child(2), & li:nth-child(5) {
           top 25%
           left 75%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(3), & li:nth-child(6) {
           top 75%
           left 25%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(4) {
           top 75%
           left 75%
-          border-top-right-radius 50%
-          border-bottom-left-radius 50%
-          border-top-left-radius 0%
-          border-bottom-right-radius 0%
         }
       }
       &.dice5 {
         & li:nth-child(1) {
           top 25%
           left 25%
-          border-top-right-radius 50%
-          border-bottom-left-radius 50%
-          border-top-left-radius 0%
-          border-bottom-right-radius 0%
         }
         & li:nth-child(2) {
           top 25%
           left 75%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(3) {
           top 75%
           left 25%
-          border-top-right-radius 0%
-          border-bottom-left-radius 0%
-          border-top-left-radius 50%
-          border-bottom-right-radius 50%
         }
         & li:nth-child(4) {
           top 75%
           left 75%
-          border-top-right-radius 50%
-          border-bottom-left-radius 50%
-          border-top-left-radius 0%
-          border-bottom-right-radius 0%
         }
         & li:nth-child(5), & li:nth-child(6) {
           top 50%

@@ -71,10 +71,10 @@ export default {
     return {
       controlPanel: false,
       theme: [{
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/stock-photo-172526585.jpg',
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_15.jpg',
         'bgc': '166, 159, 145'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/stock-photo-179567537.jpg',
+        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_16.jpg',
         'bgc': '45, 143, 100'
       }, {
         'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_1.jpg',
@@ -131,8 +131,10 @@ export default {
     },
     getTime () {
       let dateNow = new Date()
-      let dateEnd = new Date(this.dateEnd)
-      let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
+      dateNow = dateNow.getTime()
+      let dateEnd = new Date(this.dateEnd.split('-')[0], this.dateEnd.split('-')[1] - 1, this.dateEnd.split('-')[2].split(',')[0])
+      dateEnd = dateEnd.getTime()
+      let dateLeft = Math.round((dateEnd - dateNow) / 1000)
       let day = parseInt(dateLeft / (24 * 60 * 60))
       let hour = parseInt(dateLeft / (60 * 60) % 24)
       let minute = parseInt(dateLeft / 60 % 60)
@@ -155,8 +157,8 @@ export default {
     submit () {
       // verify timeline
       let dateNow = new Date()
-      let dateEnd = new Date(this.pickerDate[0] + '-' + this.pickerDate[1] + '-' + this.pickerDate[2] + ',' + this.pickerDate[3] + ':00:00')
-      console.log(this.pickerDate)
+      let dateEnd = new Date(this.pickerDate[0], this.pickerDate[1], this.pickerDate[2])
+      // console.log('pickerDate ' + this.pickerDate)
       let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
       if (isNaN(dateLeft) || dateLeft < 0) {
         wx.vibrateLong()
@@ -239,71 +241,68 @@ export default {
         icon: 'none',
         duration: 3000
       })
+    },
+    init () {
+      // init dataData
+      const db = wx.cloud.database()
+      db.collection('theDay').get({
+        success: res => {
+          console.log('[数据库] [查询记录] 成功: ', res.data[0])
+          // no record
+          if (!res.data[0]) {
+            this.initDate()
+            this.tipS('触摸时间开始设置吧')
+            return
+          }
+          // get record
+          // date is able
+          this.dateEnd = res.data[0].dateEnd
+          // console.log(this.dateEnd)
+          // date is overdue
+          let dateNow = new Date()
+          let dateEnd = new Date(this.dateEnd)
+          let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
+          if (dateLeft < 0) {
+            this.initDate()
+            this.tipS('你的事件已经过期了哦')
+            return
+          }
+          this.theThing = res.data[0].theThing
+          this.themeIndex = res.data[0].theme
+          this.dateEndShow = (this.dateEnd).split(',')[0]
+          this.pickerInit = [this.dateEnd.split('-')[0] - 2018, this.dateEnd.split('-')[1] - 1, this.dateEnd.split('-')[2].split(',')[0] - 1, parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+          this.pickerDate = [this.dateEnd.split('-')[0], this.dateEnd.split('-')[1], this.dateEnd.split('-')[2].split(',')[0], parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
+          // console.log(this.dateData)
+          this.getTime()
+          wx.setNavigationBarColor({
+            frontColor: '#ffffff',
+            backgroundColor: this.theme[this.themeIndex].bgc,
+            animation: {
+              duration: 200,
+              timingFunc: 'easeIn'
+            }
+          })
+        },
+        fail: err => {
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })
+      this.renderList()
+      this.renderTime()
+    },
+    renderList () {
+      for (let index = 0; index < 101; index++) {
+        this.pickerItem.push(2018 + index)
+      }
+    },
+    renderTime () {
+      setInterval(() => {
+        this.getTime()
+      }, 1000)
     }
   },
   onLoad () {
-    // init navigation
-    wx.setNavigationBarTitle({
-      title: '等风来'
-    })
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#000000',
-      animation: {
-        duration: 200,
-        timingFunc: 'easeIn'
-      }
-    })
-    // init dataData
-    const db = wx.cloud.database()
-    db.collection('theDay').get({
-      success: res => {
-        console.log('[数据库] [查询记录] 成功: ', res.data[0])
-        // no record
-        if (!res.data[0]) {
-          this.initDate()
-          this.tipS('触摸时间开始设置吧')
-          return
-        }
-        // get record
-        // date is able
-        this.dateEnd = res.data[0].dateEnd
-        // date is overdue
-        let dateNow = new Date()
-        let dateEnd = new Date(this.dateEnd)
-        let dateLeft = Math.round((dateEnd.getTime() - dateNow.getTime()) / 1000)
-        if (dateLeft < 0) {
-          this.initDate()
-          this.tipS('你的事件已经过期了哦')
-          return
-        }
-        this.theThing = res.data[0].theThing
-        this.themeIndex = res.data[0].theme
-        this.dateEndShow = (this.dateEnd).split(',')[0]
-        this.pickerInit = [this.dateEnd.split('-')[0] - 2018, this.dateEnd.split('-')[1] - 1, this.dateEnd.split('-')[2].split(',')[0] - 1, parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
-        let dateSplit = this.dateEnd.split(/[-,:]/)[0] - 2018
-        this.pickerInit = [dateSplit[0] - 2018, dateSplit[1] - 1, dateSplit[2] - 1, dateSplit[3]]
-        this.pickerDate = [this.dateEnd.split('-')[0], this.dateEnd.split('-')[1], this.dateEnd.split('-')[2].split(',')[0], parseInt(this.dateEnd.split('-')[2].split(',')[1].split(':')[0])]
-        console.log(this.pickerInit)
-        wx.setNavigationBarColor({
-          frontColor: '#ffffff',
-          backgroundColor: this.theme[this.themeIndex].bgc,
-          animation: {
-            duration: 200,
-            timingFunc: 'easeIn'
-          }
-        })
-      },
-      fail: err => {
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
-    for (let index = 0; index < 101; index++) {
-      this.pickerItem.push(2018 + index)
-    }
-    setInterval(() => {
-      this.getTime()
-    }, 1000)
+    this.init()
   }
 }
 </script>
