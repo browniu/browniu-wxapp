@@ -1,7 +1,6 @@
 <template>
   <div class="songs">
-    <!-- <div class="texture" :style="{backgroundImage:'url('+songs[songIndex][0]+')',backgroundPosition:scrollP+'% center'}"></div> -->
-    <div class="texture" :style="{backgroundPosition:scrollP+'%  bottom'}"></div>
+    <div class="texture"><i></i></div>
     <div class="inner">
       <div class="article">
         <div class="title">
@@ -13,7 +12,7 @@
             <!-- <div @click="listSwitch" :class="['switch',songIndex===index&&songList?'act':'']">1</div> -->
           </h1>
         </div>
-        <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1500" @scroll="scrollView">
+        <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1500">
           <span class="content-inner" v-for="(item, index) in songs[songIndex][3]" :key="index">
             <p>{{item}}</p><br>
           </span>
@@ -92,20 +91,33 @@ export default {
       }
       console.log(targetList)
       return targetList
+    },
+    fontLoad (fontA, font) {
+      if (wx.getSystemInfoSync().system.split(' ')[0] === 'Android') {
+        wx.loadFontFace({
+          family: 'webfont',
+          source: 'url("' + fontA + '")',
+          success: console.log
+        })
+        // this.isAndroid = true
+      } else {
+        wx.loadFontFace({
+          family: 'webfont',
+          source: 'url("' + font + '")',
+          success: console.log
+        })
+      }
     }
   },
   onLoad () {
+    this.fontLoad('http://pb85uax7t.bkt.clouddn.com/HYYS.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
     this.songs = this.resortArray(songs.songs).slice(1, 9)
   }
 }
 </script>
 <style lang='stylus' scoped>
 @import '../../../assets/styles/index.styl'
-@font-face {
-  font-family 'qingke'
-  // src url('http://pb85uax7t.bkt.clouddn.com/SYSF.otf') format('truetype')
-  src url('http://pb85uax7t.bkt.clouddn.com/HYYS.TTF') format('truetype')
-}
+@import '../songs/keyframe.css'
 c1 = #f0ead0
 c2 = #52462c
 c3 = #7e6048
@@ -118,22 +130,55 @@ c6 = #493b32
   overflow hidden
   background #fff
   color c3
-  font-family qingke
+  font-family 'webfont'
   & .texture {
     transform translate(-50%, -50%) rotate(90deg)
     transition background-position 1.5s linear
     height 100vw
     width 100vh
-    position absolute
+    position fixed
     top 50%
     left 50%
     z-index 0
-    background-image url('https://www.transparenttextures.com/patterns/bedge-grunge.png')
-    background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
+    overflow hidden
     background-repeat no-repeat
     background-size 120% auto
     background-position 0% bottom
     opacity 0.25
+    &:before, &:after {
+      content ''
+      display inline-block
+      height 100%
+      width 100%
+      position absolute
+      left 99.9%
+      background-image url('https://browniu-c8bfe1.tcb.qcloud.la/forest-bg.jpg?sign=ece6aded7226a56660bc20eede59edbd&t=1541396995')
+      background-repeat no-repeat
+      background-size 100% auto
+      background-position 0 bottom
+      z-index 0
+    }
+    &:before {
+      left 0
+      animation run 30s linear infinite
+    }
+    &:after {
+      animation run2 30s linear infinite
+    }
+    & i {
+      height 100%
+      width 100%
+      display inline-block
+      position fixed
+      left 0
+      top 0
+      background-image url('https://browniu-c8bfe1.tcb.qcloud.la/forest-train.svg?sign=8fa943af3f3a61cea6c12899963a58d8&t=1541398285')
+      background-size 100% auto
+      background-position -80px bottom
+      background-repeat no-repeat
+      z-index 10
+      animation run3 30s linear infinite
+    }
   }
   & .inner {
     box-sizing border-box
@@ -165,9 +210,9 @@ c6 = #493b32
           height 100vw
           text-align left
           box-sizing border-box
-          padding-top 45px
-          width 80px
-          line-height 80px
+          padding-top 40px
+          width 11.11vh
+          line-height 12vh
           border-left 1px solid rgba(0, 0, 0, 0.05)
           overflow hidden
           &.close {

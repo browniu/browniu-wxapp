@@ -1,0 +1,29 @@
+@keyframes run {
+  from {
+    transform: translateX(0%)
+  }
+
+  to {
+    transform: translateX(-100%)
+  }
+}
+
+@keyframes run2 {
+  from {
+    transform: translateX(0%)
+  }
+
+  to {
+    transform: translateX(-100%)
+  }
+}
+
+@keyframes run3 {
+  from {
+    transform: translateX(0)
+  }
+
+  to {
+    transform: translateX(0)
+  }
+}

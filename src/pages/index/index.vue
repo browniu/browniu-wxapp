@@ -40,7 +40,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -132,7 +132,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/colorful/main'
+        url: '../tools/songs/main'
       })
     }
     wx.setNavigationBarColor({

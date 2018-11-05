@@ -1,5 +1,5 @@
 <template>
-  <div class="weather">
+  <div class="weather" >
     <div class="texture" :style="{backgroundImage:'url('+CWI+')'}"></div>
     <div class="main">
       <div class="window">
@@ -436,9 +436,26 @@ export default {
         this.FEEL((parseInt(this.originalData.weather_data[2].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[2].temperature.split(' ')[2].split('℃')[0])) / 2),
         this.FEEL((parseInt(this.originalData.weather_data[3].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[3].temperature.split(' ')[2].split('℃')[0])) / 2)
       ]
+    },
+    fontLoad (fontA, font) {
+      if (wx.getSystemInfoSync().system.split(' ')[0] === 'Android') {
+        wx.loadFontFace({
+          family: 'webfont',
+          source: 'url("' + fontA + '")',
+          success: console.log
+        })
+        // this.isAndroid = true
+      } else {
+        wx.loadFontFace({
+          family: 'webfont',
+          source: 'url("' + font + '")',
+          success: console.log
+        })
+      }
     }
   },
   onLoad: function () {
+    this.fontLoad('http://pb85uax7t.bkt.clouddn.com/fzqingke257.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.ttf?sign=01feddd7d2778e06c40b327d13e0947e&t=1541385406')
     // get data
     new bmap.BMapWX().weather({
       fail: (res) => {
@@ -493,15 +510,11 @@ c1 = #f1eee9
 c2 = #070304
 c3 = #929194
 @import '../../../assets/styles/index.styl'
-@font-face {
-  font-family 'qingke'
-  src url('http://pb85uax7t.bkt.clouddn.com/fzqingke257.TTF') format('truetype')
-}
 .weather {
   height 100vh
   overflow hidden
   color c2
-  font-family qingke
+  font-family 'webfont'
   & .texture {
     height 100%
     width 100%
@@ -509,7 +522,7 @@ c3 = #929194
     background-size cover
     background-position top center
     background-repeat no-repeat
-    position absolute
+    position fixed
     top 0
     left 0
     z-index 0
@@ -518,7 +531,7 @@ c3 = #929194
   .main {
     text-align center
     .window {
-      padding 90px 0 30px
+      padding 13vh 0 20px
       .container {
         display inline-block
         height 200px
@@ -687,7 +700,7 @@ c3 = #929194
   .more {
     position fixed
     bottom 0
-    height 90px
+    height 18vh
     width 100%
     z-index 99
     & span {
