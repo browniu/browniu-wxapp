@@ -132,7 +132,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/songs/main'
+        url: '../tools/bird/main'
       })
     }
     wx.setNavigationBarColor({

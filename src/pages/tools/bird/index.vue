@@ -145,17 +145,13 @@ export default {
       this.music[0] = wx.createInnerAudioContext()
       this.music[0].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_wing.mp3'
       this.music[1] = wx.createInnerAudioContext()
-      this.music[1].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_point.ogg'
+      this.music[1].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/point.mp3?sign=c109a29d10828e6db7fb8f1900df8868&t=1541403035'
       this.music[2] = wx.createInnerAudioContext()
-      this.music[2].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_die.ogg'
+      this.music[2].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/die.mp3?sign=4a318bde5376b264556a1ae90e337a5c&t=1541403247'
       this.music[3] = wx.createInnerAudioContext()
-      this.music[3].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_hit.ogg'
+      this.music[3].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/hit.mp3?sign=2ce216c6e71b6a781a03d5e49f637998&t=1541403005'
       this.music[4] = wx.createInnerAudioContext()
       this.music[4].src = 'http://pb85uax7t.bkt.clouddn.com/Nintendo.mp3'
-    },
-    bgm () {
-      this.music = wx.createInnerAudioContext()
-      this.music.src = 'http://pb85uax7t.bkt.clouddn.com/Nintendo.mp3'
     },
     scopeShow (s) {
       // this.music[1].play()
@@ -196,7 +192,7 @@ export default {
       if (this.swingIndex === 10) {
         this.swingIndex = 0
         this.swing++
-        if (this.swing === 4) {
+        if (this.swing === 6) {
           this.swing = 0
         }
       }
@@ -204,7 +200,7 @@ export default {
       // ctx.fillRect((this.vw / 2 - 25), this.heroPosition, 50, 50)
       ctx.translate((this.vw / 2 - 17), this.heroPosition)
       ctx.rotate(this.heroRotation * Math.PI / 180)
-      ctx.drawImage('../../../assets/images/duck/bird.png', 0, 24 * this.swing, 34, 24, 0, -10, 34, 24)
+      ctx.drawImage('../../../assets/images/duck/rabbit_6_s.png', 0, 34 * this.swing, 65, 34, 0, 0, 65, 34)
       ctx.restore()
       ctx.draw()
     },
@@ -253,8 +249,7 @@ export default {
 @import '../../../assets/styles/index.styl'
 @import 'keyframe.css'
 .duck {
-  background #b0e1e3
-  background linear-gradient(to top, #e1f4fe, #cff0ff)
+  background #c7f5f6
   height 100vh
   width 100vw
   overflow hidden
@@ -279,6 +274,9 @@ export default {
       }
       .playground {
         height 100%
+        width 100vw
+        overflow hidden
+        position fixed
         .hero {
           position absolute
           top 50%
@@ -293,7 +291,7 @@ export default {
           white-space nowrap
           .item {
             height 100%
-            width 50px
+            width 30px
             display inline-block
             position absolute
             left 900px
@@ -310,7 +308,7 @@ export default {
               left 0
               width 100%
               // background-image url('../../../assets/images/duck/pipe.png')
-              background green
+              background #ffad10
               background-repeat repeat-y
               background-size 100% auto
               background-position 0 0
@@ -332,7 +330,7 @@ export default {
               position absolute
               bottom 0
               width 100%
-              background green
+              background #ffad10
               // background-image url('../../../assets/images/duck/pipe.png')
               &:before {
                 height 30px
@@ -357,7 +355,8 @@ export default {
       bottom 0
       height 20vh
       width 100%
-      background-image url('../../../assets/images/duck/land3.png')
+      // background #aaa
+      // background-image url('../../../assets/images/duck/land3.png')
       background-repeat repeat-x
       background-size auto 100%
       animation animLand 2516ms linear infinite
@@ -397,6 +396,7 @@ export default {
     font-size 14px
     color co_2
     background-image url('../../../../static/duck/splash.png')
+    background #ffad10
     height 28vh
     width 28vh
     background-repeat no-repeat
