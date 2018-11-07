@@ -40,7 +40,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
@@ -56,7 +56,7 @@ export default {
         { href: '../tools/colorful/main', name: '自然色', icon: 'organization', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
-        { href: '../tools/bird/main', name: '冲鸭小宝贝', icon: 'favorite', label: false, access: false },
+        { href: '../tools/bird/main', name: '沙雕游戏', icon: 'favorite', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
