@@ -20,7 +20,8 @@
     "pages/tools/colorful/main",
     "pages/tools/weather/main",
     "pages/tools/songs/main",
-    "pages/tools/bird/main"
+    "pages/tools/bird/main",
+    "pages/tools/translate/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -58,5 +59,11 @@
       "selectedIconPath": "static/images/mine_s.png",
       "text": "临时出口"
     }]
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.2.2",
+      "provider": "wx069ba97219f66d99"
+    }
   }
 }
