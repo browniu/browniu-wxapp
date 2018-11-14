@@ -59,7 +59,7 @@ export default {
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
-        { href: '../tools/translate/main', name: '无障碍沟通', icon: 'chat', label: false, access: false },
+        { href: '../tools/translate/main', name: '即时译聊', icon: 'chat', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
