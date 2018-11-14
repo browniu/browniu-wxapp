@@ -21,7 +21,8 @@
     "pages/tools/weather/main",
     "pages/tools/songs/main",
     "pages/tools/bird/main",
-    "pages/tools/translate/main"
+    "pages/tools/translate/main",
+    "pages/tools/legendary/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

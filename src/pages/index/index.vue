@@ -22,6 +22,7 @@
           <img v-if="item.icon==='realView'" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <img v-if="item.icon==='corrot'" style="width:10.5%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_face_1.png?sign=1527800af2e75d975f25a00357486a8f&t=1541469024" alt="">
           <img v-if="item.icon==='chat'" style="width:21%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/trans/trans_icon_1.png?sign=ee3586a648240479e48591eada18a746&t=1542177988" alt="">
+          <img v-if="item.icon==='game'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/game.svg?sign=b88933fa1be313dd75403f7e9223570f&t=1542180222" alt="">
           <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}"></div> -->
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
@@ -42,7 +43,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      develop: true,
       access: false,
       login: false,
       theme: 1,
@@ -57,9 +58,10 @@ export default {
         { href: '../tools/theDay/main', name: '等风来', icon: 'list', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'organization', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
-        { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
+        { href: '../tools/songs/main', name: '路上摘', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
         { href: '../tools/translate/main', name: '即时译聊', icon: 'chat', label: false, access: false },
+        { href: '../tools/legendary/main', name: '超神极客', icon: 'game', label: false, access: true },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
@@ -87,7 +89,7 @@ export default {
           })
         } else {
           wx.vibrateLong()
-          this.tips('立入禁止')
+          this.tips('暂不对外开发')
         }
       } else {
         wx.navigateTo({
@@ -137,7 +139,7 @@ export default {
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/translate/main'
+        url: '../tools/legendary/main'
       })
     }
     wx.setNavigationBarColor({
