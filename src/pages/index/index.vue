@@ -21,7 +21,7 @@
           <img v-if="item.icon==='favorite'" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
           <img v-if="item.icon==='realView'" mode="widthFix" src="../../../static/images/realView.svg" alt="">
           <img v-if="item.icon==='corrot'" style="width:10.5%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_face_1.png?sign=1527800af2e75d975f25a00357486a8f&t=1541469024" alt="">
-          <img v-if="item.icon==='chat'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/chat.svg?sign=142b6dd25cd974d9c444467a8d2b3763&t=1541727207" alt="">
+          <img v-if="item.icon==='chat'" style="width:21%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/trans/trans_icon_1.png?sign=ee3586a648240479e48591eada18a746&t=1542177988" alt="">
           <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}"></div> -->
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
@@ -42,7 +42,7 @@
 export default {
   data () {
     return {
-      develop: true,
+      develop: false,
       access: false,
       login: false,
       theme: 1,
@@ -59,7 +59,7 @@ export default {
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
-        { href: '../tools/translate/main', name: '小翻译', icon: 'chat', label: false, access: true },
+        { href: '../tools/translate/main', name: '无障碍沟通', icon: 'chat', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
@@ -116,16 +116,17 @@ export default {
       }, 2000)
     },
     moreSwitch () {
-      console.log('xixixi')
       this.more = true
       this.list = this.tools
     }
   },
-  onShow () {
-    this.more = false
-  },
   onLoad () {
     this.list = this.tools.slice(0, 12)
+    this.more = false
+  },
+  onUnload () {
+    this.list = this.tools.slice(0, 12)
+    this.more = false
   },
   mounted () {
     wx.cloud.init({

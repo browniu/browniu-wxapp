@@ -5,15 +5,25 @@
       <div class="info">{{tipsInfo}}</div>
     </div>
     <div class="inner">
-      <div class="main">
-        <scroll-view scroll-top="3000" scroll-y class="chatFlow">
-          <div :class="['item',item.enTrans?'left':'']" v-for="(item, index) in chatFlowData" :key="index">
+      <div class="main" @click="menuHide">
+        <scroll-view :scroll-top="scrollPos" scroll-with-animation="true" scroll-y class="chatFlow" id="CF">
+          <div class="padding"></div>
+          <div :class="['item',item.enTrans?'left':'',chatFlowDate[index]===''?'timeClose':'']" v-for="(item, index) in chatFlowData" :key="index">
             <div class="date"><span>{{chatFlowDate[index]}}</span></div>
-            <div class="hero">
+            <div class="hero" @longpress="speak(item.recResultTransVoice)">
               <span></span>
             </div>
             <div class="content">
-              <div class="inner">
+              <div class="inner" @longpress="menuSwitch(index,$event)">
+                <div :class="['menu',menuIndex===index?'act':'']">
+                  <div class="menuInner">
+                    <li @click="menuCenter(0,index)">发音</li>
+                    <li @click="menuCenter(1,index)">修正</li>
+                    <li @click="menuCenter(2,index)">拷贝</li>
+                    <li @click="menuCenter(3,index)">记录</li>
+                    <li @click="menuCenter(4,index)">删除</li>
+                  </div>
+                </div>
                 <p>{{item.recResultTrans}}</p>
                 <div class="orign">
                   <p>{{item.recResult}}</p>
@@ -34,12 +44,13 @@
               </div>
             </div>
           </div>
+          <div class="padding"></div>
         </scroll-view>
       </div>
       <div class="panel">
         <div class="input" @click="inputSwitch"><span :class="[textInput?'act':'']"></span></div>
         <div class="holder"><span :class="[pressState?'act':'']">
-            <input :focus="textInput" v-if="textInput" type="text">
+            <input v-model="inputValue" @confirm="inputTrans" v-if="textInput" type="text">
             <div @touchmove="touchUpTest" @touchend="stopRec" @longpress="startRec" v-if="!textInput" class="button">
               <i>{{buttonInfo}}</i>
               <div class="progress" :style="{transform:'scaleX('+(recProcess/1000)+')'}"></div>
@@ -80,43 +91,44 @@ export default {
       errorInfo: '没听到声音',
       buttonInfo: '按住 说话',
       tipsInfo: '手指上滑，取消发送',
-      chatFlowData: [
+      chatFlowDataPreset: [
         {
           enTrans: false,
-          date: '1542007175561',
-          recResult: '可以介绍一下你们的政策吗',
-          recResultTrans: 'May I introduce your policy?',
-          recResultTransVoice: ''
-        },
-        {
-          enTrans: true,
-          date: '1542007175561',
-          recResult: '可以介绍一下你们的政策吗',
-          recResultTrans: 'May I introduce your policy?',
-          recResultTransVoice: ''
-        },
-        {
-          enTrans: false,
-          date: '1542007175561',
-          recResult: '可以介绍一下你们的政策吗',
-          recResultTrans: 'May I introduce your policy?',
-          recResultTransVoice: ''
-        },
-        {
-          enTrans: true,
-          date: '1542007175561',
-          recResult: '可以介绍一下你们的政策吗',
-          recResultTrans: 'May I introduce your policy?',
-          recResultTransVoice: ''
+          date: '1542174706375',
+          recResult: '我是中国熊，我说的汉语会被直接转换成英语',
+          recResultTrans: 'I am a Chinese bear, and the Chinese I speak will be converted directly into English',
+          recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre1.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         },
         {
           enTrans: true,
           date: '1542007350561',
-          recResult: 'Any changes to this policy will be posted on this page. By accessing our website after such changes are posted, you indicate your acceptance of the revised policy. ',
-          recResultTrans: '此政策的任何更改将在本页上公布。在这些更改发布后访问我们的网站，表示您接受修改后的政策。',
-          recResultTransVoice: ''
+          recResult: 'I am an American bunny and my English will be translated directly into Chinese',
+          recResultTrans: '我是一只美国兔，我说的英语将被直接翻译成中文',
+          recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre2.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
+        },
+        {
+          enTrans: false,
+          date: '1542175104354',
+          recResult: '没错，现在我们可以无障碍尬聊了',
+          recResultTrans: 'Yes, now we can speak freely',
+          recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre3.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
+        },
+        {
+          enTrans: true,
+          date: '1542179215200',
+          recResult: 'We can also act as your dictionary',
+          recResultTrans: '我们也可以做你的字典',
+          recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre4.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
+        },
+        {
+          enTrans: false,
+          date: '1542179215966',
+          recResult: '还有很多隐藏技能哦，快来试试吧',
+          recResultTrans: 'There are many hidden skills. Come and try it',
+          recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre5.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         }
       ],
+      chatFlowData: [],
       currentChatItem: {
         enTrans: false,
         date: '',
@@ -125,11 +137,20 @@ export default {
         recResultTransVoice: ''
       },
       chatFlowDate: [],
-      itemGene: false
+      itemGene: false,
+      scrollPos: 0,
+      scrollP: 9999,
+      inputValue: '',
+      inputFacus: false,
+      query: {},
+      menuIndex: null,
+      userId: '',
+      chatFlowDataDeleteFlag: false
     }
   },
   methods: {
     init () {
+      this.queryInit()
       this.plugin = requirePlugin('WechatSI')
       this.manager = this.plugin.getRecordRecognitionManager()
       this.manager.onStop = res => {
@@ -144,6 +165,7 @@ export default {
             this.contentGene = false
           } else {
             this.currentChatItem.recResult = res.result
+            this.currentChatItem.recResultTrans = '正在思考...'
             if (this.enTrans) this.translate(this.lg.en, this.lg.ch, this.currentChatItem.recResult)
             else this.translate(this.lg.ch, this.lg.en, this.currentChatItem.recResult)
           }
@@ -158,12 +180,11 @@ export default {
       this.manager.onError = function (res) {
         console.error('error msg', res.msg)
       }
-      this.dateTrans()
+      this.scrollAct()
     },
     startRec () {
       if (this.itemGene) {
         this.itemPush()
-        this.itemGene = false
       }
       this.contentGene = true
       console.log('开始录音')
@@ -211,8 +232,8 @@ export default {
         success: res => {
           console.log('succ tts', res.filename)
           this.currentChatItem.recResultTransVoice = res.filename
-          this.speak()
-          this.itemGene = true
+          this.speak(res.filename)
+          this.itemPush()
         },
         fail: function (res) {
           console.log('fail tts', res)
@@ -226,21 +247,35 @@ export default {
       wx.vibrateShort()
     },
     inputSwitch () {
-      if (this.textInput) this.textInput = false
-      else this.textInput = true
+      if (this.textInput) {
+        this.textInput = false
+        this.inputFacus = false
+      } else {
+        this.textInput = true
+        this.inputFacus = true
+      }
+    },
+    inputTrans () {
+      if (this.inputValue) {
+        this.currentChatItem.recResult = this.inputValue
+        this.currentChatItem.recResultTrans = '正在思考...'
+        if (this.enTrans) this.translate(this.lg.en, this.lg.ch, this.currentChatItem.recResult)
+        else this.translate(this.lg.ch, this.lg.en, this.currentChatItem.recResult)
+      }
     },
     langSwitch () {
+      if (this.itemGene) return
       if (this.enTrans) {
         this.enTrans = false
         this.errorInfo = '没听到声音'
         this.buttonInfo = '按住 说话'
-        this.recResultTrans = '正在聆听...'
         this.tipsInfo = '手指上滑，取消发送'
+        this.currentChatItem.recResultTrans = '正在聆听...'
       } else {
         this.enTrans = true
         this.errorInfo = 'there is no voice'
         this.buttonInfo = 'Hold To Talk'
-        this.recResultTrans = 'listening...'
+        this.currentChatItem.recResultTrans = 'listening...'
         this.tipsInfo = 'Finger up and cancel'
       }
     },
@@ -275,31 +310,54 @@ export default {
       if (this.cancelRec) this.contentGene = false
       if (this.enTrans) {
         this.tipsInfo = 'Finger up and cancel'
-        this.recResultTrans = 'listening...'
+        this.currentChatItem.recResultTrans = 'listening...'
       }
     },
     itemPush () {
+      this.contentGene = false
+      this.itemGene = false
       let curtime = new Date()
       this.currentChatItem.date = curtime.getTime()
       this.currentChatItem.enTrans = this.enTrans
-      console.log(this.currentChatItem)
       this.chatFlowData.push(this.currentChatItem)
-      this.currentChatItem = {
-        enTrans: false,
-        date: '',
-        recResult: '',
-        recResultTrans: '正在聆听...',
-        recResultTransVoice: ''
+      if (this.enTrans) {
+        this.currentChatItem = {
+          enTrans: false,
+          date: '',
+          recResult: '',
+          recResultTrans: 'Listening...',
+          recResultTransVoice: ''
+        }
+      } else {
+        this.currentChatItem = {
+          enTrans: false,
+          date: '',
+          recResult: '',
+          recResultTrans: '正在聆听...',
+          recResultTransVoice: ''
+        }
       }
       this.dateTrans()
+      this.inputValue = ''
+      this.scrollAct()
     },
     dateTrans () {
       this.chatFlowDate = []
       for (let index = 0; index < this.chatFlowData.length; index++) {
         let date = this.chatFlowData[index].date
-        this.chatFlowDate.push(this.dateDistance(date))
+        if (index > 0) {
+          let datePre = this.chatFlowData[index - 1].date
+          let timeStampDis = date - datePre
+          if (timeStampDis < 60000) {
+            this.chatFlowDate.push('')
+          } else {
+            this.chatFlowDate.push(this.dateDistance(date))
+          }
+        } else {
+          this.chatFlowDate.push(this.dateDistance(date))
+        }
       }
-      console.log(this.chatFlowDate)
+      // console.log(this.chatFlowDate)
     },
     dateDistance (d) {
       let currentDate = new Date()
@@ -319,35 +377,167 @@ export default {
         let fullDateD = fullDate.getDate()
         let fullDateX = fullDate.getDay()
         let fullDateH = fullDate.getHours()
-        let fullDateM = fullDate.getMinutes()
+        let fullDateN = fullDate.getMinutes()
+
+        let disDate = new Date(parseInt(timeGap))
+        // let disDateH = disDate.getHours()
+        let disDateM = disDate.getMinutes()
         if (disWeek > 1) {
           return fullDateY + '年' + fulldateM + '月' + fullDateD + '日'
         }
         if (disDay > 1) {
-          if (fullDateX === 0) return '星期日' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 1) return '星期一' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 2) return '星期二' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 3) return '星期三' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 4) return '星期四' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 5) return '星期五' + ' ' + fullDateH + ':' + fullDateM
-          if (fullDateX === 6) return '星期六' + ' ' + fullDateH + ':' + fullDateM
+          if (fullDateX === 0) return '星期日' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 1) return '星期一' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 2) return '星期二' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 3) return '星期三' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 4) return '星期四' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 5) return '星期五' + ' ' + fullDateH + ':' + fullDateN
+          if (fullDateX === 6) return '星期六' + ' ' + fullDateH + ':' + fullDateN
         }
         if (disHour > 1) {
-          if (fullDateH < 13) return '上午 ' + fullDateH + ':' + fullDateM
-          if (fullDateH < 19) return '下午 ' + fullDateH + ':' + fullDateM
-          if (fullDateH < 25) return '晚上 ' + fullDateH + ':' + fullDateM
+          let last = ''
+          if (disHour > 12) {
+            last = '昨天'
+          }
+          if (fullDateH < 13) return last + '上午 ' + fullDateH + ':' + fullDateN
+          if (fullDateH < 19) return last + '下午 ' + fullDateH + ':' + fullDateN
+          if (fullDateH < 25) return last + '晚上 ' + fullDateH + ':' + fullDateN
         }
         if (disMinute > 1) {
-          return fullDateM + '分钟前'
+          return disDateM + '分钟前'
         }
       }
-      return '刚刚'
+      return '刚刚发生'
+    },
+    queryInit () {
+      this.query = wx.createSelectorQuery()
+      this.query.select('#CF').boundingClientRect()
+      this.query.selectViewport().scrollOffset()
+    },
+    scrollAct () {
+      setTimeout(() => {
+        this.scrollPos = this.scrollP
+      }, 100)
+      this.query.exec(function (res) {
+        this.scrollP = res[0].bottom
+      })
+    },
+    menuSwitch (index, e) {
+      let itemL = this.chatFlowData.length
+      let itemC = parseInt(e.currentTarget.dataset.eventid.split('-')[1])
+      if (itemL < 4 || itemL - itemC < 5) {
+        this.menuIndex = index
+      } else {
+        this.deleteItem(index)
+      }
+      wx.vibrateShort()
+    },
+    menuCenter (index, itemIndex) {
+      this.menuIndex = null
+      this.scrollAct()
+      if (index === 0) this.speechItem(itemIndex)
+      if (index === 1) this.fixItem(itemIndex)
+      if (index === 2) this.copyItem(itemIndex)
+      if (index === 3) this.recordItem(itemIndex)
+      if (index === 4) this.deleteItem(itemIndex)
+    },
+    menuHide () {
+      this.menuIndex = null
+    },
+    speechItem (e) {
+      console.log('I will speech this item ' + e)
+      this.speak(this.chatFlowData[e].recResultTransVoice)
+    },
+    fixItem (e) {
+      console.log('I will fix this item ' + e)
+      wx.showToast({
+        icon: 'none',
+        title: '修正功能开发中',
+        during: '1000'
+      })
+    },
+    copyItem (e) {
+      console.log('I will copy this item ' + e)
+      wx.setClipboardData({
+        data: (this.chatFlowData[e].recResultTrans).toString(),
+        icon: 'none',
+        success: (res) => {
+          console.log(res)
+        }
+      })
+    },
+    recordItem (e) {
+      console.log('I will record this item ' + e)
+      wx.showToast({
+        icon: 'none',
+        title: '笔记本功能开发中',
+        during: '1000'
+      })
+    },
+    deleteItem (e) {
+      console.log('I will detele this item ' + e)
+      wx.showModal({
+        title: '',
+        content: '确定删除这条记录吗？',
+        success: (res) => {
+          if (res.confirm) {
+            this.chatFlowData.splice(e, 1)
+            if (this.chatFlowDataDeleteFlag) this.chatFlowDataDeleteFlag = false
+            else this.chatFlowDataDeleteFlag = true
+          } else if (res.cancel) {
+            console.log('cancel')
+          }
+        }
+      })
+      this.dateTrans()
+    },
+    testData (base) {
+      const db = wx.cloud.database()
+      db.collection(base).get({
+        success: res => {
+          if (res.data.length === 0) {
+            console.log('data clean')
+            this.initData(db, base)
+          } else {
+            this.chatFlowData = res.data[0].chatFlow
+            console.log(this.chatFlowData)
+            this.userId = res.data[0]._id
+            this.dateTrans()
+          }
+        }
+      })
+    },
+    initData (db, base) {
+      console.log('I will init data')
+      // this.chatFlowData = this.chatFlowDataPreset
+      db.collection(base).add({
+        data: {
+          date: new Date(),
+          chatFlow: this.chatFlowDataPreset
+        },
+        success: (res) => {
+          this.testData('translate')
+          console.log(res)
+        }
+      })
+    },
+    updateData (base, userId) {
+      const db = wx.cloud.database()
+      db.collection(base).doc(userId).update({
+        data: {
+          chatFlow: this.chatFlowData
+        }
+      })
     }
   },
   onLoad () {
     this.init()
+    // this.getFlowData('translate', this.chatFlowData)
+    this.testData('translate')
     // this.speech(this.lg.ch, '小唠滴你四沙雕嘛,滴你四沙雕嘛,你四沙雕嘛,四沙雕嘛,沙雕嘛,雕嘛,嘛')
-    // console.log(this.dateDistance(1542007175561))
+  },
+  onUnload () {
+    this.updateData('translate', this.userId)
   }
 }
 </script>
@@ -375,11 +565,19 @@ heroSize = 50px
     & .main {
       box-sizing border-box
       padding 50px 0 PH
+      overflow visible
       height 100%
       & .chatFlow {
+        padding-bottom 20px
         height 100%
+        & .padding {
+          height 20px
+          width 100%
+          background #000
+          opacity 0
+        }
         & .item {
-          margin-bottom 50px
+          margin-top 50px
           position relative
           &:first-child {
             margin-top 25px
@@ -428,6 +626,51 @@ heroSize = 50px
                 border-left 8px solid c4
                 border-right 5px solid transparent
               }
+              & .menu {
+                display none
+                position absolute
+                color #fff
+                right 0
+                top -35px
+                width 100%
+                white-space nowrap
+                padding 0 5px
+                z-index 100
+                opacity 0.7
+                overflow visible
+                height 30px
+                &.act {
+                  display block
+                }
+                &:before {
+                  content ''
+                  display inline-block
+                  border 10px solid transparent
+                  border-top 10px solid #000
+                  position absolute
+                  left 50%
+                  bottom -18px
+                  transform translateX(-50%)
+                }
+                & .menuInner {
+                  background #000
+                  border-radius 30px
+                  position absolute
+                  right 0
+                  top 0
+                }
+                & li {
+                  display inline-block
+                  height 30px
+                  line-height 30px
+                  padding 0 15px
+                  font-size 12px
+                  border-left 1rpx solid rgba(255, 255, 255, 0.3)
+                  &:first-child {
+                    border-left 0
+                  }
+                }
+              }
               & .orign {
                 border-top 1px solid rgba(143, 184, 92, 0.4)
                 margin-top 5px
@@ -472,11 +715,25 @@ heroSize = 50px
                 & .orign {
                   border-top 1px solid rgba(143, 184, 92, 0.15)
                 }
+                & .menu {
+                  right unset
+                  left 0
+                  & .menuInner {
+                    right unset
+                    left 0
+                  }
+                }
               }
             }
           }
+          &.timeClose {
+            margin-top 15px
+            & .date {
+              display none
+            }
+          }
           &.current {
-            margin-top -25px
+            margin-top 15px
           }
         }
       }
