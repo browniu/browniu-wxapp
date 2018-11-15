@@ -10,14 +10,14 @@
           <div class="padding"></div>
           <div :class="['item',item.enTrans?'left':'',chatFlowDate[index]===''?'timeClose':'']" v-for="(item, index) in chatFlowData" :key="index">
             <div class="date"><span>{{chatFlowDate[index]}}</span></div>
-            <div class="hero" @longpress="speak(item.recResultTransVoice)">
+            <div class="hero" @longpress="speak(item.recResultTransVoice,index)">
               <span></span>
             </div>
             <div class="content">
               <div class="inner" @longpress="menuSwitch(index,$event)">
                 <div :class="['menu',menuIndex===index?'act':'']">
                   <div class="menuInner">
-                    <li @click="menuCenter(0,index)">发音</li>
+                    <li v-if="item.recResultTransVoice" @click="menuCenter(0,index)">发音</li>
                     <li @click="menuCenter(1,index)">修正</li>
                     <li @click="menuCenter(2,index)">拷贝</li>
                     <li @click="menuCenter(3,index)">记录</li>
@@ -129,6 +129,7 @@ export default {
         }
       ],
       chatFlowData: [],
+      chatFlowDateOver: [],
       currentChatItem: {
         enTrans: false,
         date: '',
@@ -241,10 +242,12 @@ export default {
       })
     },
     speak (v) {
-      this.voice = wx.createInnerAudioContext()
-      this.voice.src = v
-      this.voice.play()
-      wx.vibrateShort()
+      if (v) {
+        this.voice = wx.createInnerAudioContext()
+        this.voice.src = v
+        this.voice.play()
+        wx.vibrateShort()
+      }
     },
     inputSwitch () {
       if (this.textInput) {
@@ -358,6 +361,18 @@ export default {
         }
       }
       // console.log(this.chatFlowDate)
+      this.overtime()
+    },
+    overtime () {
+      let cT = (new Date()).getTime()
+      for (let index = 0; index < this.chatFlowData.length; index++) {
+        let date = this.chatFlowData[index].date
+        let dateDis = cT - date
+        if (dateDis > 120000 && this.chatFlowData[index].recResultTransVoice) {
+          let source = this.chatFlowData[index].recResultTransVoice.split('://')[1].split('/')[0]
+          if (source === 'ae.weixin.qq.com') this.chatFlowData[index].recResultTransVoice = ''
+        }
+      }
     },
     dateDistance (d) {
       let currentDate = new Date()
@@ -399,9 +414,9 @@ export default {
           if (disHour > 12) {
             last = '昨天'
           }
-          if (fullDateH < 13) return last + '上午 ' + fullDateH + ':' + fullDateN
-          if (fullDateH < 19) return last + '下午 ' + fullDateH + ':' + fullDateN
-          if (fullDateH < 25) return last + '晚上 ' + fullDateH + ':' + fullDateN
+          if (fullDateH < 13) return last + '上午 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
+          if (fullDateH < 19) return last + '下午 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
+          if (fullDateH < 25) return last + '晚上 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
         }
         if (disMinute > 1) {
           return disDateM + '分钟前'
@@ -446,7 +461,7 @@ export default {
     },
     speechItem (e) {
       console.log('I will speech this item ' + e)
-      this.speak(this.chatFlowData[e].recResultTransVoice)
+      this.speak(this.chatFlowData[e].recResultTransVoice, e)
     },
     fixItem (e) {
       console.log('I will fix this item ' + e)
@@ -500,7 +515,7 @@ export default {
             this.initData(db, base)
           } else {
             this.chatFlowData = res.data[0].chatFlow
-            console.log(this.chatFlowData)
+            // console.log(this.chatFlowData)
             this.userId = res.data[0]._id
             this.dateTrans()
           }
@@ -532,9 +547,10 @@ export default {
   },
   onLoad () {
     this.init()
-    // this.getFlowData('translate', this.chatFlowData)
     this.testData('translate')
     // this.speech(this.lg.ch, '小唠滴你四沙雕嘛,滴你四沙雕嘛,你四沙雕嘛,四沙雕嘛,沙雕嘛,雕嘛,嘛')
+    console.log(this.dateDistance(1542179215200))
+    console.log(new Date(1542179215200))
   },
   onUnload () {
     this.updateData('translate', this.userId)
