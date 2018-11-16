@@ -94,35 +94,35 @@ export default {
       chatFlowDataPreset: [
         {
           enTrans: false,
-          date: '1542174706375',
+          date: '1542293866068',
           recResult: '我是中国熊，我说的汉语会被直接转换成英语',
           recResultTrans: 'I am a Chinese bear, and the Chinese I speak will be converted directly into English',
           recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre1.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         },
         {
           enTrans: true,
-          date: '1542007350561',
+          date: '1542293876068',
           recResult: 'I am an American bunny and my English will be translated directly into Chinese',
           recResultTrans: '我是一只美国兔，我说的英语将被直接翻译成中文',
           recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre2.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         },
         {
           enTrans: false,
-          date: '1542175104354',
+          date: '1542294886068',
           recResult: '没错，现在我们可以无障碍尬聊了',
           recResultTrans: 'Yes, now we can speak freely',
           recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre3.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         },
         {
           enTrans: true,
-          date: '1542179215200',
+          date: '1542294896068',
           recResult: 'We can also act as your dictionary',
           recResultTrans: '我们也可以做你的字典',
           recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre4.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
         },
         {
           enTrans: false,
-          date: '1542179215966',
+          date: '1542294897068',
           recResult: '还有很多隐藏技能哦，快来试试吧',
           recResultTrans: 'There are many hidden skills. Come and try it',
           recResultTransVoice: 'https://browniu-c8bfe1.tcb.qcloud.la/trans/transPre5.mp3?sign=036a20ee867ebc24941f56c8e86a70ee&t=1542176803'
@@ -146,7 +146,8 @@ export default {
       query: {},
       menuIndex: null,
       userId: '',
-      chatFlowDataDeleteFlag: false
+      chatFlowDataDeleteFlag: false,
+      inputFocus: true
     }
   },
   methods: {
@@ -252,13 +253,14 @@ export default {
     inputSwitch () {
       if (this.textInput) {
         this.textInput = false
-        this.inputFacus = false
+        this.inputFocus = false
       } else {
         this.textInput = true
-        this.inputFacus = true
+        this.inputFocus = true
       }
     },
     inputTrans () {
+      this.inputFocus = false
       if (this.inputValue) {
         this.currentChatItem.recResult = this.inputValue
         this.currentChatItem.recResultTrans = '正在思考...'
@@ -368,7 +370,7 @@ export default {
       for (let index = 0; index < this.chatFlowData.length; index++) {
         let date = this.chatFlowData[index].date
         let dateDis = cT - date
-        if (dateDis > 120000 && this.chatFlowData[index].recResultTransVoice) {
+        if (dateDis > 7200000 && this.chatFlowData[index].recResultTransVoice) {
           let source = this.chatFlowData[index].recResultTransVoice.split('://')[1].split('/')[0]
           if (source === 'ae.weixin.qq.com') this.chatFlowData[index].recResultTransVoice = ''
         }
@@ -411,10 +413,10 @@ export default {
         }
         if (disHour > 1) {
           let last = ''
-          if (disHour > 12) {
+          if (disHour > 6) {
             last = '昨天'
           }
-          if (fullDateH < 13) return last + '上午 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
+          if (fullDateH < 13) return last + '上午 ' + (fullDateH).toString() + ':' + fullDateN.toString().padStart(2, '0')
           if (fullDateH < 19) return last + '下午 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
           if (fullDateH < 25) return last + '晚上 ' + (fullDateH - 12).toString() + ':' + fullDateN.toString().padStart(2, '0')
         }
@@ -549,8 +551,6 @@ export default {
     this.init()
     this.testData('translate')
     // this.speech(this.lg.ch, '小唠滴你四沙雕嘛,滴你四沙雕嘛,你四沙雕嘛,四沙雕嘛,沙雕嘛,雕嘛,嘛')
-    console.log(this.dateDistance(1542179215200))
-    console.log(new Date(1542179215200))
   },
   onUnload () {
     this.updateData('translate', this.userId)
@@ -607,7 +607,7 @@ heroSize = 50px
               height 80%
               width 80%
               display inline-block
-              background-image url('https://browniu-c8bfe1.tcb.qcloud.la/trans/translate_hero_1.jpg?sign=bc33c74075a1ab91c9e7b24ef1bf0f39&t=1541747265')
+              background-image url('https://browniu-c8bfe1.tcb.qcloud.la/trans/translate_hero_1.jpg?sign=f27b9d631480196b061570cc8ff6b6ba&t=1542335441')
               background-position center
               background-size contain
               background-repeat no-repeat
@@ -714,7 +714,7 @@ heroSize = 50px
               & span {
                 position absolute
                 right 0
-                background-image url('https://browniu-c8bfe1.tcb.qcloud.la/trans/translate_hero_2.jpg?sign=bc33c74075a1ab91c9e7b24ef1bf0f39&t=1541747265')
+                background-image url('https://browniu-c8bfe1.tcb.qcloud.la/trans/translate_hero_2.jpg?sign=f27b9d631480196b061570cc8ff6b6ba&t=1542335441')
               }
             }
             & .content {

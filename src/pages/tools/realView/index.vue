@@ -21,7 +21,7 @@
               <span>性能</span>
             </thead>
             <scroll-view scroll-y class="tbody">
-              <li v-for="(item, index) in dataList" :key="index">
+              <li v-for="(item, index) in dataListShow" :key="index">
                 <span>{{item.view1Device}}</span>
                 <span>{{item.view2Height}},{{item.view3Width}}</span>
                 <span>{{item.view4Info.system}}</span>
@@ -60,6 +60,7 @@ export default {
       },
       // download data
       dataList: [],
+      dataListShow: [],
       dataListDetail: {},
       buttonInfo: '提交设备信息',
       buttonState: false,
@@ -140,7 +141,7 @@ export default {
         this.buttonInfo = '你皮任你皮'
       }
     },
-    getAllData (base, container) {
+    getAllData (base) {
       const db = wx.cloud.database()
       db.collection(base).count().then(res => {
         let time = Math.ceil(res.total / 20)
@@ -148,18 +149,20 @@ export default {
           if (i === 0) {
             db.collection(base).get().then(res => {
               for (let i = 0; i < res.data.length; i++) {
-                container.push(res.data[i])
+                this.dataList.push(res.data[i])
               }
             })
           } else {
             db.collection(base).skip(20 * i).get().then(res => {
               for (let i = 0; i < res.data.length; i++) {
-                container.push(res.data[i])
+                this.dataList.push(res.data[i])
               }
-              // console.log(container)
             })
           }
         }
+        setTimeout(() => {
+          this.dataListShow = this.dataList
+        }, 3000)
       })
     }
   },
@@ -167,7 +170,10 @@ export default {
     wx.setNavigationBarTitle({
       title: '真实视窗'
     })
-    this.getAllData('realView', this.dataList)
+    // this.getAllData('realView', this.dataList)
+  },
+  onLoad () {
+    this.getAllData('realView')
   }
 }
 </script>

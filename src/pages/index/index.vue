@@ -43,7 +43,7 @@
 export default {
   data () {
     return {
-      develop: false,
+      devIndex: null,
       access: false,
       login: false,
       theme: 1,
@@ -58,7 +58,7 @@ export default {
         { href: '../tools/theDay/main', name: '等风来', icon: 'list', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'organization', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
-        { href: '../tools/songs/main', name: '路上文摘', icon: 'heart', label: false, access: false },
+        { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
         { href: '../tools/translate/main', name: '译聊', icon: 'chat', label: false, access: false },
         { href: '../tools/legendary/main', name: '即刻超神', icon: 'game', label: false, access: true },
@@ -134,12 +134,12 @@ export default {
     wx.cloud.init({
       traceUser: true
     })
-    if (this.develop) {
+    if (this.devIndex) {
       // wx.switchTab({
       //   url: '../store/index/main'
       // })
       wx.navigateTo({
-        url: '../tools/legendary/main'
+        url: this.tools[this.devIndex].href
       })
     }
     wx.setNavigationBarColor({
