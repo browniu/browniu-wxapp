@@ -23,6 +23,8 @@
           <img v-if="item.icon==='corrot'" style="width:10.5%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_face_1.png?sign=1527800af2e75d975f25a00357486a8f&t=1541469024" alt="">
           <img v-if="item.icon==='chat'" style="width:25%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/trans/chat4.svg?sign=a6afd81a50ba9482f9a81f54c81250db&t=1542242300" alt="">
           <img v-if="item.icon==='game'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/game.svg?sign=b88933fa1be313dd75403f7e9223570f&t=1542180222" alt="">
+          <img v-if="item.icon==='pineapple'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/index/pineapple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550" alt="">
+          <img v-if="item.icon==='Apple'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/index/Apple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550" alt="">
           <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}"></div> -->
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
@@ -43,7 +45,7 @@
 export default {
   data () {
     return {
-      devIndex: null,
+      devIndex: null, // 12
       access: false,
       login: false,
       theme: 1,
@@ -61,7 +63,7 @@ export default {
         { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
         { href: '../tools/translate/main', name: '译聊', icon: 'chat', label: false, access: false },
-        { href: '../tools/legendary/main', name: '即刻超神', icon: 'game', label: false, access: true },
+        { href: '../tools/legendary/main', name: '大菠萝', icon: 'pineapple', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
