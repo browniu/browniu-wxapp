@@ -156,7 +156,7 @@ export default {
     scrollEnd () {
       this.touchCur = this.touchStart - this.touchEnd
       // console.log(this.touchCur)
-      if (this.touchCur > 80) {
+      if (this.touchCur > 120) {
         this.seekSwitch()
       }
     },

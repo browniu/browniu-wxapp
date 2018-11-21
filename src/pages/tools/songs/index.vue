@@ -1,7 +1,21 @@
 <template>
   <div class="songs">
-    <div class="texture"><i></i></div>
-    <div class="inner">
+    <div v-if="!showTime" class="cover">
+      <video @timeupdate="playState" id="videoBg" class="songsCover" @click="scroll" :loop="false" :autoplay="true" :muted="true" show-play-btn="false" :controls="false" objectFit="cover" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_3.mp4?sign=7dbfc31e3cc071f09194854a1d871945&t=1542683253">
+        <cover-view :class="['coverPost',step===2?'act':'',loaded?'loaded':'']" @click="scroll">
+          <cover-view :class="['coverTexture',loaded?'loaded':'']"></cover-view>
+          <cover-view class="left">
+            <cover-image class="leftTit" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_left_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"></cover-image>
+          </cover-view>
+          <cover-view class="right">
+            <cover-image class="rightTit" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_right_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"></cover-image>
+          </cover-view>
+        </cover-view>
+      </video>
+    </div>
+    <div v-if="showTime" :class="['shadow',over?'act':'']"></div>
+    <div v-if="showTime" class="texture"><i></i></div>
+    <div v-if="showTime" class="inner">
       <div class="article">
         <div class="title">
           <h1 @click="listSwitch(index)" :class="[songList?'close':'',songList&&songIndex===index?'act':'']" v-for="(item, index) in songs" :key="index">
@@ -9,7 +23,6 @@
             <div class="subInfo">
               {{item[1]}}
             </div>
-            <!-- <div @click="listSwitch" :class="['switch',songIndex===index&&songList?'act':'']">1</div> -->
           </h1>
         </div>
         <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1500">
@@ -34,7 +47,13 @@ export default {
       scrollW: 0,
       scrollC: 0,
       scrollP: 0,
-      scrollReflash: true
+      scrollReflash: true,
+      loaded: false,
+      step: 1,
+      videoContext: {},
+      plaing: false,
+      showTime: false,
+      over: false
     }
   },
   methods: {
@@ -96,22 +115,50 @@ export default {
       if (wx.getSystemInfoSync().system.split(' ')[0] === 'Android') {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + fontA + '")',
-          success: console.log
+          source: 'url("' + fontA + '")'
         })
         // this.isAndroid = true
       } else {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + font + '")',
-          success: console.log
+          source: 'url("' + font + '")'
         })
+      }
+    },
+    scroll () {
+      if (!this.plaing && this.loaded && !this.over) {
+        this.step++
+        if (this.step === 2) {
+          // this.videoContext.seek(2)
+          this.videoContext.play()
+          this.plaing = true
+          setTimeout(() => {
+            this.videoContext.pause()
+            this.plaing = false
+            this.showTime = true
+            setTimeout(() => {
+              this.over = true
+            }, 3000)
+          }, 8000)
+        }
+        console.log(this.step)
+      }
+    },
+    init () {
+      this.fontLoad('http://pb85uax7t.bkt.clouddn.com/HYYS.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
+      this.songs = this.resortArray(songs.songs).slice(1, 9)
+      this.videoContext = wx.createVideoContext('videoBg')
+    },
+    playState (e) {
+      if (!this.plaing) {
+        this.loaded = true
+        console.log(e)
+        this.videoContext.pause()
       }
     }
   },
   onLoad () {
-    this.fontLoad('http://pb85uax7t.bkt.clouddn.com/HYYS.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
-    this.songs = this.resortArray(songs.songs).slice(1, 9)
+    this.init()
   }
 }
 </script>
@@ -215,6 +262,7 @@ c6 = #493b32
           line-height 12vh
           border-left 1px solid rgba(0, 0, 0, 0.05)
           overflow hidden
+          animation open 1.2s ease
           &.close {
             width 0
             opacity 0
@@ -292,6 +340,112 @@ c6 = #493b32
         width 0
         height 0
         color transparent
+      }
+    }
+  }
+  & .shadow {
+    position absolute
+    height 100vh
+    width 100vw
+    top 0
+    left 0
+    z-index 999
+    background #fff
+    animation leave 3s ease
+    animation-fill-mode forwards
+    &.act {
+      display none
+    }
+  }
+  & .cover {
+    & .songsCover {
+      height 100vh
+      width 100vw
+      & .coverPost {
+        position absolute
+        top 0
+        left 0
+        height 100vh
+        width 100vw
+        & .left {
+          position absolute
+          left 0
+          top 0
+          height 100vh
+          width 51vw
+          // background #fff
+          & .leftTit {
+            position absolute
+            right -18px
+            top 50%
+            transform translateY(-50%) translateX(-18px)
+            height 489px
+            width 36px
+            transition 3s cubic-bezier(0.645, 0.045, 0.355, 1)
+          }
+        }
+        & .right {
+          position absolute
+          right 0
+          top 0
+          height 100vh
+          width 49vw
+          // background #fff
+          & .rightTit {
+            position absolute
+            left -18px
+            top 50%
+            transform translateY(-50%) translateX(0)
+            height 489px
+            width 36px
+            z-index 1
+            transition 3s cubic-bezier(0.645, 0.045, 0.355, 1)
+          }
+          & .rightBg {
+            display none
+            position absolute
+            z-index 0
+            right 0
+            top 0
+            height 100vh
+            width calc(100vh * (800 / 1667))
+          }
+        }
+        & .coverTexture {
+          height 100%
+          width 100%
+          background #fff
+          top 0
+          left 0
+          position absolute
+          opacity 1
+          transition 0.7s ease
+        }
+        &.loaded {
+          & .coverTexture {
+            opacity 0
+          }
+          & .leftTit {
+            transition 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)
+            transform translateY(-50%) translateX(0px)
+          }
+        }
+        &.act {
+          // animation leave 0.7s cubic-bezier(0.645, 0.045, 0.355, 1)
+          animation-fill-mode forwards
+          & .left {
+            & .leftTit {
+              transition 5.5s cubic-bezier(0.645, 0.045, 0.355, 1)
+              transform translateY(-50%) translateX(40px)
+            }
+          }
+          & .right {
+            & .rightTit {
+              transition 5.5s cubic-bezier(0.645, 0.045, 0.355, 1)
+              transform translateY(-50%) translateX(-40px)
+            }
+          }
+        }
       }
     }
   }

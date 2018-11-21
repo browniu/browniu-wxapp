@@ -45,7 +45,7 @@
 export default {
   data () {
     return {
-      devIndex: null, // 12
+      devIndex: 9, // 12
       access: false,
       login: false,
       theme: 1,
@@ -60,7 +60,7 @@ export default {
         { href: '../tools/theDay/main', name: '等风来', icon: 'list', label: false, access: false },
         { href: '../tools/colorful/main', name: '自然色', icon: 'organization', label: false, access: false },
         { href: '../tools/weather/main', name: '冷暖自知', icon: 'download', label: false, access: false },
-        { href: '../tools/songs/main', name: '红心集', icon: 'heart', label: false, access: false },
+        { href: '../tools/songs/main', name: '在路上', icon: 'heart', label: false, access: false },
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
         { href: '../tools/translate/main', name: '译聊', icon: 'chat', label: false, access: false },
         { href: '../tools/legendary/main', name: '大菠萝', icon: 'pineapple', label: false, access: false },
