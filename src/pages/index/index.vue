@@ -45,7 +45,7 @@
 export default {
   data () {
     return {
-      devIndex: 9, // 12
+      devIndex: null, // 12
       access: false,
       login: false,
       theme: 1,
