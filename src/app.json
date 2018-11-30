@@ -22,7 +22,9 @@
     "pages/tools/songs/main",
     "pages/tools/bird/main",
     "pages/tools/translate/main",
-    "pages/tools/legendary/main"
+    "pages/tools/legendary/main",
+    "pages/tools/fire/main",
+    "pages/tools/draw/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -65,10 +67,6 @@
     "WechatSI": {
       "version": "0.2.2",
       "provider": "wx069ba97219f66d99"
-    },
-    "tencentvideo": {
-      "version": "1.2.2",
-      "provider": "wxa75efa648b60994b"
     }
   }
 }

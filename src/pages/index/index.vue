@@ -2,35 +2,94 @@
   <scroll-view scroll-y class="tools">
     <!-- <div class="navigetion">
       brown's magic
-    </div> -->
+    </div>-->
     <div class="texture"></div>
     <div v-if="tipsSwitch" class="tips">{{tipsInfo}}</div>
     <main>
       <ol>
         <li v-for="(item, index) in list" :key="index">
-          <img v-if="item.icon==='killer'" mode="widthFix" src="../../../static/images/killer.svg" alt="">
-          <img v-if="item.icon==='lab'" mode="widthFix" src="../../../static/images/lab.svg" alt="">
-          <img v-if="item.icon==='timer'" mode="widthFix" src="../../../static/images/timer.svg" alt="">
-          <img v-if="item.icon==='message'" mode="widthFix" src="../../../static/images/message.svg" alt="">
-          <img v-if="item.icon==='store'" mode="widthFix" src="../../../static/images/store.svg" alt="">
-          <img v-if="item.icon==='out'" mode="widthFix" src="../../../static/images/out.svg" alt="">
-          <img v-if="item.icon==='list'" mode="widthFix" src="../../../static/images/list.svg" alt="">
-          <img v-if="item.icon==='organization'" mode="widthFix" src="../../../static/images/organization.svg" alt="">
-          <img v-if="item.icon==='download'" mode="widthFix" src="../../../static/images/download.svg" alt="">
-          <img v-if="item.icon==='heart'" mode="widthFix" src="../../../static/images/heart.svg" alt="">
-          <img v-if="item.icon==='favorite'" mode="widthFix" src="../../../static/images/favorite.svg" alt="">
-          <img v-if="item.icon==='realView'" mode="widthFix" src="../../../static/images/realView.svg" alt="">
-          <img v-if="item.icon==='corrot'" style="width:10.5%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_face_1.png?sign=1527800af2e75d975f25a00357486a8f&t=1541469024" alt="">
-          <img v-if="item.icon==='chat'" style="width:25%" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/trans/chat4.svg?sign=a6afd81a50ba9482f9a81f54c81250db&t=1542242300" alt="">
-          <img v-if="item.icon==='game'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/game.svg?sign=b88933fa1be313dd75403f7e9223570f&t=1542180222" alt="">
-          <img v-if="item.icon==='pineapple'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/index/pineapple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550" alt="">
-          <img v-if="item.icon==='Apple'" mode="widthFix" src="https://browniu-c8bfe1.tcb.qcloud.la/index/Apple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550" alt="">
-          <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}"></div> -->
+          <img v-if="item.icon==='killer'" mode="widthFix" src="../../../static/images/killer.svg">
+          <img v-if="item.icon==='lab'" mode="widthFix" src="../../../static/images/lab.svg">
+          <img v-if="item.icon==='timer'" mode="widthFix" src="../../../static/images/timer.svg">
+          <img
+            v-if="item.icon==='message'"
+            mode="widthFix"
+            src="../../../static/images/message.svg"
+          >
+          <img v-if="item.icon==='store'" mode="widthFix" src="../../../static/images/store.svg">
+          <img v-if="item.icon==='out'" mode="widthFix" src="../../../static/images/out.svg">
+          <img
+            v-if="item.icon==='light'"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/draw/light.svg?sign=6d5e6fefa251b3ebc59c7468ed1a03e3&t=1543558510"
+          >
+          <img
+            v-if="item.icon==='organization'"
+            mode="widthFix"
+            src="../../../static/images/organization.svg"
+          >
+          <img
+            v-if="item.icon==='download'"
+            mode="widthFix"
+            src="../../../static/images/download.svg"
+          >
+          <img v-if="item.icon==='heart'" mode="widthFix" src="../../../static/images/heart.svg">
+          <img
+            v-if="item.icon==='favorite'"
+            mode="widthFix"
+            src="../../../static/images/favorite.svg"
+          >
+          <img
+            v-if="item.icon==='realView'"
+            mode="widthFix"
+            src="../../../static/images/realView.svg"
+          >
+          <img
+            v-if="item.icon==='corrot'"
+            style="width:10.5%"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_face_1.png?sign=1527800af2e75d975f25a00357486a8f&t=1541469024"
+          >
+          <img
+            v-if="item.icon==='chat'"
+            style="width:25%"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/trans/chat4.svg?sign=a6afd81a50ba9482f9a81f54c81250db&t=1542242300"
+          >
+          <img
+            v-if="item.icon==='game'"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/game.svg?sign=b88933fa1be313dd75403f7e9223570f&t=1542180222"
+          >
+          <img
+            v-if="item.icon==='pineapple'"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/index/pineapple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550"
+          >
+          <img
+            v-if="item.icon==='Apple'"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/index/Apple.svg?sign=b305367be12b22b54ec1af3561ba2542&t=1542675550"
+          >
+          <img
+            v-if="item.icon==='fire'"
+            style="width:18%"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/fire/fire_icon.png?sign=b229258bad723f5c9560630e0d0360e0&t=1543298512"
+          >
+          <img
+            v-if="item.icon==='animation'"
+            mode="widthFix"
+            src="https://browniu-c8bfe1.tcb.qcloud.la/draw/animation.svg?sign=3123e03962588161a3c02121afc12201&t=1543299690"
+          >
+          <!-- <div class="icon" :style="{backgroundImage:'url('+item.icon+')'}">
+</div>
+          -->
           <p>{{item.name}}</p>
           <a @click="verify(index)"></a>
         </li>
         <li v-if="more">
-          <img mode="widthFix" src="../../../static/images/lock.svg" alt="">
+          <img mode="widthFix" src="../../../static/images/lock.svg" alt>
           <p>开启专属</p>
           <button open-type="getUserInfo" @click="identity"></button>
         </li>
@@ -45,7 +104,7 @@
 export default {
   data () {
     return {
-      devIndex: null, // 12
+      devIndex: null, // 14
       access: false,
       login: false,
       theme: 1,
@@ -64,6 +123,8 @@ export default {
         { href: '../tools/bird/main', name: '胡萝卜骑士', icon: 'corrot', label: false, access: false },
         { href: '../tools/translate/main', name: '译聊', icon: 'chat', label: false, access: false },
         { href: '../tools/legendary/main', name: '大菠萝', icon: 'pineapple', label: false, access: false },
+        { href: '../tools/fire/main', name: '暖角', icon: 'fire', label: false, access: false },
+        { href: '../tools/draw/main', name: '烟花巷', icon: 'light', label: false, access: false },
         { href: '../tools/lab/main', name: '实验室', icon: 'realView', label: false, access: true }
       ],
       list: [],
