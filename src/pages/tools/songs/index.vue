@@ -1,33 +1,62 @@
 <template>
   <div class="songs">
     <div v-if="!showTime" class="cover">
-      <video @timeupdate="playState" id="videoBg" class="songsCover" @click="scroll" :loop="false" :autoplay="true" :muted="true" show-play-btn="false" :controls="false" objectFit="cover" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_3.mp4?sign=7dbfc31e3cc071f09194854a1d871945&t=1542683253">
+      <video
+        @timeupdate="playState"
+        id="videoBg"
+        class="songsCover"
+        @click="scroll"
+        :loop="false"
+        :autoplay="true"
+        :muted="true"
+        show-play-btn="false"
+        :controls="false"
+        objectFit="cover"
+        src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_3.mp4?sign=7dbfc31e3cc071f09194854a1d871945&t=1542683253"
+      >
         <cover-view :class="['coverPost',step===2?'act':'',loaded?'loaded':'']" @click="scroll">
           <cover-view :class="['coverTexture',loaded?'loaded':'']"></cover-view>
           <cover-view class="left">
-            <cover-image class="leftTit" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_left_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"></cover-image>
+            <cover-image
+              class="leftTit"
+              src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_left_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"
+            ></cover-image>
           </cover-view>
           <cover-view class="right">
-            <cover-image class="rightTit" src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_right_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"></cover-image>
+            <cover-image
+              class="rightTit"
+              src="https://browniu-c8bfe1.tcb.qcloud.la/songs/songs_cover_right_tit.jpg?sign=bb22281b3c00d50c5fa4835f6240e6fb&t=1542694449"
+            ></cover-image>
           </cover-view>
         </cover-view>
       </video>
     </div>
     <div v-if="showTime" :class="['shadow',over?'act':'']"></div>
-    <div v-if="showTime" class="texture"><i></i></div>
+    <div v-if="showTime" class="texture">
+      <i></i>
+    </div>
     <div v-if="showTime" class="inner">
       <div class="article">
         <div class="title">
-          <h1 @click="listSwitch(index)" :class="[songList?'close':'',songList&&songIndex===index?'act':'']" v-for="(item, index) in songs" :key="index">
+          <h1
+            @click="listSwitch(index)"
+            :class="[songList?'close':'',songList&&songIndex===index?'act':'']"
+            v-for="(item, index) in songs"
+            :key="index"
+          >
             <span :class="[songList&&songIndex===index?'act':'']">{{item[2]}}</span>
-            <div class="subInfo">
-              {{item[1]}}
-            </div>
+            <div class="subInfo">{{item[1]}}</div>
           </h1>
         </div>
-        <scroll-view v-if="scrollReflash" :class="['content',songList?'act':'']" scroll-x scroll-left="1500">
+        <scroll-view
+          v-if="scrollReflash"
+          :class="['content',songList?'act':'']"
+          scroll-x
+          scroll-left="1500"
+        >
           <span class="content-inner" v-for="(item, index) in songs[songIndex][3]" :key="index">
-            <p>{{item}}</p><br>
+            <p>{{item}}</p>
+            <br>
           </span>
         </scroll-view>
       </div>
@@ -145,7 +174,7 @@ export default {
       }
     },
     init () {
-      this.fontLoad('http://pb85uax7t.bkt.clouddn.com/HYYS.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
+      this.fontLoad('https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/HYYS.TTF?q-sign-algorithm=sha1&q-ak=AKIDGNK6iAo7I1BA4un7byFRTPQJ2Z3MYUL7&q-sign-time=1543803912;1543804812&q-key-time=1543803912;1543804812&q-header-list=&q-url-param-list=&q-signature=bba4d1afe808e152ba7061d81b6752a6d261b984', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
       this.songs = this.resortArray(songs.songs).slice(1, 9)
       this.videoContext = wx.createVideoContext('videoBg')
     },

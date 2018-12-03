@@ -1,7 +1,10 @@
 <template>
   <div class="theDay">
     <div class="main" :style="{backgroundImage:'url('+theme[themeIndex].bgi+')'}">
-      <div :class="['gradient',controlPanel?'act':'']" :style="{background:'linear-gradient(to top, rgba('+theme[themeIndex].bgc+', 0), rgba('+theme[themeIndex].bgc+', 1))'}"></div>
+      <div
+        :class="['gradient',controlPanel?'act':'']"
+        :style="{background:'linear-gradient(to top, rgba('+theme[themeIndex].bgc+', 0), rgba('+theme[themeIndex].bgc+', 1))'}"
+      ></div>
       <div :class="['inner',controlPanel?'act':'']" @click="cpSwitch">
         <div class="container">
           <div class="title">
@@ -26,9 +29,7 @@
               <i>秒</i>
             </div>
           </div>
-          <div class="date">
-            {{dateEndShow}}
-          </div>
+          <div class="date">{{dateEndShow}}</div>
         </div>
         <div class="blur" :style="{backgroundImage:'url('+theme[themeIndex].bgi+')'}"></div>
       </div>
@@ -38,7 +39,13 @@
       <div class="slogan">
         <span v-for="(item, index) in slogan" :key="index">{{item}}</span>
       </div>
-      <picker-view class="date-picker" indicator-style="height: 50px;color:green;" mask-style="" @change="pickerChange" :value="pickerInit">
+      <picker-view
+        class="date-picker"
+        indicator-style="height: 50px;color:green;"
+        mask-style
+        @change="pickerChange"
+        :value="pickerInit"
+      >
         <picker-view-column>
           <view class="picker-item" v-for="(item, index) in pickerItem" :key="index">{{item}}年</view>
         </picker-view-column>
@@ -56,10 +63,20 @@
       <input type="text" placeholder="你在等什么？" v-model="theThingCache">
       <scroll-view scroll-x class="theme-picker">
         <div class="inner">
-          <span @click="themeSwitch(index)" :class="['item',themeIndex===index?'act':'']" v-for="(item, index) in theme" :key="index" :style="{backgroundImage:'url('+item.bgi+')'}"></span>
+          <span
+            @click="themeSwitch(index)"
+            :class="['item',themeIndex===index?'act':'']"
+            v-for="(item, index) in theme"
+            :key="index"
+            :style="{backgroundImage:'url('+item.bgi+')'}"
+          ></span>
         </div>
       </scroll-view>
-      <div @click="submit" class="button" :style="{backgroundColor:'rgba('+theme[themeIndex].bgc+', .8)'}">开始吧</div>
+      <div
+        @click="submit"
+        class="button"
+        :style="{backgroundColor:'rgba('+theme[themeIndex].bgc+', .8)'}"
+      >开始吧</div>
     </div>
   </div>
 </template>
@@ -71,34 +88,34 @@ export default {
     return {
       controlPanel: false,
       theme: [{
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_15.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_15.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '166, 159, 145'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_16.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_16.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '45, 143, 100'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_1.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_1.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '7, 109, 85'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_3.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_3.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '26, 31, 31'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_6.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_6.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '145, 157, 168'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_7.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_7.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '20, 116, 160'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_9.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_9.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '30, 31, 36'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_12.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_12.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '55, 39, 47'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_13.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_13.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '11, 16, 45'
       }, {
-        'bgi': 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_14.jpg',
+        'bgi': 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_14.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993',
         'bgc': '28, 2, 11'
       }],
       themeIndex: 8,

@@ -4,13 +4,15 @@
     <div class="screen">
       <div class="item cny">
         <h1>{{cnyResult}}</h1>
-        <p>¥人民币
+        <p>
+          ¥人民币
           <span v-if="!exchangeSwitch">目标货币</span>
         </p>
       </div>
       <div class="item jap">
         <h1>{{japResult}}</h1>
-        <p>¥日元
+        <p>
+          ¥日元
           <span v-if="exchangeSwitch">目标货币</span>
         </p>
       </div>
@@ -28,7 +30,14 @@
           </div>
         </div>
         <div class="keyboard" @click.stop="keyPress">
-          <div @touchstart="keyTouch = item" @touchend="keyDown" :data-value="item" v-for="(item, index) in keyValue" :key="index" :class="['key',keyTouch===item?'touch':'']">{{item}}</div>
+          <div
+            @touchstart="keyTouch = item"
+            @touchend="keyDown"
+            :data-value="item"
+            v-for="(item, index) in keyValue"
+            :key="index"
+            :class="['key',keyTouch===item?'touch':'']"
+          >{{item}}</div>
         </div>
       </div>
     </div>
@@ -150,7 +159,7 @@ c_2_1 = #4252c0
 c_2_2 = #6340a9
 c_2_3 = #bfe9ff
 c_2_4 = #ff6e7f
-themeimg = 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_6.jpg'
+themeimg = 'https://browniu-c8bfe1.tcb.qcloud.la/theDay/theDay_theme_6.jpg?sign=a6cbddcf1323160639d3f7f596c9b9f5&t=1543804993'
 .japan {
   height 100vh
   background linear-gradient(45deg, c_2_4, c_2_3)
@@ -271,12 +280,12 @@ themeimg = 'http://pb85uax7t.bkt.clouddn.com/theDay_theme_6.jpg'
             background #fff
             border-radius 50%
             display inline-block
-            background url('http://pb85uax7t.bkt.clouddn.com/chinaFlagScreen.jpg')
+            background url('https://browniu-c8bfe1.tcb.qcloud.la/other/chinaFlagScreen.jpg?sign=778df30159e6dd572b651390a41b9c54&t=1543805291')
             background-size 110%
             background-position center center
             background-repeat no-repeat
             &:last-child {
-              background-image url('http://pb85uax7t.bkt.clouddn.com/japanFlagScreen.jpg')
+              background-image url('https://browniu-c8bfe1.tcb.qcloud.la/other/japanFlagScreen.jpg?sign=778df30159e6dd572b651390a41b9c54&t=1543805291')
               right 0
               float right
             }

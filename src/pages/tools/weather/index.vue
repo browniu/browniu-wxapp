@@ -1,12 +1,13 @@
 <template>
-  <div class="weather" >
+  <div class="weather">
     <div class="texture" :style="{backgroundImage:'url('+CWI+')'}"></div>
     <div class="main">
       <div class="window">
         <div :class="['container',isDay?'bright':'']">
           <div class="clock">
             <div class="inner" :style="{transform:'rotate('+clockDeg+'deg)'}">
-              <div class="clockItem" :style="{transform:'rotate(-'+clockDeg+'deg)'}"><span :style="{backgroundColor:tempColor}"></span>
+              <div class="clockItem" :style="{transform:'rotate(-'+clockDeg+'deg)'}">
+                <span :style="{backgroundColor:tempColor}"></span>
                 <i :style="{backgroundColor:tempColor}">
                   <b class="iconfont w1" v-if="currentWeatherIndex[0]===1&&isDay">&#xe62f;</b>
                   <b class="iconfont w12" v-if="currentWeatherIndex[0]===1&&!isDay">&#xe9ff;</b>
@@ -18,32 +19,43 @@
               </div>
             </div>
           </div>
-          <div class="inner" :style="{backgroundImage:'url('+CWI+')'}">
-          </div>
+          <div class="inner" :style="{backgroundImage:'url('+CWI+')'}"></div>
         </div>
       </div>
       <div class="info">
         <div class="temprature">
-          <p><span>【</span>{{currentWeather}}·{{currentWind}}<span>】</span></p>
-          <span class="weather">
-            {{currentTemprature}}
-          </span>
+          <p>
+            <span>【</span>
+            {{currentWeather}}·{{currentWind}}
+            <span>】</span>
+          </p>
+          <span class="weather">{{currentTemprature}}</span>
         </div>
       </div>
     </div>
     <div class="label">
       <span>{{currentLocation}}</span>
-      <div class="feeling"><b>{{currentFeel}}</b></div>
+      <div class="feeling">
+        <b>{{currentFeel}}</b>
+      </div>
       <div class="date">{{currentDate}}</div>
       <div class="angle"></div>
     </div>
     <div class="more">
-      <span @click="moreSwitch(index)" :class="[moreIndex===index?'act':'']" v-for="(item, index) in moreWeather" :key="index">
+      <span
+        @click="moreSwitch(index)"
+        :class="[moreIndex===index?'act':'']"
+        v-for="(item, index) in moreWeather"
+        :key="index"
+      >
         <div class="inner">
           <div :class="['owInfo',moreIndex===index?'act':'']">
             <div class="ow-temp">{{moreTemp[index]}}·{{moreWind[index]}}</div>
             <div class="ow-des">{{moreDes[index]}}</div>
-            <div class="ow-date">{{moreDate[index]}} <b>{{moreFeel[index]}}</b></div>
+            <div class="ow-date">
+              {{moreDate[index]}}
+              <b>{{moreFeel[index]}}</b>
+            </div>
           </div>
         </div>
         <div :class="['arrow',moreIndex===index-1?'act':'']"></div>
@@ -67,7 +79,7 @@ export default {
       currentTemp: '25',
       currentWeather: '晴空万里',
       currentWeatherIndex: [1, 6, 1],
-      CWI: 'http://pb85uax7t.bkt.clouddn.com/cwi-000.jpg',
+      CWI: 'https://browniu-c8bfe1.tcb.qcloud.la/weather/cwi-000.jpg?sign=79dc7089ee14221bb2f12d49d4595eb8&t=1543801734',
       currentWind: '微',
       currentLocation: '上海',
       currentDate: '十月十一',
@@ -88,7 +100,7 @@ export default {
       isDay: true,
       clockDeg: 0,
       tempColor: '#ff5027',
-      tempImage: 'http://pb85uax7t.bkt.clouddn.com/cwi-000.jpg',
+      tempImage: 'https://browniu-c8bfe1.tcb.qcloud.la/weather/cwi-000.jpg?sign=79dc7089ee14221bb2f12d49d4595eb8&t=1543801734',
       moreIndex: 0,
       tempOpen: 3,
       tempEnd: 31
@@ -455,7 +467,7 @@ export default {
     }
   },
   onLoad: function () {
-    this.fontLoad('http://pb85uax7t.bkt.clouddn.com/fzqingke257.TTF', 'https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.ttf?sign=01feddd7d2778e06c40b327d13e0947e&t=1541385406')
+    this.fontLoad('https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/fzqingke257.TTF?q-sign-algorithm=sha1&q-ak=AKIDGNK6iAo7I1BA4un7byFRTPQJ2Z3MYUL7&q-sign-time=1543802757;1543803657&q-key-time=1543802757;1543803657&q-header-list=&q-url-param-list=&q-signature=e6860d867522ba948951e8cb6fe1044c62a292f4', 'https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.ttf?sign=01feddd7d2778e06c40b327d13e0947e&t=1541385406')
     // get data
     new bmap.BMapWX().weather({
       fail: (res) => {
@@ -518,7 +530,7 @@ c3 = #929194
   & .texture {
     height 100%
     width 100%
-    background-image url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539145924402&di=14054b87eaada69222a5bcf9623d3928&imgtype=0&src=http%3A%2F%2F3img.zhuokearts.com%2Fauction.pics%2F2012%2F10%2F6%2Fzc-8339-4854.jpg')
+    background-image url('https://browniu-c8bfe1.tcb.qcloud.la/weather/cwi-000.jpg?sign=5088081bf591ae4fe54253b700ed2cc0&t=1543801853')
     background-size cover
     background-position top center
     background-repeat no-repeat

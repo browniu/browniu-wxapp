@@ -18,6 +18,7 @@
           >
           <img v-if="item.icon==='store'" mode="widthFix" src="../../../static/images/store.svg">
           <img v-if="item.icon==='out'" mode="widthFix" src="../../../static/images/out.svg">
+          <img v-if="item.icon==='list'" mode="widthFix" src="../../../static/images/list.svg">
           <img
             v-if="item.icon==='light'"
             mode="widthFix"
@@ -227,7 +228,7 @@ export default {
   background linear-gradient(135deg, #3ca55c, #b5ac49)
   overflow hidden
   &.theme1 {
-    background-image url('http://pb85uax7t.bkt.clouddn.com/forage_6.jpg')
+    background-image url('https://browniu-c8bfe1.tcb.qcloud.la/songs/forage_6.jpg?sign=c24bee782ad7040b7b24584dfade6b6f&t=1543803977')
     background-position bottom right
     background-size 150%
   }
@@ -352,7 +353,7 @@ export default {
     left 0
     height 100vh
     width 100vw
-    background-image url('http://pb85uax7t.bkt.clouddn.com/indexbg-80.jpg')
+    background-image url('https://browniu-c8bfe1.tcb.qcloud.la/index/indexbg-80.jpg?sign=ac3d1cda63375c320ab15c890eb03488&t=1543804149')
     background-size cover
     background-position top left
     background-repeat no-repeat

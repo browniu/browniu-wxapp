@@ -5,10 +5,20 @@
       <div class="inner">
         <div class="info">
           <div class="best">
-            <div :style="{backgroundImage:'url(https://browniu-c8bfe1.tcb.qcloud.la/duck/f_'+item+'.png?sign=ea63044cc0ffce1fc0c888e6d6278484&t=1541555605)'}" class="item" v-for="(item, index) in scopeBest" :key="index"></div>
+            <div
+              :style="{backgroundImage:'url(https://browniu-c8bfe1.tcb.qcloud.la/duck/f_'+item+'.png?sign=ea63044cc0ffce1fc0c888e6d6278484&t=1541555605)'}"
+              class="item"
+              v-for="(item, index) in scopeBest"
+              :key="index"
+            ></div>
           </div>
           <div :class="['scope',getScop?'act':'']">
-            <div :style="{backgroundImage:'url(https://browniu-c8bfe1.tcb.qcloud.la/duck/f_'+item+'.png?sign=ea63044cc0ffce1fc0c888e6d6278484&t=1541555605)'}" class="item" v-for="(item, index) in scopeData" :key="index"></div>
+            <div
+              :style="{backgroundImage:'url(https://browniu-c8bfe1.tcb.qcloud.la/duck/f_'+item+'.png?sign=ea63044cc0ffce1fc0c888e6d6278484&t=1541555605)'}"
+              class="item"
+              v-for="(item, index) in scopeData"
+              :key="index"
+            ></div>
           </div>
         </div>
         <div :class="['sky',running?'act':'']">
@@ -17,16 +27,23 @@
             <div :class="['pipes',pipesStatus?'act':'']">
               <div v-if="index>pipesIndex" class="item" v-for="(item, index) in pipes" :key="index">
                 <div class="top" :style="{height:(item*10)+'%'}">
-                  <i v-if="index%2===0" :style="{backgroundImage:'url('+gotList[gotItem[0]]+')'}" :class="[gotIndex===index?'got':'']"></i>
-                  <i v-if="index%2!=0" :style="{backgroundImage:'url('+gotList[gotItem[1]]+')'}" :class="[gotIndex===index?'got':'']"></i>
+                  <i
+                    v-if="index%2===0"
+                    :style="{backgroundImage:'url('+gotList[gotItem[0]]+')'}"
+                    :class="[gotIndex===index?'got':'']"
+                  ></i>
+                  <i
+                    v-if="index%2!=0"
+                    :style="{backgroundImage:'url('+gotList[gotItem[1]]+')'}"
+                    :class="[gotIndex===index?'got':'']"
+                  ></i>
                 </div>
                 <div class="bottom" :style="{height:((level-item)*10)+'%'}"></div>
               </div>
             </div>
           </div>
         </div>
-        <div :class="['land',running?'act':'']">
-        </div>
+        <div :class="['land',running?'act':'']"></div>
       </div>
     </div>
     <div v-if="!running" class="panel" @click="run">
@@ -169,7 +186,7 @@ export default {
     },
     musicLoader () {
       this.music[0] = wx.createInnerAudioContext()
-      this.music[0].src = 'http://pb85uax7t.bkt.clouddn.com/sfx_wing.mp3'
+      this.music[0].src = 'https://browniu-c8bfe1.tcb.qcloud.la/bird/sfx_wing.mp3?sign=d502b7e1c4e9570368ee062ef9b2164e&t=1543804622'
       this.music[1] = wx.createInnerAudioContext()
       // this.music[1].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/point.mp3?sign=c109a29d10828e6db7fb8f1900df8868&t=1541403035'
       this.music[1].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/duck_get.mp3?sign=d3f67885084e526ea43bfaa75935fa09&t=1541558158'
@@ -178,7 +195,7 @@ export default {
       this.music[3] = wx.createInnerAudioContext()
       this.music[3].src = 'https://browniu-c8bfe1.tcb.qcloud.la/duck/hit.mp3?sign=2ce216c6e71b6a781a03d5e49f637998&t=1541403005'
       this.music[4] = wx.createInnerAudioContext()
-      this.music[4].src = 'http://pb85uax7t.bkt.clouddn.com/Nintendo.mp3'
+      this.music[4].src = 'https://browniu-c8bfe1.tcb.qcloud.la/bird/Nintendo.mp3?sign=f84ff946280632c03bd7befef76e76ad&t=1543804704'
     },
     scopeShow (s) {
       let scopes = s.toString()

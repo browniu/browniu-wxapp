@@ -54,9 +54,9 @@ export default {
         'button': '去看看',
         'color': '#fff',
         'position': 'center',
-        'img': 'http://pb85uax7t.bkt.clouddn.com/sp_logo_login.png',
+        'img': 'https://browniu-c8bfe1.tcb.qcloud.la/store/sp_logo_login.png?sign=fe7d14b5ec37ca6cbf15268c0157a34f&t=1543804463',
         'bgcolor': '#01d664',
-        'bgimg': 'http://pb85uax7t.bkt.clouddn.com/vichy.png'
+        'bgimg': 'https://browniu-c8bfe1.tcb.qcloud.la/store/vichy.png?sign=4e085d17094f26b5060e657d712301b3&t=1543804510'
       }
     }
   }

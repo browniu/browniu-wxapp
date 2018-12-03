@@ -1,6 +1,12 @@
 <template>
-  <div class="module-cross" :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}">
-    <div class="main" :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}">
+  <div
+    class="module-cross"
+    :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}"
+  >
+    <div
+      class="main"
+      :style="{color:data.color,textAlign:data.position,backgroundColor:data.bgcolor}"
+    >
       <div class="inner">
         <h1>{{data.title}}</h1>
         <p>{{data.sub}}</p>
@@ -31,7 +37,7 @@ export default {
     border-bottom 6px solid #fff
     position relative
     height 135px
-    background-image url('http://pb85uax7t.bkt.clouddn.com/vichy.png')
+    background-image url('https://browniu-c8bfe1.tcb.qcloud.la/store/vichy.png?sign=4e085d17094f26b5060e657d712301b3&t=1543804510')
     & .texture {
       height 50px
       width 97px
@@ -42,7 +48,7 @@ export default {
       background-position left top
       background-size auto 60px
       background-repeat no-repeat
-      background-image url('http://pb85uax7t.bkt.clouddn.com/sp_logo_login.png')
+      background-image url('https://browniu-c8bfe1.tcb.qcloud.la/store/sp_logo_login.png?sign=86516c4981c18d79ee4decd678ce8f55&t=1543804539')
     }
     & .inner {
       text-align center

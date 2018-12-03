@@ -6,7 +6,7 @@
       <img
         mode="widthFix"
         src="https://browniu-c8bfe1.tcb.qcloud.la/fire/fire_item_2.gif?sign=fb57b0b9cf494c0a3758b68fa281d352&t=1543281919"
-        alt=""
+        alt
       >
     </div>
   </div>
@@ -41,7 +41,7 @@ export default {
     }, 3000)
   },
   onUnload () {
-    this.music.pause()
+    this.music.stop()
   }
 }
 </script>
