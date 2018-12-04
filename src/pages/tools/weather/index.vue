@@ -449,25 +449,25 @@ export default {
         this.FEEL((parseInt(this.originalData.weather_data[3].temperature.split(' ')[0]) + parseInt(this.originalData.weather_data[3].temperature.split(' ')[2].split('℃')[0])) / 2)
       ]
     },
-    fontLoad (fontA, font) {
+    fontLoad () {
       if (wx.getSystemInfoSync().system.split(' ')[0] === 'Android') {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + fontA + '")',
+          source: 'url(https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/HYYS.TTF)',
           success: console.log
         })
         // this.isAndroid = true
       } else {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + font + '")',
+          source: 'url(https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.ttf?sign=01feddd7d2778e06c40b327d13e0947e&t=1541385406)',
           success: console.log
         })
       }
     }
   },
   onLoad: function () {
-    this.fontLoad('https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/fzqingke257.TTF?q-sign-algorithm=sha1&q-ak=AKIDGNK6iAo7I1BA4un7byFRTPQJ2Z3MYUL7&q-sign-time=1543802757;1543803657&q-key-time=1543802757;1543803657&q-header-list=&q-url-param-list=&q-signature=e6860d867522ba948951e8cb6fe1044c62a292f4', 'https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.ttf?sign=01feddd7d2778e06c40b327d13e0947e&t=1541385406')
+    this.fontLoad()
     // get data
     new bmap.BMapWX().weather({
       fail: (res) => {
@@ -522,6 +522,10 @@ c1 = #f1eee9
 c2 = #070304
 c3 = #929194
 @import '../../../assets/styles/index.styl'
+@font-face {
+  font-family 'qingke'
+  src url('https://browniu-c8bfe1.tcb.qcloud.la/fzqingke257.woff2?sign=569909df71ac1c461a5fb7a0a5f6e89d&t=1543889840') format('truetype')
+}
 .weather {
   height 100vh
   overflow hidden

@@ -140,17 +140,17 @@ export default {
       console.log(targetList)
       return targetList
     },
-    fontLoad (fontA, font) {
+    fontLoad () {
       if (wx.getSystemInfoSync().system.split(' ')[0] === 'Android') {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + fontA + '")'
+          source: 'url(https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/HYYS.TTF)'
         })
         // this.isAndroid = true
       } else {
         wx.loadFontFace({
           family: 'webfont',
-          source: 'url("' + font + '")'
+          source: 'url(https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437)'
         })
       }
     },
@@ -174,7 +174,7 @@ export default {
       }
     },
     init () {
-      this.fontLoad('https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/HYYS.TTF?q-sign-algorithm=sha1&q-ak=AKIDGNK6iAo7I1BA4un7byFRTPQJ2Z3MYUL7&q-sign-time=1543803912;1543804812&q-key-time=1543803912;1543804812&q-header-list=&q-url-param-list=&q-signature=bba4d1afe808e152ba7061d81b6752a6d261b984', 'https://browniu-c8bfe1.tcb.qcloud.la/HYYS.TTF?sign=623d810f767185fe34b4e7db6ce575eb&t=1541383437')
+      this.fontLoad()
       this.songs = this.resortArray(songs.songs).slice(1, 9)
       this.videoContext = wx.createVideoContext('videoBg')
     },
