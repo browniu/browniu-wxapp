@@ -105,7 +105,7 @@
 export default {
   data () {
     return {
-      devIndex: null, // 14
+      devIndex: 15, // 14
       access: false,
       login: false,
       theme: 1,
