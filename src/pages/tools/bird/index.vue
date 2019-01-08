@@ -244,7 +244,7 @@ export default {
       // ctx.fillRect((this.vw / 2 - 25), this.heroPosition, 50, 50)
       ctx.translate((this.vw / 2 - 17), this.heroPosition)
       ctx.rotate(this.heroRotation * Math.PI / 180)
-      ctx.drawImage('../../../assets/images/duck/rabbit_6_n3.png', 0, 40 * this.swing, 78, 40, 0, 0, 78, 40)
+      ctx.drawImage('../../../static/duck/rabbit_6_n3.png', 0, 40 * this.swing, 78, 40, 0, 0, 78, 40)
       ctx.restore()
       ctx.draw()
     },
