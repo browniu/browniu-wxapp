@@ -8,7 +8,11 @@
 
 ## 项目列表
 
-### 小游戏-[兔子爱蔬菜](https://github.com/browniu/browniu-wxapp/blob/master/mdStatic/game-tzasc.mp4)
+### 小游戏-兔子爱蔬菜
 
-[![demo](./mdStatic/game-tzasc.gif)](https://ali.image.hellorf.com/images/21bed3696cddb114cee395427211334c.mp4)
+[![demo](./mdStatic/game-tzasc.gif)]()
+
+### 生活应用-墨画天气
+
+[![demo](./mdStatic/mhtq.jpg)]()
 
