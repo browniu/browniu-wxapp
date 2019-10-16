@@ -9,6 +9,10 @@
 
 ### 小游戏-[兔子爱蔬菜]()
 
+<img src="./mdStatic/game-tzasc.gif" alt="" style="height: 200px;width: 200px;">
+
+<video src="./mdStatic/game-tzasc.mp4" muted></video>
+
 ![demo](./mdStatic/game-tzasc.gif)
 ![demo](./mdStatic/game-tzasc.mp4)
 
