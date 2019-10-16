@@ -10,9 +10,15 @@
 
 ### 小游戏-兔子爱蔬菜
 
-[![demo](./mdStatic/game-tzasc.gif)]()
+![demo](./mdStatic/game-tzasc.gif)
 
 ### 生活应用-墨画天气
 
-[![demo](./mdStatic/mhtq.jpg)]()
+![demo](./mdStatic/mhtq.jpg)
+
+### 生活应用-译聊
+
+![demo](./mdStatic/yiliao.gif)
+
+
 
