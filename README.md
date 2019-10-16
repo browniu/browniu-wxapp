@@ -1,21 +1,14 @@
-# browniu
+# BROWNIU-WX
 
-> browniu app
+> 小程序作品集合
 
-## Build Setup
+## 扫码体验
+![小程序二维码](./mdStatic/wxapp-crcode.jpg)
 
-``` bash
-# install dependencies
-npm install
+## 项目列表
 
-# serve with hot reload at localhost:8080
-npm run dev
+### 小游戏-[兔子爱蔬菜]()
 
-# build for production with minification
-npm run build
+![demo](./mdStatic/game-tzasc.gif)
+![demo](./mdStatic/game-tzasc.mp4)
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
