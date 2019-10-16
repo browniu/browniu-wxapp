@@ -3,9 +3,9 @@
 > 小程序作品集合
 
 ## 扫码体验
-<div style="width: 100px;">
+
 <img src="./mdStatic/wxapp-crcode.jpg" alt="小程序二维码" style="height: 100px;width: 100px;">
-</div>
+
 ## 项目列表
 
 ### 小游戏-[兔子爱蔬菜]()
