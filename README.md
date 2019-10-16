@@ -20,6 +20,14 @@
 
 ![demo](./mdStatic/yiliao.gif)
 
+### 文艺青年-等风来
+
+![demo](./mdStatic/dfl.gif)
+
+### 文艺青年-诗和远方
+
+![demo](./mdStatic/shyf.gif)
+
 ### 十余款奇特应用等你去发现
 
 
