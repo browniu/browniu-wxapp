@@ -3,7 +3,7 @@
 > 小程序作品集合
 
 ## 扫码体验
-![小程序二维码](./mdStatic/wxapp-crcode.jpg)
+![小程序二维码](./mdStatic/wxapp-crcode.jpg){:height='100' width='100'}
 
 ## 项目列表
 
