@@ -2,6 +2,8 @@
 
 > 小程序作品集合
 
+## [Demo](http://browniu.com/browniu-wxapp/)
+
 ## 扫码体验
 
 <img src="https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/wxapp-crcode.gif" alt="小程序二维码" style="height: 200px;width: 200px;">
