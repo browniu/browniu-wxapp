@@ -10,23 +10,23 @@
 
 ### 小游戏-兔子爱蔬菜
 
-![demo](./mdStatic/game-tzasc.gif)
+![demo](https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/game-tzasc.gif)
 
 ### 生活应用-墨画天气
 
-![demo](./mdStatic/mhtq.jpg)
+![demo](https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/mhtq.jpg)
 
 ### 生活应用-译聊
 
-![demo](./mdStatic/yiliao.gif)
+![demo](https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/yiliao.gif)
 
 ### 文艺青年-等风来
 
-![demo](./mdStatic/dfl.gif)
+![demo](https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/dfl.gif)
 
 ### 文艺青年-诗和远方
 
-![demo](./mdStatic/shyf.gif)
+![demo](https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/shyf.gif)
 
 ### 十余款奇特应用等你去发现
 
