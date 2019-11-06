@@ -4,7 +4,7 @@
 
 ## 扫码体验
 
-<img src="./mdStatic/wxapp-crcode.gif" alt="小程序二维码" style="height: 200px;width: 200px;">
+<img src="https://browniu-wx-1257187612.cos.ap-shanghai.myqcloud.com/GitHub/wxapp-crcode.gif" alt="小程序二维码" style="height: 200px;width: 200px;">
 
 ## 项目列表
 
